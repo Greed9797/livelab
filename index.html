@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Livelab é a franquia de live commerce que você controla de um iPad. 10 cabines, dados em tempo real e metodologia comprovada." />
+  <title>Livelab — Franquia de Live Commerce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F97316',
+            secondary: '#0F172A',
+            tertiary: '#EF4444',
+            neutral: '#64748B',
+            bg: '#030303',
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: 'Poppins', sans-serif; }
+    body { background: #030303; color: #fff; overflow-x: hidden; }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+      opacity: 0.022;
+      mix-blend-mode: screen;
+    }
+
+    /* ---- CSS Variables ---- */
+    :root {
+      --primary: #F97316;
+      --secondary: #0F172A;
+      --tertiary: #EF4444;
+      --neutral: #64748B;
+      --bg: #030303;
+    }
+
+    /* ---- Keyframes ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(var(--shape-rotate, 0deg)); }
+      50%       { transform: translateY(15px) rotate(var(--shape-rotate, 0deg)); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 0.7; }
+    }
+    @keyframes barGrow {
+      from { transform: scaleY(0); transform-origin: bottom; }
+      to   { transform: scaleY(1); transform-origin: bottom; }
+    }
+
+    /* ---- Navbar ---- */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 1rem 2rem;
+      transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-actions { display: flex; gap: 0.75rem; align-items: center; }
+    .btn-outline {
+      background: transparent; border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; padding: 0.5rem 1.25rem; border-radius: 8px; font-size: 0.875rem;
+      font-weight: 500; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+    .btn-primary {
+      background: #F97316; border: none; color: #fff;
+      padding: 0.5rem 1.25rem; border-radius: 8px; font-size: 0.875rem;
+      font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover { background: #ea6b0e; transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px; background: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    #mobile-menu {
+      display: none; max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    #mobile-menu.open { max-height: 320px; }
+    .mobile-links { list-style: none; padding: 1rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .mobile-links a {
+      display: block; color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 1rem; font-weight: 500; padding: 0.5rem 0;
+      transition: color 0.2s;
+    }
+    .mobile-links a:hover { color: #fff; }
+    .mobile-actions { display: flex; gap: 0.75rem; padding-top: 0.5rem; flex-wrap: wrap; }
+
+    @media (max-width: 767px) {
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+      #mobile-menu { display: block; }
+      #navbar { padding: 1rem 1.5rem; }
+    }
+
+    /* ---- Logo ---- */
+    .logo-text {
+      font-size: 1.5rem; font-weight: 800; color: #fff;
+      letter-spacing: -0.03em; position: relative;
+      display: inline-block; text-decoration: none;
+    }
+    .logo-play {
+      position: absolute; top: 0.12em; left: 0.435em;
+      width: 0.32em; height: 0.32em;
+    }
+
+    /* ---- Hero ---- */
+    #hero {
+      min-height: 100vh; background: #030303;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 6rem 1.5rem 4rem;
+    }
+    .hero-bg-radial {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(249,115,22,0.05) 0%, transparent 70%);
+    }
+    .hero-overlay-top {
+      position: absolute; top: 0; left: 0; right: 0; height: 200px; pointer-events: none;
+      background: linear-gradient(to bottom, #030303, transparent);
+      z-index: 5;
+    }
+    .hero-overlay-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 200px; pointer-events: none;
+      background: linear-gradient(to top, #030303, transparent);
+      z-index: 5;
+    }
+
+    /* Floating shapes */
+    .shape {
+      position: absolute; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(2px);
+      animation: bob 12s ease-in-out infinite;
+      pointer-events: none;
+      will-change: transform;
+    }
+    .shape-indigo {
+      width: 600px; height: 140px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.06) 0%, transparent 70%);
+      top: 15%; left: -10%;
+      --shape-rotate: 12deg;
+      transform: rotate(12deg);
+      animation-delay: 0s;
+    }
+    .shape-rose {
+      width: 500px; height: 120px;
+      background: linear-gradient(135deg, rgba(244,63,94,0.05) 0%, transparent 70%);
+      bottom: 20%; right: -8%;
+      --shape-rotate: -15deg;
+      transform: rotate(-15deg);
+      animation-delay: -3s;
+    }
+    .shape-violet {
+      width: 300px; height: 80px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, transparent 70%);
+      bottom: 30%; left: 5%;
+      --shape-rotate: -8deg;
+      transform: rotate(-8deg);
+      animation-delay: -6s;
+    }
+    .shape-amber {
+      width: 220px; height: 60px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, transparent 70%);
+      top: 20%; right: 10%;
+      --shape-rotate: 20deg;
+      transform: rotate(20deg);
+      animation-delay: -2s;
+    }
+    .shape-cyan {
+      width: 150px; height: 40px;
+      background: linear-gradient(135deg, rgba(6,182,212,0.05) 0%, transparent 70%);
+      top: 10%; left: 50%;
+      --shape-rotate: -25deg;
+      transform: rotate(-25deg);
+      animation-delay: -9s;
+    }
+
+    /* Hero content */
+    .hero-content {
+      position: relative; z-index: 10; text-align: center;
+      max-width: 800px; margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3);
+      color: rgba(255,255,255,0.85); border-radius: 999px;
+      padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 500; margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; background: #F97316; border-radius: 50%;
+    }
+    .hero-h1 {
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-h1-line1 {
+      display: block; color: #fff;
+      opacity: 0; animation: fadeUp 0.7s ease forwards; animation-delay: 0.7s;
+    }
+    .hero-h1-line2 {
+      display: block;
+      background: linear-gradient(90deg, #fb923c 0%, rgba(255,255,255,0.9) 50%, #f87171 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0; animation: fadeUp 0.7s ease forwards; animation-delay: 0.9s;
+    }
+    .hero-subtitle {
+      color: rgba(255,255,255,0.4); font-size: clamp(1rem, 2.5vw, 1.25rem);
+      max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.6;
+      opacity: 0; animation: fadeUp 0.7s ease forwards; animation-delay: 1.1s;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s ease forwards; animation-delay: 1.3s;
+    }
+    .btn-hero-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #F97316; color: #fff; border: none;
+      padding: 0.875rem 1.75rem; border-radius: 12px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-hero-primary:hover {
+      background: #ea6b0e; transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(249,115,22,0.4);
+    }
+    .btn-hero-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.875rem 1.75rem; border-radius: 12px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-hero-outline:hover {
+      border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+
+    /* ---- Section: Scroll 3D ---- */
+    #scroll-section {
+      background: #0F172A; padding: 5rem 1.5rem;
+      overflow: hidden;
+    }
+    .section-header {
+      text-align: center; margin-bottom: 3rem;
+    }
+    .section-title-white { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.03em; color: #fff; }
+    .section-title-gradient {
+      display: inline; font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.03em;
+      background: linear-gradient(90deg, #F97316, #f87171);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .scroll-3d-wrapper {
+      perspective: 1000px;
+      max-width: 900px; margin: 0 auto;
+    }
+    #scroll-card {
+      background: #1E293B;
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 30px;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+      overflow: hidden;
+      transform: rotateX(20deg) scale(1.05) translateY(0px);
+      transform-style: preserve-3d;
+      transition: transform 0.1s linear;
+      will-change: transform;
+    }
+
+    /* Dashboard mock */
+    .dash-header {
+      background: #0F172A;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .dash-logo { font-size: 0.9rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4);
+      color: #EF4444; border-radius: 999px; padding: 0.3rem 0.75rem; font-size: 0.75rem; font-weight: 600;
+    }
+    .live-dot { width: 6px; height: 6px; background: #EF4444; border-radius: 50%; animation: pulse-dot 1.2s ease-in-out infinite; }
+    .dash-title { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-align: right; }
+
+    .dash-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .metric {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .metric:last-child { border-right: none; }
+    .metric-value { font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .metric-value.orange { color: #F97316; }
+    .metric-value.green  { color: #22c55e; }
+    .metric-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 0.25rem; }
+    .metric-change { font-size: 0.72rem; font-weight: 600; color: #22c55e; margin-top: 0.2rem; }
+
+    .dash-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    @media (max-width: 640px) {
+      .dash-body { grid-template-columns: 1fr; }
+      .dash-metrics { grid-template-columns: 1fr; }
+      .metric { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    }
+
+    .dash-panel { padding: 1.5rem; }
+    .dash-panel:first-child { border-right: 1px solid rgba(255,255,255,0.08); }
+    @media (max-width: 640px) { .dash-panel:first-child { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); } }
+    .panel-title { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Bar chart */
+    .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 80px; }
+    .bar-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .bar {
+      width: 100%; border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, #F97316, #ea580c);
+      animation: barGrow 0.8s ease forwards;
+    }
+    .bar-label { font-size: 0.6rem; color: rgba(255,255,255,0.3); margin-top: 4px; }
+
+    /* Product list */
+    .product-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .product-item:last-child { border-bottom: none; }
+    .product-thumb {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    }
+    .product-name { font-size: 0.8rem; color: rgba(255,255,255,0.8); font-weight: 500; flex: 1; }
+    .product-price { font-size: 0.8rem; color: #F97316; font-weight: 700; }
+    .product-btn {
+      background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3);
+      color: #F97316; border-radius: 6px; padding: 0.2rem 0.5rem;
+      font-size: 0.65rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ---- Section: Bento Features ---- */
+    #bento { background: #030303; padding: 5rem 1.5rem; }
+
+    /* Grid: sem gap, bordas tocando (padrão combined-featured-section) */
+    .bento-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 0; max-width: 1100px; margin: 0 auto;
+      border: 1px solid rgba(249,115,22,0.18); border-radius: 16px; overflow: hidden;
+    }
+    @media (max-width: 767px) { .bento-grid { grid-template-columns: 1fr; } }
+
+    .bento-card {
+      background: #0F172A;
+      border: 1px solid rgba(249,115,22,0.12);
+      padding: 1.75rem;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .bento-card.visible { opacity: 1; transform: translateY(0); }
+    .bento-card:hover { background: rgba(15,23,42,0.95); }
+
+    /* Card label (ícone + texto) — padrão MapPin / Activity */
+    .bento-card-label {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      margin-bottom: 0.65rem; font-weight: 500;
+    }
+    .bento-card-label svg { flex-shrink: 0; }
+    .bento-card-title {
+      font-size: 1rem; font-weight: 400; color: #fff;
+      line-height: 1.5; margin-bottom: 1rem;
+    }
+    .bento-card-title span { color: rgba(255,255,255,0.4); }
+
+    /* Map card */
+    .map-svg-wrap { position: relative; margin-top: 0.5rem; }
+    .map-badge {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #0F172A; border: 1px solid rgba(249,115,22,0.35);
+      color: rgba(255,255,255,0.85); border-radius: 8px;
+      padding: 0.35rem 0.85rem; font-size: 0.75rem; font-weight: 600;
+      white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,0.4); z-index: 2;
+    }
+
+    /* ── Notifications: gradient cards (padrão RuixenFeaturedMessageCard) ── */
+    .notif-list-wrap {
+      max-height: 280px; overflow: hidden; position: relative;
+    }
+    .notif-list-fade {
+      position: absolute; inset-x: 0; bottom: 0; height: 60px;
+      background: linear-gradient(to top, #0F172A, transparent); z-index: 2;
+      pointer-events: none;
+    }
+    .notif-item {
+      display: flex; align-items: flex-start; gap: 0.65rem;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; margin-bottom: 0.5rem;
+      opacity: 0; transform: scale(0.85);
+      animation: scaleUp 0.4s ease forwards;
+      animation-play-state: paused;
+    }
+    .notif-item.triggered { animation-play-state: running; }
+    .notif-icon-grad {
+      width: 32px; height: 32px; min-width: 32px; border-radius: 8px;
+      background: var(--grad); flex-shrink: 0;
+    }
+    .notif-text { flex: 1; min-width: 0; }
+    .notif-main {
+      font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.9);
+      display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+    }
+    .notif-main-time {
+      font-size: 0.7rem; color: rgba(255,255,255,0.35); font-weight: 400;
+    }
+    .notif-main-time::before { content: '•'; margin-right: 0.25rem; }
+    .notif-sub { font-size: 0.73rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+    /* Analytics chart */
+    .chart-legend { display: flex; gap: 1rem; margin-bottom: 0.75rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ── Card 4: FeatureCard 2-col (padrão combined-featured-section) ── */
+    .feature-cards-grid {
+      display: grid; grid-template-columns: 1fr 1fr; height: 100%;
+    }
+    @media (max-width: 540px) { .feature-cards-grid { grid-template-columns: 1fr; } }
+    .feature-card {
+      padding: 1.5rem; position: relative; overflow: hidden;
+      border-right: 1px solid rgba(249,115,22,0.12);
+      transition: background 0.2s;
+    }
+    .feature-card:last-child { border-right: none; }
+    .feature-card:hover { background: rgba(255,255,255,0.02); }
+    .feature-card-label {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.75rem; color: rgba(255,255,255,0.4);
+      margin-bottom: 0.75rem;
+    }
+    .feature-card-title {
+      font-size: 0.95rem; font-weight: 400; color: #fff; line-height: 1.5;
+    }
+    .feature-card-title span { color: rgba(255,255,255,0.4); }
+    /* Card pinned bottom-right (padrão FeatureCard do shadcn) */
+    .feature-card-thumb {
+      position: absolute; bottom: 0; right: 0;
+      width: 80px; height: 70px;
+      border: 6px solid #0F172A; border-right: none; border-bottom: none;
+      border-top-left-radius: 10px;
+      background: rgba(249,115,22,0.08);
+      border-color: rgba(249,115,22,0.2);
+    }
+    /* Arrow button (padrão hover:-rotate-45) */
+    .feature-card-arrow {
+      position: absolute; bottom: 0.6rem; right: 0.6rem;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #0F172A;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, border-color 0.2s; z-index: 2; cursor: pointer;
+    }
+    .feature-card:hover .feature-card-arrow {
+      transform: rotate(-45deg); border-color: #F97316;
+    }
+
+    /* @keyframes scaleUp — da spec do combined-featured-section */
+    @keyframes scaleUp {
+      0%   { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+    @keyframes animation-path {
+      0%   { offset-distance: 0%; }
+      100% { offset-distance: 100%; }
+    }
+
+    /* ---- Section: CTA ---- */
+    #cta-section {
+      background: #030303; padding: 6rem 1.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 600px; height: 300px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(249,115,22,0.12) 0%, transparent 70%);
+      animation: glowPulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+    #cta-title {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+      letter-spacing: -0.03em; color: #fff; line-height: 1.1;
+      position: relative; z-index: 2;
+    }
+    .cta-letter {
+      display: inline-block; opacity: 0; transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cta-letter.visible { opacity: 1; transform: translateY(0); }
+    .cta-letter-space { display: inline-block; width: 0.35em; }
+
+    #cta-underline {
+      height: 4px; border-radius: 2px; width: 0%; margin: 0.6rem auto 2rem;
+      background: linear-gradient(90deg, #F97316, #f87171, #fb923c);
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative; z-index: 2;
+    }
+    .cta-subtitle {
+      font-size: 1.1rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position: relative; z-index: 2;
+    }
+    .cta-subtitle.visible { opacity: 1; transform: translateY(0); }
+    .cta-btn-wrap {
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position: relative; z-index: 2;
+    }
+    .cta-btn-wrap.visible { opacity: 1; transform: translateY(0); }
+    .btn-cta {
+      display: inline-block; background: #F97316; color: #fff;
+      border: none; padding: 1rem 2.5rem; border-radius: 14px;
+      font-size: 1.1rem; font-weight: 700; cursor: pointer; text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-cta:hover {
+      background: #ea6b0e; transform: scale(1.05);
+      box-shadow: 0 8px 40px rgba(249,115,22,0.5);
+    }
+    .cta-footnote {
+      font-size: 0.8rem; color: rgba(255,255,255,0.25); margin-top: 1rem;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position: relative; z-index: 2;
+    }
+    .cta-footnote.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---- Font Applications ---- */
+    .btn-outline, .btn-primary, .btn-hero-primary, .btn-hero-outline, .btn-cta, .product-btn {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ---- Hero dot grid ---- */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background-image: radial-gradient(rgba(249,115,22,0.14) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 10%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 10%, transparent 72%);
+    }
+
+    /* ---- Hero radial glow (stronger) ---- */
+    .hero-bg-radial {
+      background: radial-gradient(ellipse 72% 55% at 50% 55%, rgba(249,115,22,0.09) 0%, rgba(249,115,22,0.03) 50%, transparent 70%) !important;
+    }
+
+    /* ---- Badge refinement ---- */
+    .hero-badge {
+      background: rgba(249,115,22,0.07) !important;
+      border-color: rgba(249,115,22,0.22) !important;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem !important;
+      font-weight: 600 !important;
+    }
+    .badge-dot {
+      box-shadow: 0 0 6px 2px rgba(249,115,22,0.5);
+      animation: pulse-dot 1.4s ease-in-out infinite;
+    }
+
+    /* ---- Hero H1 refinement ---- */
+    .hero-h1 { letter-spacing: -0.04em !important; }
+    .hero-subtitle {
+      color: rgba(255,255,255,0.45) !important;
+      font-size: clamp(1rem, 2vw, 1.15rem) !important;
+      letter-spacing: 0.01em;
+    }
+
+    /* ---- CTA button shimmer ---- */
+    .btn-hero-primary, .btn-cta {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #F97316 0%, #fb923c 100%) !important;
+      box-shadow: 0 2px 20px rgba(249,115,22,0.25);
+    }
+    .btn-hero-primary::after, .btn-cta::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+      transform: translateX(-120%);
+      transition: transform 0.6s ease;
+    }
+    .btn-hero-primary:hover::after, .btn-cta:hover::after {
+      transform: translateX(120%);
+    }
+    .btn-hero-primary:hover { background: linear-gradient(135deg, #ea6b0e 0%, #F97316 100%) !important; }
+    .btn-cta:hover { background: linear-gradient(135deg, #ea6b0e 0%, #F97316 100%) !important; }
+
+    /* ---- Enhanced bento card hover ---- */
+    .bento-card { transition: opacity 0.6s ease, transform 0.6s ease, background 0.25s, box-shadow 0.25s !important; }
+    .bento-card:hover {
+      background: rgba(20,30,55,0.98) !important;
+      box-shadow: inset 0 0 0 1px rgba(249,115,22,0.18), 0 0 50px rgba(249,115,22,0.04);
+    }
+
+    /* ---- Scroll section background ---- */
+    #scroll-section {
+      background: linear-gradient(180deg, #0a1120 0%, #0F172A 30%, #0a1120 100%) !important;
+    }
+
+    /* ---- Section title letter spacing ---- */
+    .section-title-white, .section-title-gradient {
+      letter-spacing: -0.04em !important;
+    }
+
+    /* ---- CTA section glow (stronger) ---- */
+    .cta-glow {
+      width: 800px !important; height: 400px !important;
+      background: radial-gradient(ellipse, rgba(249,115,22,0.14) 0%, transparent 68%) !important;
+    }
+    #cta-title { letter-spacing: -0.04em !important; }
+
+    /* ---- Nav refinement ---- */
+    .nav-links a { letter-spacing: 0.01em; }
+    .logo-text { letter-spacing: -0.04em !important; }
+
+    /* ---- Footer ---- */
+    footer { background: #020202 !important; }
+
+    /* ---- data-animate base ---- */
+    [data-animate] {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    [data-animate].visible { opacity: 1; transform: translateY(0); }
+
+    /* ---- Footer ---- */
+    footer {
+      background: #030303;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); margin-top: 0.75rem; }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <!-- Logo -->
+    <a href="#" class="logo-text" aria-label="Livelab">
+      l<span style="visibility:hidden;" aria-hidden="true">i</span>velab
+      <svg aria-hidden="true" class="logo-play" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L9 6L1 11V1Z" fill="#F97316"/>
+      </svg>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="nav-links">
+      <li><a href="#">Franquia</a></li>
+      <li><a href="#">Metodologia</a></li>
+      <li><a href="#">Sistema</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+
+    <!-- Desktop actions -->
+    <div class="nav-actions">
+      <a href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="btn-primary">Quero franquear</a>
+    </div>
+
+    <!-- Hamburger -->
+    <button type="button" class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu">
+    <ul class="mobile-links">
+      <li><a href="#">Franquia</a></li>
+      <li><a href="#">Metodologia</a></li>
+      <li><a href="#">Sistema</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+    <div class="mobile-actions">
+      <a href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="btn-primary">Quero franquear</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-bg-radial"></div>
+  <div class="hero-overlay-top"></div>
+  <div class="hero-overlay-bottom"></div>
+
+  <!-- Floating shapes -->
+  <div class="shape shape-indigo"></div>
+  <div class="shape shape-rose"></div>
+  <div class="shape shape-violet"></div>
+  <div class="shape shape-amber"></div>
+  <div class="shape shape-cyan"></div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Franquia de Live Commerce
+    </div>
+
+    <h1 class="hero-h1">
+      <span class="hero-h1-line1">10 cabines ao vivo.</span>
+      <span class="hero-h1-line2">Um iPad. Seu negócio.</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Adquira a franquia Livelab, abra seu estúdio de live commerce e atenda dezenas de marcas por dia — tudo controlado de um único dispositivo.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="btn-hero-primary">
+        Quero ser franqueado
+        <svg aria-hidden="true" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SCROLL 3D ===================== -->
+<section id="scroll-section">
+  <div class="section-header" data-animate>
+    <div>
+      <span class="section-title-white">O sistema que sua </span>
+      <span class="section-title-gradient">franquia merece</span>
+    </div>
+    <p style="color:rgba(255,255,255,0.35); margin-top:0.75rem; font-size:1rem; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.6;">
+      Gerencie todas as cabines em tempo real, veja as lives ativas e acompanhe as vendas de cada estúdio num único dashboard.
+    </p>
+  </div>
+
+  <div class="scroll-3d-wrapper">
+    <div id="scroll-card">
+      <!-- Dashboard Header -->
+      <div class="dash-header">
+        <span class="dash-logo">
+          l<span style="visibility:hidden; font-size:0.9rem;">i</span>velab
+        </span>
+        <div class="live-badge">
+          <span class="live-dot"></span> AO VIVO
+        </div>
+        <div class="dash-title">Franquia Centro SP — 8 cabines ativas</div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="dash-metrics">
+        <div class="metric">
+          <div class="metric-label">Cabines Ativas</div>
+          <div class="metric-value">8/10</div>
+          <div class="metric-change">↑ 2 vs ontem</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Faturamento Hoje</div>
+          <div class="metric-value orange">R$ 48.2K</div>
+          <div class="metric-change">↑ 41% vs semana passada</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Marcas Atendidas</div>
+          <div class="metric-value green">23</div>
+          <div class="metric-change">↑ 5 novas este mês</div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="dash-body">
+        <!-- Bar chart panel -->
+        <div class="dash-panel">
+          <div class="panel-title">Ocupação das Cabines (7 dias)</div>
+          <div class="bar-chart">
+            <div class="bar-wrap"><div class="bar" style="height:40px; animation-delay:0.1s;"></div><span class="bar-label">Seg</span></div>
+            <div class="bar-wrap"><div class="bar" style="height:55px; animation-delay:0.15s;"></div><span class="bar-label">Ter</span></div>
+            <div class="bar-wrap"><div class="bar" style="height:35px; animation-delay:0.2s;"></div><span class="bar-label">Qua</span></div>
+            <div class="bar-wrap"><div class="bar" style="height:70px; animation-delay:0.25s;"></div><span class="bar-label">Qui</span></div>
+            <div class="bar-wrap"><div class="bar" style="height:50px; animation-delay:0.3s;"></div><span class="bar-label">Sex</span></div>
+            <div class="bar-wrap"><div class="bar" style="height:62px; animation-delay:0.35s;"></div><span class="bar-label">Sáb</span></div>
+            <div class="bar-wrap"><div class="bar" style="height:80px; animation-delay:0.4s; background:linear-gradient(180deg,#fb923c,#F97316);"></div><span class="bar-label" style="color:rgba(255,255,255,0.7);">Hoje</span></div>
+          </div>
+        </div>
+
+        <!-- Products panel -->
+        <div class="dash-panel">
+          <div class="panel-title">Cabines em uso agora</div>
+          <div class="product-item">
+            <div class="product-thumb" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);"></div>
+            <span class="product-name">Cabine 1 — Moda Feminina</span>
+            <span class="product-price">Ao vivo</span>
+            <button type="button" class="product-btn" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#22c55e;">Ativa</button>
+          </div>
+          <div class="product-item">
+            <div class="product-thumb" style="background:linear-gradient(135deg,#F97316,#ea580c);"></div>
+            <span class="product-name">Cabine 3 — Eletrônicos</span>
+            <span class="product-price">Ao vivo</span>
+            <button type="button" class="product-btn" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#22c55e;">Ativa</button>
+          </div>
+          <div class="product-item">
+            <div class="product-thumb" style="background:linear-gradient(135deg,#a855f7,#7c3aed);"></div>
+            <span class="product-name">Cabine 5 — Beleza</span>
+            <span class="product-price">Ao vivo</span>
+            <button type="button" class="product-btn" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#22c55e;">Ativa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BENTO FEATURES ===================== -->
+<section id="bento">
+  <div class="section-header" data-animate>
+    <div>
+      <span class="section-title-white">Tudo para escalar </span><br/>
+      <span class="section-title-gradient">sua franquia</span>
+    </div>
+  </div>
+
+  <div class="bento-grid">
+
+    <!-- Card 1: Map — padrão MAP do combined-featured-section -->
+    <div class="bento-card" data-animate>
+      <div class="bento-card-label">
+        <svg aria-hidden="true" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        Livelab Analytics
+      </div>
+      <p class="bento-card-title">
+        Veja cada marca ao vivo no mapa.
+        <span>Saiba de onde vêm seus clientes e onde sua franquia cresce mais.</span>
+      </p>
+      <div class="map-svg-wrap">
+        <svg aria-hidden="true" viewBox="0 0 400 220" style="width:100%; height:auto;" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="220" fill="rgba(15,23,42,0.5)" rx="8"/>
+          <g fill="rgba(249,115,22,0.6)">
+            <circle cx="80" cy="70" r="2"/><circle cx="85" cy="65" r="2"/><circle cx="90" cy="75" r="2"/>
+            <circle cx="95" cy="68" r="1.5"/><circle cx="100" cy="80" r="2"/><circle cx="88" cy="82" r="1.5"/>
+            <circle cx="75" cy="78" r="1.5"/><circle cx="105" cy="72" r="1.5"/><circle cx="92" cy="60" r="1.5"/>
+            <circle cx="70" cy="85" r="2"/><circle cx="78" cy="90" r="1.5"/><circle cx="97" cy="90" r="1.5"/>
+            <circle cx="108" cy="88" r="2"/><circle cx="112" cy="78" r="1.5"/><circle cx="83" cy="95" r="1.5"/>
+          </g>
+          <g fill="rgba(249,115,22,0.45)">
+            <circle cx="105" cy="125" r="2"/><circle cx="112" cy="118" r="2"/><circle cx="118" cy="128" r="2"/>
+            <circle cx="108" cy="135" r="1.5"/><circle cx="115" cy="140" r="2"/><circle cx="110" cy="148" r="1.5"/>
+            <circle cx="120" cy="145" r="1.5"/><circle cx="122" cy="132" r="1.5"/>
+          </g>
+          <g fill="rgba(249,115,22,0.7)">
+            <circle cx="192" cy="60" r="2"/><circle cx="198" cy="55" r="2"/><circle cx="204" cy="62" r="2"/>
+            <circle cx="195" cy="68" r="1.5"/><circle cx="202" cy="70" r="1.5"/><circle cx="188" cy="64" r="1.5"/>
+            <circle cx="208" cy="58" r="1.5"/><circle cx="210" cy="68" r="1.5"/>
+          </g>
+          <g fill="rgba(249,115,22,0.4)">
+            <circle cx="195" cy="100" r="2"/><circle cx="202" cy="108" r="2"/><circle cx="198" cy="118" r="2"/>
+            <circle cx="205" cy="125" r="1.5"/><circle cx="192" cy="128" r="1.5"/><circle cx="188" cy="110" r="1.5"/>
+          </g>
+          <g fill="rgba(249,115,22,0.6)">
+            <circle cx="270" cy="55" r="2"/><circle cx="280" cy="60" r="2"/><circle cx="290" cy="65" r="2"/>
+            <circle cx="275" cy="68" r="2"/><circle cx="285" cy="75" r="1.5"/><circle cx="295" cy="72" r="1.5"/>
+            <circle cx="265" cy="62" r="1.5"/><circle cx="260" cy="70" r="1.5"/><circle cx="300" cy="80" r="2"/>
+            <circle cx="308" cy="70" r="1.5"/><circle cx="315" cy="78" r="1.5"/><circle cx="282" cy="82" r="1.5"/>
+          </g>
+          <g fill="rgba(249,115,22,0.45)">
+            <circle cx="305" cy="148" r="2"/><circle cx="315" cy="142" r="2"/><circle cx="320" cy="152" r="2"/>
+            <circle cx="310" cy="158" r="1.5"/><circle cx="322" cy="160" r="1.5"/>
+          </g>
+          <circle cx="90" cy="75" r="8" fill="none" stroke="rgba(249,115,22,0.8)" stroke-width="1.5">
+            <animate attributeName="r" values="4;16;4" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.8;0;0.8" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="198" cy="62" r="8" fill="none" stroke="rgba(249,115,22,0.8)" stroke-width="1.5">
+            <animate attributeName="r" values="4;14;4" dur="3s" repeatCount="indefinite" begin="0.8s"/>
+            <animate attributeName="opacity" values="0.8;0;0.8" dur="3s" repeatCount="indefinite" begin="0.8s"/>
+          </circle>
+          <circle cx="285" cy="68" r="8" fill="none" stroke="rgba(249,115,22,0.8)" stroke-width="1.5">
+            <animate attributeName="r" values="4;15;4" dur="2.8s" repeatCount="indefinite" begin="1.5s"/>
+            <animate attributeName="opacity" values="0.8;0;0.8" dur="2.8s" repeatCount="indefinite" begin="1.5s"/>
+          </circle>
+          <line x1="0" y1="110" x2="400" y2="110" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="200" y1="0" x2="200" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        </svg>
+        <div class="map-badge">🌎 Última venda: São Paulo</div>
+      </div>
+    </div>
+
+    <!-- Card 2: Featured Messages — padrão RuixenFeaturedMessageCard com scaleUp -->
+    <div class="bento-card" data-animate style="transition-delay:0.1s;">
+      <div class="bento-card-label">
+        <svg aria-hidden="true" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+        </svg>
+        Atividade da Live
+      </div>
+      <p class="bento-card-title">
+        Entrada de marca, cabine iniciada, venda confirmada.
+        <span>Cada evento de todas as cabines notificado em tempo real.</span>
+      </p>
+      <!-- Notif list com fade overlay (padrão RuixenFeaturedMessageCard) -->
+      <div class="notif-list-wrap" id="notif-list">
+        <div class="notif-list-fade"></div>
+        <!-- notif-item com --grad como CSS var inline, animação scaleUp -->
+        <div class="notif-item" style="--grad: linear-gradient(135deg,#22c55e,#16a34a); animation-delay:0ms;">
+          <div class="notif-icon-grad" style="background: var(--grad);"></div>
+          <div class="notif-text">
+            <div class="notif-main">Cabine 3 iniciada <span class="notif-main-time">agora mesmo</span></div>
+            <div class="notif-sub">Marca: Beleza Total · Live ao vivo</div>
+          </div>
+        </div>
+        <div class="notif-item" style="--grad: linear-gradient(135deg,#6366f1,#4f46e5); animation-delay:300ms;">
+          <div class="notif-icon-grad" style="background: var(--grad);"></div>
+          <div class="notif-text">
+            <div class="notif-main">Nova venda — R$ 1.240 <span class="notif-main-time">1 min atrás</span></div>
+            <div class="notif-sub">Cabine 1 · Moda Feminina</div>
+          </div>
+        </div>
+        <div class="notif-item" style="--grad: linear-gradient(135deg,#F97316,#ea580c); animation-delay:600ms;">
+          <div class="notif-icon-grad" style="background: var(--grad);"></div>
+          <div class="notif-text">
+            <div class="notif-main">Nova marca agendada <span class="notif-main-time">3 min atrás</span></div>
+            <div class="notif-sub">Cabine 7 · amanhã às 14h</div>
+          </div>
+        </div>
+        <div class="notif-item" style="--grad: linear-gradient(135deg,#EF4444,#b91c1c); animation-delay:900ms;">
+          <div class="notif-icon-grad" style="background: var(--grad);"></div>
+          <div class="notif-text">
+            <div class="notif-main">Cabine 9 encerrada <span class="notif-main-time">5 min atrás</span></div>
+            <div class="notif-sub">R$ 3.890 gerados · 1h 12min de live</div>
+          </div>
+        </div>
+        <div class="notif-item" style="--grad: linear-gradient(135deg,#f59e0b,#d97706); animation-delay:1200ms;">
+          <div class="notif-icon-grad" style="background: var(--grad);"></div>
+          <div class="notif-text">
+            <div class="notif-main">Relatório diário gerado <span class="notif-main-time">8 min atrás</span></div>
+            <div class="notif-sub">23 marcas · 8 cabines · R$ 48.2K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Analytics Chart — padrão MonitoringChart -->
+    <div class="bento-card" data-animate style="transition-delay:0.2s;">
+      <div class="bento-card-label">
+        <svg aria-hidden="true" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Livelab Analytics
+      </div>
+      <p class="bento-card-title">
+        Performance de cada cabine num único lugar.
+        <span>Decida quais estúdios expandir com dados reais da operação.</span>
+      </p>
+      <div class="chart-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#F97316;"></span>Viewers</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#f87171;"></span>Vendas</span>
+      </div>
+      <svg aria-hidden="true" viewBox="0 0 340 130" style="width:100%; height:auto;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gOrange" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F97316" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="gRose" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f87171" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#f87171" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line x1="30" y1="10" x2="330" y2="10" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="30" y1="40" x2="330" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="30" y1="70" x2="330" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="30" y1="100" x2="330" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <path d="M30,90 L75,70 L120,80 L165,45 L210,55 L255,30 L300,20 L300,110 L30,110 Z" fill="url(#gOrange)"/>
+        <path d="M30,90 L75,70 L120,80 L165,45 L210,55 L255,30 L300,20" fill="none" stroke="#F97316" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M30,100 L75,88 L120,92 L165,68 L210,75 L255,55 L300,42 L300,110 L30,110 Z" fill="url(#gRose)"/>
+        <path d="M30,100 L75,88 L120,92 L165,68 L210,75 L255,55 L300,42" fill="none" stroke="#f87171" stroke-width="2" stroke-linejoin="round"/>
+        <text x="30"  y="125" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter" text-anchor="middle">Jan</text>
+        <text x="75"  y="125" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter" text-anchor="middle">Fev</text>
+        <text x="120" y="125" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter" text-anchor="middle">Mar</text>
+        <text x="165" y="125" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter" text-anchor="middle">Abr</text>
+        <text x="210" y="125" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter" text-anchor="middle">Mai</text>
+        <text x="255" y="125" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter" text-anchor="middle">Jun</text>
+        <text x="300" y="125" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter" text-anchor="middle">Jul</text>
+      </svg>
+    </div>
+
+    <!-- Card 4: Feature Cards — padrão FeatureCard (card pinned bottom-right + hover arrow) -->
+    <div class="bento-card" style="padding:0; opacity:0; transform:translateY(30px); transition:opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;" data-animate>
+      <div class="feature-cards-grid">
+
+        <!-- Feature A: Integração -->
+        <div class="feature-card">
+          <div class="feature-card-label">
+            <svg aria-hidden="true" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+            </svg>
+            Integração fácil
+          </div>
+          <p class="feature-card-title">
+            iOS, Android e PC
+            <span> Gerencie sua franquia de qualquer dispositivo, de onde estiver.</span>
+          </p>
+          <!-- Card pinned bottom-right (padrão FeatureCard shadcn) -->
+          <div class="feature-card-thumb"></div>
+          <!-- Arrow com hover -rotate-45 -->
+          <div class="feature-card-arrow" aria-hidden="true">
+            <svg width="13" height="13" fill="none" viewBox="0 0 16 16" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Feature B: Suporte -->
+        <div class="feature-card">
+          <div class="feature-card-label">
+            <svg aria-hidden="true" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 18v-6a9 9 0 0118 0v6"/>
+              <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3v5zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3v5z"/>
+            </svg>
+            Suporte 24/7
+          </div>
+          <p class="feature-card-title">
+            Metodologia comprovada
+            <span> Suporte completo do primeiro dia. Você nunca opera sozinho.</span>
+          </p>
+          <div class="feature-card-thumb"></div>
+          <div class="feature-card-arrow" aria-hidden="true">
+            <svg width="13" height="13" fill="none" viewBox="0 0 16 16" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== CTA ANIMADO ===================== -->
+<section id="cta-section">
+  <div class="cta-glow"></div>
+
+  <h2 id="cta-title">Pronto para abrir seu estúdio?</h2>
+  <div id="cta-underline"></div>
+
+  <p class="cta-subtitle" id="cta-subtitle">
+    Adquira a franquia Livelab, receba a metodologia completa e comece a atender marcas com 10 cabines prontas para operar.
+  </p>
+
+  <div class="cta-btn-wrap" id="cta-btn-wrap">
+    <a href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="btn-cta">Quero ser franqueado</a>
+  </div>
+
+  <p class="cta-footnote" id="cta-footnote">
+    Vagas limitadas por região. Fale com um consultor.
+  </p>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="logo-text" style="font-size:1.2rem;" aria-label="Livelab">
+      l<span style="visibility:hidden;" aria-hidden="true">i</span>velab
+      <svg aria-hidden="true" class="logo-play" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L9 6L1 11V1Z" fill="#F97316"/>
+      </svg>
+    </a>
+    <p class="footer-copy">© 2026 Livelab. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+  // ---- 1. Navbar scroll ----
+  const navbar = document.getElementById('navbar');
+  function handleNavScroll() {
+    if (window.scrollY > 10) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+  handleNavScroll();
+
+  // ---- 2. Mobile menu ----
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    mobileMenu.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e) {
+    if (!navbar.contains(e.target)) {
+      mobileMenu.classList.remove('open');
+    }
+  });
+
+  // ---- 3. Scroll 3D card ----
+  const scrollSection = document.getElementById('scroll-section');
+  const scrollCard = document.getElementById('scroll-card');
+  let ticking = false;
+
+  function updateCard3D() {
+    const sectionRect = scrollSection.getBoundingClientRect();
+    const windowH = window.innerHeight;
+    // Progress: 0 when section top hits bottom of viewport, 1 when section top hits center
+    const raw = 1 - (sectionRect.top / windowH);
+    const progress = Math.max(0, Math.min(1, raw * 1.5));
+
+    const rotateX    = 20 - (20 * progress);     // 20deg → 0deg
+    const scale      = 1.05 - (0.05 * progress); // 1.05 → 1
+    const translateY = -(40 * progress);           // 0 → -40px
+
+    scrollCard.style.transform =
+      `rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px)`;
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(updateCard3D);
+      ticking = true;
+    }
+  }, { passive: true });
+  updateCard3D();
+
+  // ---- 4. Intersection Observer for [data-animate] and .bento-card ----
+  const animObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('[data-animate], .bento-card').forEach(function(el) {
+    animObserver.observe(el);
+  });
+
+  // ---- 5. CTA letter animation ----
+  var ctaTriggered = false;
+  const ctaTitle = document.getElementById('cta-title');
+  const ctaUnderline = document.getElementById('cta-underline');
+  const ctaSubtitle = document.getElementById('cta-subtitle');
+  const ctaBtnWrap = document.getElementById('cta-btn-wrap');
+  const ctaFootnote = document.getElementById('cta-footnote');
+
+  // Split text into letter spans
+  function splitCTAText() {
+    const text = ctaTitle.textContent.trim();
+    ctaTitle.innerHTML = '';
+    for (var i = 0; i < text.length; i++) {
+      if (text[i] === ' ') {
+        var sp = document.createElement('span');
+        sp.className = 'cta-letter-space';
+        ctaTitle.appendChild(sp);
+      } else {
+        var span = document.createElement('span');
+        span.className = 'cta-letter';
+        span.textContent = text[i];
+        span.style.transitionDelay = (i * 0.04) + 's';
+        ctaTitle.appendChild(span);
+      }
+    }
+  }
+  splitCTAText();
+
+  function triggerCTA() {
+    if (ctaTriggered) return;
+    ctaTriggered = true;
+
+    // Animate letters
+    var letters = ctaTitle.querySelectorAll('.cta-letter');
+    letters.forEach(function(l) { l.classList.add('visible'); });
+
+    // After letters: underline
+    var lettersDuration = letters.length * 40 + 400;
+    setTimeout(function() {
+      ctaUnderline.style.width = '100%';
+    }, lettersDuration);
+
+    // After underline: subtitle, button, footnote
+    setTimeout(function() {
+      ctaSubtitle.classList.add('visible');
+    }, lettersDuration + 900);
+
+    setTimeout(function() {
+      ctaBtnWrap.classList.add('visible');
+    }, lettersDuration + 1100);
+
+    setTimeout(function() {
+      ctaFootnote.classList.add('visible');
+    }, lettersDuration + 1300);
+  }
+
+  const ctaObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        triggerCTA();
+        ctaObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  ctaObserver.observe(document.getElementById('cta-section'));
+
+  // ---- 6. Notifications — scaleUp (padrão RuixenFeaturedMessageCard) ----
+  var notifTriggered = false;
+  const notifList = document.getElementById('notif-list');
+
+  function triggerNotifs() {
+    if (notifTriggered) return;
+    notifTriggered = true;
+    // Adiciona classe .triggered para iniciar animation-play-state: running
+    // O delay já está definido inline via animation-delay no HTML
+    var items = notifList.querySelectorAll('.notif-item');
+    items.forEach(function(item) {
+      item.classList.add('triggered');
+    });
+  }
+
+  const notifObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        triggerNotifs();
+        notifObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  notifObserver.observe(notifList);
+</script>
+</body>
+</html>
