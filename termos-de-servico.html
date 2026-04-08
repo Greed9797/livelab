@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Termos de Serviço da Livelab Franchising Ltda. — condições gerais para uso da plataforma e dos serviços de live commerce." />
+  <title>Termos de Serviço — Livelab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: '#F97316', bg: '#030303' },
+          fontFamily: { sans: ['Poppins', 'sans-serif'] },
+        },
+      },
+    };
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    body { background: #030303; color: #fff; overflow-x: hidden; }
+
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 300px 300px; opacity: 0.022; mix-blend-mode: screen;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 1rem 2rem;
+      background: rgba(3,3,3,0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-text {
+      font-size: 1.5rem; font-weight: 800; color: #fff;
+      letter-spacing: -0.04em; position: relative;
+      display: inline-flex; align-items: center; text-decoration: none;
+    }
+    .logo-play { position: absolute; top: 0.12em; left: 0.435em; width: 0.32em; height: 0.32em; }
+    .btn-cta {
+      background: linear-gradient(135deg, #F97316 0%, #fb923c 100%);
+      border: none; color: #fff; padding: 0.5rem 1.25rem; border-radius: 8px;
+      font-size: 0.875rem; font-weight: 600; cursor: pointer; text-decoration: none;
+      font-family: 'Poppins', sans-serif; transition: opacity 0.2s;
+    }
+    .btn-cta:hover { opacity: 0.88; }
+
+    /* Hero */
+    .page-hero {
+      padding: 9rem 1.5rem 4rem; text-align: center; position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(249,115,22,0.07) 0%, transparent 70%);
+    }
+    .page-hero-tag {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.22);
+      color: rgba(255,255,255,0.7); border-radius: 999px;
+      padding: 0.35rem 1rem; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 0.75rem;
+    }
+    .page-hero p { color: rgba(255,255,255,0.4); font-size: 0.95rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    /* Layout */
+    .main-wrap {
+      max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem 6rem;
+      display: grid; grid-template-columns: 240px 1fr; gap: 4rem; align-items: start;
+    }
+    @media (max-width: 767px) {
+      .main-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .sidebar { display: none; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky; top: 90px;
+    }
+    .sidebar-title { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+    .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+    .sidebar-links a {
+      display: block; color: rgba(255,255,255,0.35); text-decoration: none;
+      font-size: 0.82rem; padding: 0.35rem 0.75rem; border-left: 2px solid rgba(255,255,255,0.07);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .sidebar-links a:hover { color: rgba(255,255,255,0.7); border-left-color: rgba(249,115,22,0.4); }
+    .sidebar-links a.current { color: #F97316; border-left-color: #F97316; }
+
+    /* Company card */
+    .company-card {
+      margin-top: 2rem;
+      background: rgba(249,115,22,0.05); border: 1px solid rgba(249,115,22,0.15);
+      border-radius: 10px; padding: 1rem 1.25rem;
+    }
+    .company-card-title { font-size: 0.72rem; font-weight: 600; color: rgba(249,115,22,0.7); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
+    .company-card p { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+    .company-card strong { color: rgba(255,255,255,0.65); font-weight: 500; }
+
+    /* Content */
+    .content { min-width: 0; }
+
+    .doc-meta {
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 3rem; padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .doc-meta-item { font-size: 0.78rem; color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 0.4rem; }
+    .doc-meta-item span { color: rgba(249,115,22,0.7); }
+
+    .policy-block { margin-bottom: 2.75rem; scroll-margin-top: 100px; }
+    .policy-block h2 {
+      font-size: 1.05rem; font-weight: 700; color: #fff;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .policy-block h2 .clause-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0;
+      background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.25);
+      color: #F97316; font-size: 0.72rem; font-weight: 700;
+    }
+    .policy-block p { color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .policy-block p:last-child { margin-bottom: 0; }
+    .policy-block ul { list-style: none; padding: 0; margin: 0.5rem 0 0.85rem; }
+    .policy-block ul li {
+      color: rgba(255,255,255,0.45); font-size: 0.88rem; line-height: 1.75;
+      padding: 0.3rem 0 0.3rem 1.4rem; position: relative;
+    }
+    .policy-block ul li::before {
+      content: '—'; position: absolute; left: 0;
+      color: rgba(249,115,22,0.45); font-size: 0.8rem;
+    }
+    .policy-block h3 {
+      font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.7);
+      margin: 1.25rem 0 0.5rem; letter-spacing: -0.01em;
+    }
+
+    .highlight-box {
+      background: rgba(249,115,22,0.05); border: 1px solid rgba(249,115,22,0.18);
+      border-radius: 10px; padding: 1.1rem 1.4rem; margin: 1rem 0;
+    }
+    .highlight-box p { margin-bottom: 0; color: rgba(255,255,255,0.55); }
+
+    .info-box {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 1.1rem 1.4rem; margin: 1rem 0;
+    }
+    .info-box p { margin-bottom: 0; }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;
+    }
+    @media (max-width: 540px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-item {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 1rem 1.25rem;
+    }
+    .contact-item-label { font-size: 0.7rem; color: rgba(249,115,22,0.6); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .contact-item-value { font-size: 0.85rem; color: rgba(255,255,255,0.65); font-weight: 500; }
+
+    hr.divider { border: none; border-top: 1px solid rgba(255,255,255,0.05); margin: 0 0 2.75rem; }
+
+    /* Footer */
+    footer {
+      background: #020202; border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 1.5rem; text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); margin-top: 0.75rem; }
+    .footer-copy a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-copy a:hover { color: rgba(249,115,22,0.7); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo-text" aria-label="Livelab">
+      l<span style="visibility:hidden;" aria-hidden="true">i</span>velab
+      <svg aria-hidden="true" class="logo-play" viewBox="0 0 10 12" fill="none">
+        <path d="M1 1L9 6L1 11V1Z" fill="#F97316"/>
+      </svg>
+    </a>
+    <a href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="btn-cta">Quero franquear</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-tag">
+    <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    Documento legal
+  </div>
+  <h1>Termos de <span style="background:linear-gradient(90deg,#F97316,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Serviço</span></h1>
+  <p>Condições que regem o uso dos serviços, da plataforma e da rede de franquias Livelab.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Nesta página</div>
+    <ul class="sidebar-links">
+      <li><a href="#identificacao" class="current">1. Identificação</a></li>
+      <li><a href="#objeto">2. Objeto</a></li>
+      <li><a href="#aceitacao">3. Aceitação</a></li>
+      <li><a href="#servicos">4. Serviços</a></li>
+      <li><a href="#cadastro">5. Cadastro</a></li>
+      <li><a href="#uso-plataforma">6. Uso da Plataforma</a></li>
+      <li><a href="#pagamentos">7. Pagamentos</a></li>
+      <li><a href="#cancelamento">8. Cancelamento</a></li>
+      <li><a href="#propriedade-intelectual">9. Prop. Intelectual</a></li>
+      <li><a href="#privacidade">10. Privacidade</a></li>
+      <li><a href="#responsabilidade">11. Responsabilidade</a></li>
+      <li><a href="#condutas">12. Condutas Proibidas</a></li>
+      <li><a href="#modificacoes">13. Modificações</a></li>
+      <li><a href="#foro">14. Foro e Lei</a></li>
+      <li><a href="#contato">15. Contato</a></li>
+    </ul>
+
+    <div class="company-card">
+      <div class="company-card-title">Empresa responsável</div>
+      <p>
+        <strong>Livelab Franchising Ltda.</strong><br/>
+        CNPJ 47.382.910/0001-55<br/>
+        Balneário Camboriú — SC<br/>
+        <strong>contato@livelab.com.br</strong>
+      </p>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="doc-meta">
+      <div class="doc-meta-item">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Versão em vigor desde <span>08 de abril de 2026</span>
+      </div>
+      <div class="doc-meta-item">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Última revisão: <span>08 de abril de 2026</span>
+      </div>
+    </div>
+
+    <!-- 1 -->
+    <div class="policy-block" id="identificacao">
+      <h2><span class="clause-num">1</span> Identificação da Empresa</h2>
+      <p>A <strong style="color:rgba(255,255,255,0.75);">Livelab Franchising Ltda.</strong>, pessoa jurídica de direito privado, inscrita no CNPJ sob o nº <strong style="color:rgba(255,255,255,0.75);">47.382.910/0001-55</strong>, com sede na <strong style="color:rgba(255,255,255,0.75);">Rua das Inovações, 842, Sala 301, Balneário Camboriú – SC, CEP 88330-000</strong>, é a empresa responsável pela operação da plataforma Livelab, pela concessão de franquias de estúdios de live commerce e pela prestação dos serviços descritos nestes Termos.</p>
+      <div class="info-box">
+        <p><strong style="color:rgba(255,255,255,0.65);">Inscrição Estadual:</strong> <span style="color:rgba(255,255,255,0.45);">254.982.740</span> &nbsp;·&nbsp; <strong style="color:rgba(255,255,255,0.65);">Registro na Junta Comercial de SC:</strong> <span style="color:rgba(255,255,255,0.45);">NIRE 42200319080</span></p>
+      </div>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 2 -->
+    <div class="policy-block" id="objeto">
+      <h2><span class="clause-num">2</span> Objeto</h2>
+      <p>Estes Termos de Serviço regulam as condições gerais de uso da plataforma digital Livelab, a contratação dos serviços de gestão de estúdios de live commerce, bem como o relacionamento entre a Livelab Franchising Ltda. e seus clientes, parceiros e franqueados.</p>
+      <p>O presente documento constitui um contrato vinculante entre a Livelab e o usuário, sendo aplicável a qualquer forma de acesso ou utilização dos serviços, incluindo acesso via navegador web, aplicativo móvel (iOS e Android) ou aplicativo desktop.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 3 -->
+    <div class="policy-block" id="aceitacao">
+      <h2><span class="clause-num">3</span> Aceitação dos Termos</h2>
+      <p>O acesso e uso dos serviços Livelab implicam a aceitação plena, expressa e irrevogável de todos os termos e condições aqui estabelecidos. Caso não concorde com qualquer disposição deste documento, o usuário deverá cessar imediatamente o uso da plataforma e dos serviços.</p>
+      <div class="highlight-box">
+        <p>A aceitação pode se dar de forma explícita — mediante clique em botão de confirmação — ou implícita, pelo simples uso continuado da plataforma após o período de 15 dias concedido para análise de eventuais alterações.</p>
+      </div>
+      <p>O usuário declara ter capacidade civil plena para contratar e, caso esteja agindo em nome de pessoa jurídica, declara possuir poderes de representação suficientes para vincular a empresa a estes Termos.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 4 -->
+    <div class="policy-block" id="servicos">
+      <h2><span class="clause-num">4</span> Descrição dos Serviços</h2>
+      <p>A Livelab oferece os seguintes serviços:</p>
+
+      <h3>4.1 Plataforma de gestão de cabines</h3>
+      <p>Sistema multiplataforma (iOS, Android e PC) que permite ao franqueado gerenciar em tempo real até 10 cabines de live commerce (ou mais, conforme contratado), com acesso a dashboard centralizado contendo dados de ocupação, faturamento por cabine, marcas atendidas, alertas operacionais e relatórios de performance.</p>
+
+      <h3>4.2 Metodologia Livelab</h3>
+      <p>Conjunto de processos, manuais, treinamentos e diretrizes operacionais proprietários que orientam a implantação, comercialização e operação de estúdios de live commerce, incluindo modelo de precificação, captação de marcas parceiras e gestão de equipe.</p>
+
+      <h3>4.3 Franquia de estúdio</h3>
+      <p>Concessão do direito de uso da marca Livelab, da metodologia e do sistema para operação de unidade franqueada com exclusividade territorial, nos termos do Contrato de Franquia específico.</p>
+
+      <h3>4.4 Suporte e treinamento</h3>
+      <p>Treinamento inicial presencial, suporte técnico contínuo por canais digitais e consultoria periódica de negócios para otimização da operação.</p>
+
+      <h3>4.5 Serviços adicionais</h3>
+      <ul>
+        <li>Licenciamento de cabines adicionais além do pacote padrão de 10 unidades</li>
+        <li>Materiais de marketing personalizados para a unidade franqueada</li>
+        <li>Integrações com plataformas de e-commerce e marketplaces, incluindo TikTok Shop</li>
+        <li>Consultoria especializada em estratégia de live commerce</li>
+      </ul>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 5 -->
+    <div class="policy-block" id="cadastro">
+      <h2><span class="clause-num">5</span> Cadastro e Conta de Usuário</h2>
+      <p>Para acessar os serviços Livelab, é necessário criar uma conta mediante fornecimento das seguintes informações:</p>
+      <ul>
+        <li>Nome completo ou razão social</li>
+        <li>CPF ou CNPJ válido</li>
+        <li>Endereço de e-mail ativo</li>
+        <li>Número de telefone celular (preferencialmente WhatsApp)</li>
+        <li>Cidade e estado de operação ou interesse</li>
+      </ul>
+      <p>O usuário é responsável pela veracidade, atualidade e completude das informações fornecidas. O cadastro com dados falsos ou de terceiros sem autorização é expressamente proibido e sujeito a cancelamento imediato, sem prejuízo das medidas legais cabíveis.</p>
+      <p>Cada conta é pessoal e intransferível. O usuário deve manter suas credenciais (e-mail e senha) em sigilo, sendo responsável por todas as ações realizadas sob sua conta.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 6 -->
+    <div class="policy-block" id="uso-plataforma">
+      <h2><span class="clause-num">6</span> Uso da Plataforma</h2>
+      <p>O usuário concorda em utilizar a plataforma Livelab exclusivamente para fins legítimos e em conformidade com:</p>
+      <ul>
+        <li>A legislação brasileira vigente, incluindo o Código de Defesa do Consumidor (Lei 8.078/90) e o Marco Civil da Internet (Lei 12.965/2014)</li>
+        <li>As políticas da plataforma TikTok e dos demais marketplaces integrados, quando aplicável</li>
+        <li>Os padrões operacionais e de qualidade da rede Livelab</li>
+        <li>As boas práticas de live commerce e de relacionamento com marcas parceiras</li>
+      </ul>
+      <p>O sistema de gestão de cabines deve ser utilizado somente para fins operacionais da unidade franqueada. É vedado o uso para fins pessoais, recreativos ou para benefício de terceiros não autorizados.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 7 -->
+    <div class="policy-block" id="pagamentos">
+      <h2><span class="clause-num">7</span> Pagamentos, Royalties e Taxas</h2>
+
+      <h3>7.1 Taxa de franquia</h3>
+      <p>Paga uma única vez no momento da assinatura do contrato, conforme proposta comercial aprovada. Inclui licença do sistema, metodologia, treinamento inicial e materiais de implantação.</p>
+
+      <h3>7.2 Royalties mensais</h3>
+      <p>Calculados sobre o faturamento bruto mensal da unidade, com percentual definido em contrato e comunicado durante o processo de qualificação. O vencimento ocorre no 5º dia útil do mês subsequente ao período de apuração.</p>
+
+      <h3>7.3 Fundo de marketing</h3>
+      <p>Contribuição mensal destinada às ações de marketing e comunicação da rede, calculada sobre o faturamento bruto. Os recursos são geridos de forma coletiva e aplicados em campanhas que beneficiam toda a rede.</p>
+
+      <h3>7.4 Cabines adicionais</h3>
+      <p>A contratação de cabines além do pacote padrão (10 unidades) é realizada mediante aditivo contratual, com cobrança de taxa de licença por cabine adicional e inclusão no royalty mensal proporcional.</p>
+
+      <h3>7.5 Atraso e inadimplência</h3>
+      <p>Valores em atraso estão sujeitos a multa de 2% e juros de mora de 1% ao mês, além de correção monetária pelo IGPM. A inadimplência superior a 60 dias pode resultar na suspensão do acesso ao sistema, sem prejuízo das demais penalidades contratuais.</p>
+
+      <div class="highlight-box">
+        <p>Todos os pagamentos são realizados via boleto bancário, PIX ou transferência bancária para a conta da Livelab Franchising Ltda. Não são aceitos pagamentos em espécie.</p>
+      </div>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 8 -->
+    <div class="policy-block" id="cancelamento">
+      <h2><span class="clause-num">8</span> Cancelamento e Rescisão</h2>
+
+      <h3>8.1 Cancelamento pelo usuário</h3>
+      <p>O franqueado pode solicitar o cancelamento do contrato mediante notificação escrita com antecedência mínima de 90 dias. O cancelamento antecipado (antes do término da vigência contratual de 5 anos) está sujeito a multa rescisória proporcional ao tempo restante, conforme cláusula específica do Contrato de Franquia.</p>
+
+      <h3>8.2 Rescisão pela Livelab</h3>
+      <p>A Livelab poderá rescindir o contrato, com ou sem aviso prévio dependendo da gravidade, nas seguintes situações:</p>
+      <ul>
+        <li>Inadimplência financeira superior a 60 dias</li>
+        <li>Descumprimento reiterado dos padrões operacionais da rede</li>
+        <li>Uso indevido da marca, do sistema ou da metodologia Livelab</li>
+        <li>Prática de atividades ilegais ou antiéticas no espaço franqueado</li>
+        <li>Transferência não autorizada da franquia a terceiros</li>
+      </ul>
+
+      <h3>8.3 Direito de arrependimento</h3>
+      <p>Para contratações realizadas exclusivamente por meio digital, o consumidor tem direito de arrependimento no prazo de 7 dias corridos a partir da assinatura do contrato, conforme art. 49 do Código de Defesa do Consumidor, com devolução integral dos valores pagos.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 9 -->
+    <div class="policy-block" id="propriedade-intelectual">
+      <h2><span class="clause-num">9</span> Propriedade Intelectual</h2>
+      <p>A marca <strong style="color:rgba(255,255,255,0.7);">Livelab®</strong>, o logotipo, o sistema de gestão, a metodologia operacional, os materiais de treinamento, as interfaces do dashboard, os relatórios e todo o conteúdo gerado pela empresa são de propriedade exclusiva da Livelab Franchising Ltda., protegidos pelas Leis nº 9.279/96 (Propriedade Industrial) e nº 9.610/98 (Direitos Autorais).</p>
+      <p>A franquia concede ao franqueado uma licença de uso limitada, não exclusiva e intransferível da marca e dos ativos intelectuais Livelab, restrita ao território e à vigência estabelecidos em contrato. Nenhum direito de propriedade é transferido ao franqueado.</p>
+      <div class="highlight-box">
+        <p>É expressamente proibida qualquer reprodução, modificação, redistribuição, sublicenciamento ou uso dos ativos intelectuais da Livelab fora dos limites autorizados, sob pena de rescisão imediata e responsabilização civil e criminal.</p>
+      </div>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 10 -->
+    <div class="policy-block" id="privacidade">
+      <h2><span class="clause-num">10</span> Privacidade e Proteção de Dados</h2>
+      <p>O tratamento de dados pessoais realizado pela Livelab obedece às disposições da Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018) e está detalhado em nossa <a href="politicas.html" style="color:#F97316;text-decoration:none;">Política de Privacidade</a>, que é parte integrante destes Termos de Serviço.</p>
+      <p>Ao utilizar os serviços Livelab, o usuário consente com o tratamento de seus dados pessoais nas finalidades descritas na Política de Privacidade, podendo revogar o consentimento a qualquer momento mediante solicitação formal ao DPO da empresa.</p>
+      <p>A Livelab adota medidas técnicas e organizacionais adequadas para proteger os dados pessoais contra acesso não autorizado, perda, alteração ou divulgação indevida.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 11 -->
+    <div class="policy-block" id="responsabilidade">
+      <h2><span class="clause-num">11</span> Limitação de Responsabilidade</h2>
+      <p>A Livelab envidará todos os esforços razoáveis para manter a plataforma disponível e funcional, mas não garante disponibilidade ininterrupta. A empresa não se responsabiliza por:</p>
+      <ul>
+        <li>Falhas técnicas causadas por terceiros, incluindo provedores de internet e serviços de nuvem</li>
+        <li>Indisponibilidade temporária por manutenção programada, comunicada com antecedência mínima de 24 horas</li>
+        <li>Resultados comerciais específicos decorrentes do uso da plataforma ou da operação da franquia</li>
+        <li>Danos causados por uso inadequado do sistema pelo franqueado ou seus colaboradores</li>
+        <li>Perdas decorrentes de eventos de força maior, conforme definido no art. 393 do Código Civil</li>
+        <li>Alterações nas políticas de plataformas de terceiros integradas ao sistema (ex.: TikTok, Instagram, YouTube)</li>
+      </ul>
+      <p>Em nenhuma hipótese a responsabilidade total da Livelab perante o usuário excederá o valor pago pelos serviços nos 12 meses anteriores ao evento gerador do dano.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 12 -->
+    <div class="policy-block" id="condutas">
+      <h2><span class="clause-num">12</span> Condutas Proibidas</h2>
+      <p>É expressamente vedado ao usuário, sob pena de suspensão ou cancelamento imediato da conta:</p>
+      <ul>
+        <li>Compartilhar credenciais de acesso ao sistema com terceiros não autorizados</li>
+        <li>Tentar acessar dados de outros franqueados ou áreas restritas do sistema</li>
+        <li>Realizar engenharia reversa, descompilar ou modificar qualquer parte do software Livelab</li>
+        <li>Usar a plataforma para veicular conteúdo ilegal, ofensivo, discriminatório ou que viole direitos de terceiros</li>
+        <li>Comercializar ou sublicenciar o acesso à plataforma para terceiros</li>
+        <li>Utilizar robôs, scrapers ou scripts automatizados para acessar ou extrair dados do sistema</li>
+        <li>Realizar transmissões ao vivo nas cabines com conteúdo que viole as políticas da plataforma de destino (TikTok, Instagram, YouTube etc.)</li>
+        <li>Veicular nas cabines produtos proibidos ou sujeitos a restrições legais sem as devidas autorizações</li>
+      </ul>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 13 -->
+    <div class="policy-block" id="modificacoes">
+      <h2><span class="clause-num">13</span> Modificações dos Termos</h2>
+      <p>A Livelab reserva-se o direito de atualizar estes Termos a qualquer momento, em função de mudanças na legislação, nos serviços oferecidos ou nas práticas operacionais da empresa.</p>
+      <p>Alterações materiais serão comunicadas com antecedência mínima de <strong style="color:rgba(255,255,255,0.7);">15 dias corridos</strong> por e-mail cadastrado e mediante notificação no painel do sistema. O uso continuado dos serviços após o prazo concedido implica aceitação dos novos termos.</p>
+      <p>Caso o usuário não concorde com as alterações, deverá comunicar formalmente sua recusa dentro do prazo estabelecido, podendo rescindir o contrato sem penalidade se as alterações impuserem obrigações substancialmente mais onerosas.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 14 -->
+    <div class="policy-block" id="foro">
+      <h2><span class="clause-num">14</span> Legislação Aplicável e Foro</h2>
+      <p>Estes Termos de Serviço são regidos exclusivamente pela legislação da República Federativa do Brasil, em especial:</p>
+      <ul>
+        <li>Código Civil Brasileiro (Lei nº 10.406/2002)</li>
+        <li>Código de Defesa do Consumidor (Lei nº 8.078/1990)</li>
+        <li>Lei Geral de Proteção de Dados — LGPD (Lei nº 13.709/2018)</li>
+        <li>Marco Civil da Internet (Lei nº 12.965/2014)</li>
+        <li>Lei de Franquia (Lei nº 13.966/2019)</li>
+      </ul>
+      <p>Fica eleito o foro da <strong style="color:rgba(255,255,255,0.7);">Comarca de Balneário Camboriú — SC</strong> como competente para dirimir quaisquer controvérsias ou litígios decorrentes destes Termos, com renúncia expressa a qualquer outro foro, por mais privilegiado que seja. As partes concordam em tentar a resolução amigável de disputas antes do ingresso em juízo, com prazo de 30 dias para negociação.</p>
+    </div>
+    <hr class="divider"/>
+
+    <!-- 15 -->
+    <div class="policy-block" id="contato">
+      <h2><span class="clause-num">15</span> Contato e Atendimento</h2>
+      <p>Para dúvidas, solicitações ou manifestações relacionadas a estes Termos de Serviço, o usuário pode entrar em contato pelos canais abaixo:</p>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-item-label">E-mail comercial</div>
+          <div class="contact-item-value">contato@livelab.com.br</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">E-mail jurídico</div>
+          <div class="contact-item-value">juridico@livelab.com.br</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">WhatsApp</div>
+          <div class="contact-item-value">(47) 98467-6404</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">Telefone</div>
+          <div class="contact-item-value">(47) 3000-0842</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">Endereço</div>
+          <div class="contact-item-value">R. das Inovações, 842 — Sala 301<br/>Balneário Camboriú – SC, 88330-000</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">Horário de atendimento</div>
+          <div class="contact-item-value">Seg a Sex, 9h às 18h<br/>Sábado, 9h às 13h</div>
+        </div>
+      </div>
+
+      <p style="margin-top:1.5rem;">Para assuntos relacionados à proteção de dados e exercício de direitos LGPD, contate nosso DPO diretamente pelo e-mail <strong style="color:rgba(249,115,22,0.8);">dpo@livelab.com.br</strong>.</p>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="logo-text" style="font-size:1.2rem;" aria-label="Livelab">
+      l<span style="visibility:hidden;" aria-hidden="true">i</span>velab
+      <svg aria-hidden="true" class="logo-play" viewBox="0 0 10 12" fill="none">
+        <path d="M1 1L9 6L1 11V1Z" fill="#F97316"/>
+      </svg>
+    </a>
+    <p class="footer-copy">© 2026 Livelab Franchising Ltda. — CNPJ 47.382.910/0001-55 &nbsp;·&nbsp;
+      <a href="politicas.html">Políticas de Privacidade</a> &nbsp;·&nbsp;
+      <a href="termos-de-servico.html">Termos de Serviço</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Highlight current sidebar link on scroll
+  const sections = document.querySelectorAll('.policy-block[id]');
+  const links = document.querySelectorAll('.sidebar-links a');
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        links.forEach(function(l) { l.classList.remove('current'); });
+        const active = document.querySelector('.sidebar-links a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('current');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(function(s) { observer.observe(s); });
+</script>
+
+</body>
+</html>
