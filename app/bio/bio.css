@@ -1,0 +1,4 @@
+.bio-root .font-serif,
+.bio-root [class~="font-serif"] {
+  font-family: var(--font-playfair), Georgia, serif;
+}
