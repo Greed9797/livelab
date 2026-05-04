@@ -9,7 +9,7 @@ export interface LinkItem {
 export const links: LinkItem[] = [
   {
     id: "estrutura",
-    href: "/cliente",
+    href: "/bio/cliente",
     parts: [
       { text: "Estrutura completa", bold: true },
       { text: " de " },
@@ -19,7 +19,7 @@ export const links: LinkItem[] = [
   },
   {
     id: "franqueado",
-    href: "/franqueado",
+    href: "/bio/franqueado",
     parts: [
       { text: "Seja um " },
       { text: "franqueado", bold: true },
@@ -28,7 +28,7 @@ export const links: LinkItem[] = [
   },
   {
     id: "apresentador",
-    href: "/apresentador",
+    href: "/bio/apresentador",
     parts: [
       { text: "Quero me tornar " },
       { text: "apresentador(a)!", bold: true },
