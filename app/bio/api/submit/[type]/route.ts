@@ -4,6 +4,15 @@ import type { Persona } from "@/lib/bio/whatsapp";
 
 const VALID: Persona[] = ["cliente", "franqueado", "apresentador"];
 
+function firstHeader(req: Request, name: string): string | null {
+  const value = req.headers.get(name);
+  return value?.split(",")[0]?.trim() || null;
+}
+
+function stringValue(value: unknown): string | null {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
 export async function POST(req: Request, { params }: { params: Promise<{ type: string }> }) {
   const { type } = await params;
   if (!VALID.includes(type as Persona)) {
@@ -19,13 +28,29 @@ export async function POST(req: Request, { params }: { params: Promise<{ type: s
   }
 
   const values = body.values ?? {};
+  const leadName = stringValue(values.nome);
+  const contactEmail = stringValue(values.email);
+  const whatsapp = stringValue(values.whatsapp);
+  const city = stringValue(values.cidade) ?? stringValue(values.cidade_estado);
+  const sourcePath = `/bio/${persona}`;
+  const metadata = {
+    referer: req.headers.get("referer"),
+    origin: req.headers.get("origin"),
+    acceptLanguage: req.headers.get("accept-language"),
+  };
 
   const sb = getServiceSupabase();
   if (sb) {
     const { error } = await sb.from("submissions").insert({
       persona,
-      lead_name: typeof values.nome === "string" ? values.nome : null,
+      lead_name: leadName,
+      contact_email: contactEmail,
+      whatsapp,
+      city,
+      source_path: sourcePath,
       payload: values,
+      metadata,
+      ip_address: firstHeader(req, "x-forwarded-for") ?? firstHeader(req, "x-real-ip"),
       user_agent: req.headers.get("user-agent") ?? null,
     });
     if (error) {

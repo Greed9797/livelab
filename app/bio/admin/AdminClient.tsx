@@ -10,6 +10,14 @@ interface Submission {
   id: string | number;
   persona: Persona;
   lead_name: string | null;
+  contact_email: string | null;
+  whatsapp: string | null;
+  city: string | null;
+  status: string | null;
+  source_path: string | null;
+  metadata: Record<string, unknown> | null;
+  ip_address: string | null;
+  user_agent: string | null;
   payload: Record<string, string | string[]>;
   created_at: string;
 }
@@ -87,6 +95,7 @@ export default function AdminClient({ submissions, dbError }: Props) {
                   <th className="px-[14px] py-[10px]">Nome</th>
                   <th className="px-[14px] py-[10px]">WhatsApp</th>
                   <th className="px-[14px] py-[10px]">Cidade</th>
+                  <th className="px-[14px] py-[10px]">Status</th>
                   <th className="px-[14px] py-[10px]"></th>
                 </tr>
               </thead>
@@ -98,8 +107,9 @@ export default function AdminClient({ submissions, dbError }: Props) {
                       <span className="rounded-full bg-[#FE5206]/15 px-[8px] py-[2px] text-[11px] text-[#FE5206]">{PERSONA_LABEL[s.persona]}</span>
                     </td>
                     <td className="px-[14px] py-[10px]">{s.lead_name ?? s.payload?.nome ?? "—"}</td>
-                    <td className="px-[14px] py-[10px] text-white/70">{(s.payload?.whatsapp as string) ?? "—"}</td>
-                    <td className="px-[14px] py-[10px] text-white/70">{(s.payload?.cidade as string) ?? (s.payload?.cidade_estado as string) ?? "—"}</td>
+                    <td className="px-[14px] py-[10px] text-white/70">{s.whatsapp ?? (s.payload?.whatsapp as string) ?? "—"}</td>
+                    <td className="px-[14px] py-[10px] text-white/70">{s.city ?? (s.payload?.cidade as string) ?? (s.payload?.cidade_estado as string) ?? "—"}</td>
+                    <td className="px-[14px] py-[10px] text-white/70">{s.status ?? "novo"}</td>
                     <td className="px-[14px] py-[10px] text-right">
                       <button onClick={() => setSelected(s)} className="text-[12px] text-[#FE5206] hover:underline">
                         Ver detalhes
@@ -133,6 +143,18 @@ export default function AdminClient({ submissions, dbError }: Props) {
               </button>
             </div>
             <dl className="flex flex-col gap-[10px]">
+              <div className="flex flex-col gap-[2px] border-b border-white/5 pb-[8px]">
+                <dt className="text-[11px] uppercase tracking-wider text-white/50">metadata</dt>
+                <dd className="text-[14px] text-white">{JSON.stringify({
+                  email: selected.contact_email,
+                  whatsapp: selected.whatsapp,
+                  cidade: selected.city,
+                  origem: selected.source_path,
+                  ip: selected.ip_address,
+                  userAgent: selected.user_agent,
+                  ...selected.metadata,
+                })}</dd>
+              </div>
               {Object.entries(selected.payload ?? {}).map(([k, v]) => (
                 <div key={k} className="flex flex-col gap-[2px] border-b border-white/5 pb-[8px]">
                   <dt className="text-[11px] uppercase tracking-wider text-white/50">{k}</dt>

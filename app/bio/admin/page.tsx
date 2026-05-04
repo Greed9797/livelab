@@ -23,7 +23,7 @@ export default async function AdminPage() {
   } else {
     const { data, error } = await sb
       .from("submissions")
-      .select("id, persona, lead_name, payload, created_at")
+      .select("id, persona, lead_name, contact_email, whatsapp, city, status, source_path, payload, metadata, ip_address, user_agent, created_at")
       .order("created_at", { ascending: false })
       .limit(500);
     if (error) {
