@@ -25,7 +25,9 @@ function maskWebhookUrl(url: string): string {
 
 async function fireBioCrmWebhook(payload: Record<string, unknown>) {
   const webhookUrl = process.env.BIO_CRM_WEBHOOK_URL;
-  if (!webhookUrl) return;
+  if (!webhookUrl) {
+    throw new Error("BIO_CRM_WEBHOOK_URL ausente");
+  }
 
   const body = JSON.stringify(payload);
   const headers: Record<string, string> = {
@@ -78,6 +80,18 @@ export async function POST(req: Request, { params }: { params: Promise<{ type: s
     acceptLanguage: req.headers.get("accept-language"),
   };
   const submittedAt = new Date().toISOString();
+  const webhookPayload = {
+    event: "bio.form.submitted",
+    persona,
+    lead_name: leadName,
+    contact_email: contactEmail,
+    whatsapp,
+    city,
+    submitted_at: submittedAt,
+    source_path: sourcePath,
+    data: values,
+    metadata,
+  };
 
   const sb = getServiceSupabase();
   if (sb) {
@@ -98,28 +112,18 @@ export async function POST(req: Request, { params }: { params: Promise<{ type: s
       return NextResponse.json({ error: "Erro ao gravar" }, { status: 500 });
     }
   } else {
-    console.log(`[submit:${persona}]`, JSON.stringify(values));
+    console.warn("[submit] Supabase ausente; usando webhook como persistencia principal", { persona });
   }
 
-  const webhookPayload = {
-    event: "bio.form.submitted",
-    persona,
-    lead_name: leadName,
-    contact_email: contactEmail,
-    whatsapp,
-    city,
-    submitted_at: submittedAt,
-    source_path: sourcePath,
-    data: values,
-    metadata,
-  };
-
-  void fireBioCrmWebhook(webhookPayload).catch((err) => {
+  try {
+    await fireBioCrmWebhook(webhookPayload);
+  } catch (err) {
     console.warn("[bio-crm webhook] falhou", {
       err: err instanceof Error ? err.message : String(err),
       webhookUrl: process.env.BIO_CRM_WEBHOOK_URL ? maskWebhookUrl(process.env.BIO_CRM_WEBHOOK_URL) : undefined,
     });
-  });
+    return NextResponse.json({ error: "Erro ao enviar para o CRM" }, { status: 502 });
+  }
 
   return NextResponse.json({ ok: true });
 }
