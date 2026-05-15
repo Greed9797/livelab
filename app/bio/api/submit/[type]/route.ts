@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { createHmac } from "node:crypto";
+import { createHmac, randomUUID } from "node:crypto";
 import { getServiceSupabase } from "@/lib/bio/supabase/server";
 import type { Persona } from "@/lib/bio/whatsapp";
 
 const VALID: Persona[] = ["cliente", "franqueado", "apresentador"];
+const CRM_WEBHOOK_TIMEOUT_MS = 5000;
+const N8N_WEBHOOK_TIMEOUT_MS = 2500;
 
 function firstHeader(req: Request, name: string): string | null {
   const value = req.headers.get(name);
@@ -23,10 +25,18 @@ function maskWebhookUrl(url: string): string {
   }
 }
 
-async function fireBioCrmWebhook(payload: Record<string, unknown>) {
+type WebhookResult = {
+  ok: boolean;
+  skipped?: boolean;
+  error?: string;
+  status?: number;
+  webhookUrl?: string;
+};
+
+async function fireBioCrmWebhook(payload: Record<string, unknown>): Promise<WebhookResult> {
   const webhookUrl = process.env.BIO_CRM_WEBHOOK_URL;
   if (!webhookUrl) {
-    throw new Error("BIO_CRM_WEBHOOK_URL ausente");
+    return { ok: false, skipped: true, error: "BIO_CRM_WEBHOOK_URL ausente" };
   }
 
   const body = JSON.stringify(payload);
@@ -38,20 +48,94 @@ async function fireBioCrmWebhook(payload: Record<string, unknown>) {
   if (secret) {
     const signature = createHmac("sha256", secret).update(body).digest("hex");
     headers["X-Livelab-Signature"] = `sha256=${signature}`;
+    headers["X-Livelab-Timestamp"] = Math.floor(Date.now() / 1000).toString();
+    headers["X-Livelab-Nonce"] = randomUUID();
   }
 
-  const res = await fetch(webhookUrl, {
-    method: "POST",
-    headers,
-    body,
-    signal: AbortSignal.timeout(5000),
-  });
+  try {
+    const res = await fetch(webhookUrl, {
+      method: "POST",
+      headers,
+      body,
+      signal: AbortSignal.timeout(CRM_WEBHOOK_TIMEOUT_MS),
+    });
 
-  if (!res.ok) {
-    throw new Error(`Webhook retornou HTTP ${res.status}`);
+    if (!res.ok) {
+      return {
+        ok: false,
+        status: res.status,
+        error: `Webhook retornou HTTP ${res.status}`,
+        webhookUrl: maskWebhookUrl(webhookUrl),
+      };
+    }
+
+    console.info("[bio-crm webhook] sent", { webhookUrl: maskWebhookUrl(webhookUrl) });
+    return { ok: true, webhookUrl: maskWebhookUrl(webhookUrl) };
+  } catch (err) {
+    return {
+      ok: false,
+      error: err instanceof Error ? err.message : String(err),
+      webhookUrl: maskWebhookUrl(webhookUrl),
+    };
+  }
+}
+
+async function fireN8nLeadWebhook(payload: Record<string, unknown>): Promise<WebhookResult> {
+  const webhookUrl = process.env.N8N_LEAD_WEBHOOK_URL;
+  if (!webhookUrl) {
+    return { ok: false, skipped: true, error: "N8N_LEAD_WEBHOOK_URL ausente" };
   }
 
-  console.info("[bio-crm webhook] sent", { webhookUrl: maskWebhookUrl(webhookUrl) });
+  const secret = process.env.N8N_LEAD_WEBHOOK_SECRET;
+  try {
+    const res = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(secret ? { "X-Livelab-N8n-Secret": secret } : {}),
+      },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(N8N_WEBHOOK_TIMEOUT_MS),
+    });
+
+    if (!res.ok) {
+      return {
+        ok: false,
+        status: res.status,
+        error: `Webhook retornou HTTP ${res.status}`,
+        webhookUrl: maskWebhookUrl(webhookUrl),
+      };
+    }
+
+    console.info("[bio-n8n webhook] sent", { webhookUrl: maskWebhookUrl(webhookUrl) });
+    return { ok: true, webhookUrl: maskWebhookUrl(webhookUrl) };
+  } catch (err) {
+    return {
+      ok: false,
+      error: err instanceof Error ? err.message : String(err),
+      webhookUrl: maskWebhookUrl(webhookUrl),
+    };
+  }
+}
+
+async function fireSecondaryNotifications({
+  crmPayload,
+  n8nPayload,
+}: {
+  crmPayload: Record<string, unknown>;
+  n8nPayload: Record<string, unknown>;
+}) {
+  const [crmResult, n8nResult] = await Promise.all([
+    fireBioCrmWebhook(crmPayload),
+    fireN8nLeadWebhook(n8nPayload),
+  ]);
+
+  if (!crmResult.ok && !crmResult.skipped) {
+    console.warn("[bio-crm webhook] falhou sem bloquear formulario", crmResult);
+  }
+  if (!n8nResult.ok && !n8nResult.skipped) {
+    console.warn("[bio-n8n webhook] falhou sem bloquear formulario", n8nResult);
+  }
 }
 
 export async function POST(req: Request, { params }: { params: Promise<{ type: string }> }) {
@@ -92,6 +176,15 @@ export async function POST(req: Request, { params }: { params: Promise<{ type: s
     data: values,
     metadata,
   };
+  const n8nPayload = {
+    event: "link_bio.lead.submitted",
+    source: "livelab-bio",
+    persona,
+    lead_name: leadName,
+    whatsapp,
+    payload: values,
+    submitted_at: submittedAt,
+  };
 
   const sb = getServiceSupabase();
   if (sb) {
@@ -111,19 +204,23 @@ export async function POST(req: Request, { params }: { params: Promise<{ type: s
       console.error("[submit] supabase error:", error.message);
       return NextResponse.json({ error: "Erro ao gravar" }, { status: 500 });
     }
+
+    void fireSecondaryNotifications({ crmPayload: webhookPayload, n8nPayload });
+    return NextResponse.json({ ok: true });
   } else {
     console.warn("[submit] Supabase ausente; usando webhook como persistencia principal", { persona });
   }
 
-  try {
-    await fireBioCrmWebhook(webhookPayload);
-  } catch (err) {
-    console.warn("[bio-crm webhook] falhou", {
-      err: err instanceof Error ? err.message : String(err),
-      webhookUrl: process.env.BIO_CRM_WEBHOOK_URL ? maskWebhookUrl(process.env.BIO_CRM_WEBHOOK_URL) : undefined,
-    });
+  const crmResult = await fireBioCrmWebhook(webhookPayload);
+  if (!crmResult.ok) {
+    console.warn("[bio-crm webhook] falhou como persistencia fallback", crmResult);
     return NextResponse.json({ error: "Erro ao enviar para o CRM" }, { status: 502 });
   }
+  void fireN8nLeadWebhook(n8nPayload).then((result) => {
+    if (!result.ok && !result.skipped) {
+      console.warn("[bio-n8n webhook] falhou sem bloquear formulario", result);
+    }
+  });
 
   return NextResponse.json({ ok: true });
 }
