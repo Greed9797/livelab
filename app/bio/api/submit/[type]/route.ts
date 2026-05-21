@@ -195,7 +195,17 @@ export async function POST(req: Request, { params }: { params: Promise<{ type: s
     submitted_at: submittedAt,
   };
 
-  const sb = getServiceSupabase();
+  let sb: ReturnType<typeof getServiceSupabase>;
+  try {
+    sb = getServiceSupabase();
+  } catch (err) {
+    console.error("[submit] erro ao inicializar Supabase", {
+      persona,
+      error: err instanceof Error ? err.message : String(err),
+    });
+    return NextResponse.json({ error: "Erro ao registrar" }, { status: 500 });
+  }
+
   if (!sb) {
     console.error("[submit] Supabase ausente; lead nao gravado", {
       persona,

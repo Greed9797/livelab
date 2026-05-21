@@ -56,8 +56,16 @@ export default function FormShell({ form }: { form: FormDef }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ values }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Erro ao enviar");
+      const responseText = await res.text();
+      let data: { error?: string } | null = null;
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          data = null;
+        }
+      }
+      if (!res.ok) throw new Error(data?.error ?? "Erro ao enviar");
       const leadName = (values.nome as string) || "";
       setDone({ leadName, whatsappUrl: buildWhatsappUrl(form.persona, leadName) });
     } catch (err) {
