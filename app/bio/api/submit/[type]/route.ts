@@ -125,16 +125,25 @@ async function fireSecondaryNotifications({
   crmPayload: Record<string, unknown>;
   n8nPayload: Record<string, unknown>;
 }) {
-  const [crmResult, n8nResult] = await Promise.all([
+  const [crmResult, n8nResult] = await Promise.allSettled([
     fireBioCrmWebhook(crmPayload),
     fireN8nLeadWebhook(n8nPayload),
   ]);
 
-  if (!crmResult.ok && !crmResult.skipped) {
-    console.warn("[bio-crm webhook] falhou sem bloquear formulario", crmResult);
+  logSecondaryNotification("bio-crm webhook", crmResult);
+  logSecondaryNotification("bio-n8n webhook", n8nResult);
+}
+
+function logSecondaryNotification(label: string, result: PromiseSettledResult<WebhookResult>) {
+  if (result.status === "rejected") {
+    console.warn(`[${label}] falhou sem bloquear formulario`, {
+      error: result.reason instanceof Error ? result.reason.message : String(result.reason),
+    });
+    return;
   }
-  if (!n8nResult.ok && !n8nResult.skipped) {
-    console.warn("[bio-n8n webhook] falhou sem bloquear formulario", n8nResult);
+
+  if (!result.value.ok && !result.value.skipped) {
+    console.warn(`[${label}] falhou sem bloquear formulario`, result.value);
   }
 }
 
@@ -187,40 +196,33 @@ export async function POST(req: Request, { params }: { params: Promise<{ type: s
   };
 
   const sb = getServiceSupabase();
-  if (sb) {
-    const { error } = await sb.from("submissions").insert({
+  if (!sb) {
+    console.error("[submit] Supabase ausente; lead nao gravado", {
       persona,
-      lead_name: leadName,
-      contact_email: contactEmail,
-      whatsapp,
-      city,
-      source_path: sourcePath,
-      payload: values,
-      metadata,
-      ip_address: firstHeader(req, "x-forwarded-for") ?? firstHeader(req, "x-real-ip"),
-      user_agent: req.headers.get("user-agent") ?? null,
+      hasSupabaseUrl: Boolean(process.env.SUPABASE_URL),
+      hasServiceRoleKey: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
     });
-    if (error) {
-      console.error("[submit] supabase error:", error.message);
-      return NextResponse.json({ error: "Erro ao gravar" }, { status: 500 });
-    }
-
-    void fireSecondaryNotifications({ crmPayload: webhookPayload, n8nPayload });
-    return NextResponse.json({ ok: true });
-  } else {
-    console.warn("[submit] Supabase ausente; usando webhook como persistencia principal", { persona });
+    return NextResponse.json({ error: "Erro ao registrar" }, { status: 500 });
   }
 
-  const crmResult = await fireBioCrmWebhook(webhookPayload);
-  if (!crmResult.ok) {
-    console.warn("[bio-crm webhook] falhou como persistencia fallback", crmResult);
-    return NextResponse.json({ error: "Erro ao enviar para o CRM" }, { status: 502 });
-  }
-  void fireN8nLeadWebhook(n8nPayload).then((result) => {
-    if (!result.ok && !result.skipped) {
-      console.warn("[bio-n8n webhook] falhou sem bloquear formulario", result);
-    }
+  const { error } = await sb.from("submissions").insert({
+    persona,
+    lead_name: leadName,
+    contact_email: contactEmail,
+    whatsapp,
+    city,
+    source_path: sourcePath,
+    payload: values,
+    metadata,
+    ip_address: firstHeader(req, "x-forwarded-for") ?? firstHeader(req, "x-real-ip"),
+    user_agent: req.headers.get("user-agent") ?? null,
   });
+  if (error) {
+    console.error("[submit] supabase error:", error.message);
+    return NextResponse.json({ error: "Erro ao gravar" }, { status: 500 });
+  }
+
+  await fireSecondaryNotifications({ crmPayload: webhookPayload, n8nPayload });
 
   return NextResponse.json({ ok: true });
 }
