@@ -7,12 +7,12 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden pt-20 pb-24 md:pt-32 md:pb-36">
       {/* Studio background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
         <Image
           src="/hero-studio.jpg"
           alt=""
           fill
-          preload
+          priority
           sizes="100vw"
           quality={75}
           className="scale-110 object-cover object-center blur-[7px]"
@@ -22,7 +22,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(232,103,60,0.14),_transparent_65%)]" />
       </div>
 
-      <Container>
+      <Container className="relative z-10">
         <div className="flex flex-col items-start gap-10 md:items-center md:text-center">
           <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 py-2 pl-3 pr-5 backdrop-blur rise">
             <span className="relative flex h-2.5 w-2.5">
