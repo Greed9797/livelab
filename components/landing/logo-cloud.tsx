@@ -20,19 +20,21 @@ export function LogoCloud() {
         <div className="flex flex-col items-center gap-8 text-center md:gap-10">
           <p className="eyebrow px-4">Marcas que já vendem ao vivo com a Livelab</p>
 
-          <div className="grid w-full max-w-md grid-cols-2 place-items-center gap-x-8 gap-y-8 sm:max-w-none sm:flex sm:flex-wrap sm:gap-x-12 md:gap-x-16">
-            {BRANDS.map((brand) => (
-              <Image
-                key={brand.src}
-                src={brand.src}
-                alt={brand.alt}
-                width={brand.width}
-                height={brand.height}
-                sizes="(max-width: 640px) 130px, 160px"
-                quality={80}
-                className="h-6 w-auto max-w-[130px] object-contain opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 sm:h-7 md:h-8"
-              />
-            ))}
+          <div className="marquee-mask relative w-full overflow-hidden">
+            <div className="ticker-track flex w-max items-center gap-12 md:gap-16">
+              {[...BRANDS, ...BRANDS, ...BRANDS].map((brand, i) => (
+                <Image
+                  key={`${brand.src}-${i}`}
+                  src={brand.src}
+                  alt={brand.alt}
+                  width={brand.width}
+                  height={brand.height}
+                  sizes="160px"
+                  quality={80}
+                  className="h-6 w-auto max-w-[140px] shrink-0 object-contain opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 sm:h-7 md:h-8"
+                />
+              ))}
+            </div>
           </div>
 
           <div className="mt-2 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
