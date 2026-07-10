@@ -5,7 +5,7 @@ import { Button } from "./button";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-20 pb-24 md:pt-32 md:pb-36">
+    <section className="relative -mt-[68px] overflow-hidden pt-[104px] pb-24 md:-mt-[84px] md:pt-44 md:pb-36">
       {/* Studio background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
         <Image
