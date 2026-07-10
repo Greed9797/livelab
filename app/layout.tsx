@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { siteUrl } from "@/lib/site-config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,15 +21,40 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: "Livelab — Inteligência para lives que vendem",
   description:
     "Livelab é a sala de controle para live commerce: audiência, engajamento e vendas em tempo real, enquanto a live ainda está no ar.",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: "Livelab — Inteligência para lives que vendem",
     description:
       "A sala de controle para live commerce. Audiência, engajamento e vendas em tempo real.",
     locale: "pt_BR",
     type: "website",
+    url: "/",
+    siteName: "Livelab",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Livelab — inteligência para lives que vendem",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Livelab — Inteligência para lives que vendem",
+    description:
+      "A sala de controle para live commerce. Audiência, engajamento e vendas em tempo real.",
+    images: ["/opengraph-image"],
   },
 };
 

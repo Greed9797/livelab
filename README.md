@@ -16,6 +16,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## SEO
+
+For production canonical URLs, set `NEXT_PUBLIC_SITE_URL` to the public site URL
+(for example, `https://example.com`). Vercel production variables are used when
+this value is not set; local development falls back to `http://localhost:3000`.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRight, Radio } from "lucide-react";
 import { Container } from "./container";
 import { Button } from "./button";
@@ -5,41 +6,36 @@ import { Button } from "./button";
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-20 pb-24 md:pt-32 md:pb-36">
-      {/* Background atmosphere */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 flex justify-center"
-      >
-        <div className="h-[520px] w-[1100px] rounded-full bg-[radial-gradient(ellipse_at_center,_rgba(232,103,60,0.16),_transparent_60%)] blur-3xl" />
+      {/* Studio background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <Image
+          src="/hero-studio.jpg"
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          quality={75}
+          className="scale-110 object-cover object-center blur-[7px]"
+        />
+        {/* Legibility overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,8,6,0.72)_0%,rgba(12,8,6,0.55)_45%,rgba(12,8,6,0.78)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(232,103,60,0.14),_transparent_65%)]" />
       </div>
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.18]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.08) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
-          maskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-        }}
-      />
 
       <Container>
         <div className="flex flex-col items-start gap-10 md:items-center md:text-center">
-          <div className="flex items-center gap-3 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)]/80 py-2 pl-3 pr-5 backdrop-blur rise">
+          <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 py-2 pl-3 pr-5 backdrop-blur rise">
             <span className="relative flex h-2.5 w-2.5">
               <span className="pulse-dot absolute inline-flex h-full w-full rounded-full" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand" />
             </span>
-            <span className="eyebrow">AO VIVO • EM PRODUÇÃO</span>
+            <span className="eyebrow !text-white/80">AO VIVO • EM PRODUÇÃO</span>
           </div>
 
-          <h1 className="rise rise-delay-1 max-w-5xl font-display text-[clamp(3rem,8vw,7rem)] leading-[0.92] tracking-[-0.035em] text-foreground">
+          <h1 className="rise rise-delay-1 max-w-5xl font-display text-[clamp(3rem,8vw,7rem)] leading-[0.92] tracking-[-0.035em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
             A inteligência por trás
             <br className="hidden md:block" />
-            <span className="italic text-foreground-soft">
+            <span className="italic text-white/75">
               das lives que vendem
             </span>
             <span className="ml-2 inline-block translate-y-[0.08em] text-brand">
@@ -47,7 +43,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="rise rise-delay-2 max-w-2xl text-lg leading-relaxed text-[color:var(--muted-strong)] md:text-xl">
+          <p className="rise rise-delay-2 max-w-2xl text-lg leading-relaxed text-white/75 md:text-xl">
             Livelab é a sala de controle para live commerce. Monitore
             audiência, engajamento e vendas em tempo real — e decida o próximo
             passo enquanto a live ainda está no ar.
@@ -58,7 +54,7 @@ export function Hero() {
               Quero franquear
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Button>
-            <Button href="#produto" variant="secondary" size="lg">
+            <Button href="#produto" variant="inverse" size="lg">
               <Radio className="h-4 w-4" />
               Ver a sala de controle
             </Button>
@@ -66,7 +62,7 @@ export function Hero() {
 
           <div className="rise rise-delay-4 flex items-center gap-3 pt-2">
             <div className="hairline-brand" aria-hidden />
-            <p className="eyebrow !text-[color:var(--muted-strong)]">
+            <p className="eyebrow !text-white/60">
               Operando lives que faturam mais de R$&nbsp;50M/ano em
               live&nbsp;commerce
             </p>
