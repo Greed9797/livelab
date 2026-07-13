@@ -62,15 +62,17 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <div className="relative hidden items-center gap-4 md:flex">
+          <div className="relative hidden items-center gap-3 md:flex">
             <a
-              href="#entrar"
-              className="text-sm font-medium text-white/65 transition-colors hover:text-white"
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/25 bg-white/5 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/15"
             >
-              Entrar
+              Quero vender
             </a>
             <Button
-              href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0"
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
               target="_blank"
               rel="noopener noreferrer"
               size="md"
@@ -111,15 +113,24 @@ export function SiteHeader() {
             </a>
           ))}
           <div className="mt-2 flex flex-col gap-3">
-            <a
-              href="#entrar"
-              className="text-sm font-medium text-white/65"
+            <Button
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
+              target="_blank"
+              rel="noopener noreferrer"
+              size="md"
+              className="w-full"
             >
-              Entrar
-            </a>
-            <Button href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" size="md" className="w-full">
               Quero franquear
             </Button>
+            <a
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="w-full rounded-full border border-white/25 bg-white/5 px-4 py-3 text-center text-sm font-medium text-white"
+            >
+              Quero vender
+            </a>
           </div>
         </Container>
       </div>

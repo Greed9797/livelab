@@ -14,16 +14,10 @@ interface AnimatedMarqueeHeroProps {
   className?: string;
 }
 
-// Reusable Button component styled like in the image
-const ActionButton = ({ children }: { children: React.ReactNode }) => (
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="mt-8 px-8 py-3 rounded-full bg-red-500 text-white font-semibold shadow-lg transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
-  >
-    {children}
-  </motion.button>
-);
+const WA_FRANQUEAR =
+  "https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab";
+const WA_VENDER =
+  "https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab";
 
 // The main hero component
 export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
@@ -101,14 +95,34 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
           {description}
         </motion.p>
 
-        {/* Call to Action Button */}
+        {/* Call to Action Buttons */}
         <motion.div
           initial="hidden"
           animate="show"
           variants={FADE_IN_ANIMATION_VARIANTS}
           transition={{ delay: 0.6 }}
+          className="mt-8 flex flex-col items-center gap-3 sm:flex-row"
         >
-          <ActionButton>{ctaText}</ActionButton>
+          <motion.a
+            href={WA_FRANQUEAR}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full bg-brand px-8 py-3 font-semibold text-brand-foreground shadow-lg transition-colors hover:bg-brand-hover"
+          >
+            {ctaText}
+          </motion.a>
+          <motion.a
+            href={WA_VENDER}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full border border-[color:var(--border-strong)] bg-background px-8 py-3 font-semibold text-foreground shadow-sm transition-colors hover:bg-foreground hover:text-background"
+          >
+            Quero vender
+          </motion.a>
         </motion.div>
       </div>
 

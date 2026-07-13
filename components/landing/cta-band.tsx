@@ -46,18 +46,26 @@ export function CtaBand() {
           </p>
 
           <div className="flex flex-col items-center gap-4 sm:flex-row">
-            <Button href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" variant="primary" size="lg">
+            <Button
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              size="lg"
+            >
               Quero franquear
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Button>
-            <a
-              href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0"
+            <Button
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline"
+              variant="inverse"
+              size="lg"
             >
-              Falar com vendas →
-            </a>
+              Quero vender
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Button>
           </div>
         </div>
       </Container>
