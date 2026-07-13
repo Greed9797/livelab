@@ -3,9 +3,9 @@ import { Container } from "./container";
 
 export function ProductPreview() {
   return (
-    <section id="produto" className="relative py-24 md:py-36">
+    <section id="produto" className="relative py-16 md:py-24">
       <Container>
-        <div className="mb-14 flex flex-col items-start gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col items-start gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
           <div className="flex items-center gap-3">
             <div className="hairline-brand" aria-hidden />
             <span className="eyebrow">Veja em ação</span>

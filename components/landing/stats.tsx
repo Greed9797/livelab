@@ -20,9 +20,9 @@ const STATS = [
 
 export function Stats() {
   return (
-    <section className="border-y border-[color:var(--border)] bg-[color:var(--surface-alt)] py-20 md:py-28">
+    <section className="border-y border-[color:var(--border)] bg-[color:var(--surface-alt)] py-16 md:py-24">
       <Container>
-        <div className="mb-14 flex flex-col items-start gap-3">
+        <div className="mb-10 flex flex-col items-start gap-3">
           <div className="flex items-center gap-3">
             <div className="hairline-brand" aria-hidden />
             <span className="eyebrow">Números que o time mede</span>

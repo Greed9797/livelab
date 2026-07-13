@@ -4,7 +4,7 @@ import { Button } from "./button";
 
 export function CtaBand() {
   return (
-    <section id="demo" className="relative overflow-hidden bg-foreground py-24 text-background md:py-32">
+    <section id="demo" className="relative overflow-hidden bg-foreground py-16 text-background md:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.15]"

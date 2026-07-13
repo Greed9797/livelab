@@ -40,7 +40,7 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
   return (
     <section
       className={cn(
-        "relative w-full h-screen overflow-hidden bg-background flex flex-col items-center justify-center text-center px-4",
+        "relative w-full overflow-hidden bg-background flex flex-col items-center text-center px-4 pt-20 pb-0 md:pt-24",
         className
       )}
     >
@@ -127,7 +127,7 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
       </div>
 
       {/* Animated Image Marquee */}
-      <div className="absolute bottom-0 left-0 w-full h-1/3 md:h-2/5 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+      <div className="relative mt-14 h-56 w-full overflow-hidden md:mt-20 md:h-72 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]">
         <motion.div
           className="flex gap-4"
           animate={{
