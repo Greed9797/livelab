@@ -1,15 +1,9 @@
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
 
-const SHOWCASE_IMAGES = [
-  "/showcase/s1.jpg",
-  "/showcase/s2.jpg",
-  "/showcase/s3.jpg",
-  "/showcase/s4.jpg",
-  "/showcase/s2.jpg",
-  "/showcase/s4.jpg",
-  "/showcase/s1.jpg",
-  "/showcase/s3.jpg",
-];
+const SHOWCASE_IMAGES = Array.from(
+  { length: 13 },
+  (_, i) => `/showcase/post-${i + 1}.jpg`
+);
 
 export function MarqueeShowcase() {
   return (
