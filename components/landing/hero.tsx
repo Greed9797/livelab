@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ArrowUpRight, Radio } from "lucide-react";
 import { Container } from "./container";
 import { Button } from "./button";
@@ -6,16 +5,13 @@ import { Button } from "./button";
 export function Hero() {
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center -mt-[68px] overflow-hidden pt-[104px] pb-24 md:-mt-[84px] md:pt-44 md:pb-36">
-      {/* Studio background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-        <Image
-          src="/hero-studio.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          quality={75}
-          className="scale-110 object-cover object-center blur-[7px]"
+      {/* Video background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <iframe
+          title="Livelab background"
+          src="https://player-vz-75e71015-90c.tv.pandavideo.com.br/embed/?v=218ce9d6-dff8-47ab-af4b-f8add39a6a10&autoplay=true&muted=true&loop=true&controls=false&smartautoplay=true"
+          allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
+          className="absolute left-1/2 top-1/2 h-[max(100%,56.25vw)] w-[max(100%,177.78vh)] -translate-x-1/2 -translate-y-1/2 scale-110 border-0 blur-[6px]"
         />
         {/* Legibility overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,8,6,0.72)_0%,rgba(12,8,6,0.55)_45%,rgba(12,8,6,0.78)_100%)]" />
