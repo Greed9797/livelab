@@ -36,18 +36,18 @@ export function Stats() {
           {STATS.map(({ value, suffix, label }) => (
             <div
               key={label}
-              className="flex flex-col gap-6 bg-[color:var(--surface-alt)] p-10 md:p-14"
+              className="flex flex-col justify-between gap-8 bg-[color:var(--surface-alt)] p-8 md:p-10"
             >
-              <div className="flex items-baseline">
-                <span className="font-display text-[clamp(3.5rem,8vw,6.5rem)] leading-[0.9] tracking-[-0.04em] text-foreground tabular-nums">
+              <span className="flex items-baseline whitespace-nowrap font-display leading-none tracking-[-0.03em] text-foreground">
+                <span className="text-[clamp(2.75rem,5vw,4.25rem)] tabular-nums">
                   {value}
                 </span>
-                <span className="font-display text-[clamp(2.5rem,5vw,4rem)] leading-none text-brand">
+                <span className="ml-0.5 text-[clamp(1.75rem,3vw,2.5rem)] text-brand">
                   {suffix}
                 </span>
-              </div>
+              </span>
               <div className="flex items-center gap-3">
-                <div className="h-px w-8 bg-[color:var(--border-strong)]" aria-hidden />
+                <div className="h-px w-8 shrink-0 bg-brand" aria-hidden />
                 <span className="text-sm text-[color:var(--muted-strong)]">
                   {label}
                 </span>
