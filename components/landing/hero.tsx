@@ -1,18 +1,14 @@
 import { ArrowUpRight, Radio } from "lucide-react";
 import { Container } from "./container";
 import { Button } from "./button";
+import { HeroVideo } from "./hero-video";
 
 export function Hero() {
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-20 md:py-28">
       {/* Video background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <iframe
-          title="Livelab background"
-          src="https://player-vz-75e71015-90c.tv.pandavideo.com.br/embed/?v=218ce9d6-dff8-47ab-af4b-f8add39a6a10&autoplay=true&muted=true&loop=true&controls=false&smartautoplay=true"
-          allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
-          className="absolute left-1/2 top-1/2 h-[max(100%,56.25vw)] w-[max(100%,177.78vh)] -translate-x-1/2 -translate-y-1/2 scale-110 border-0 blur-[6px]"
-        />
+        <HeroVideo />
         {/* Legibility overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.58)_45%,rgba(0,0,0,0.82)_100%)]" />
       </div>
