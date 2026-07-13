@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { Container } from "./container";
 import { Button } from "./button";
-import { LivelabLogo } from "@/components/brand/livelab-logo";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const GLASS =
@@ -40,7 +40,14 @@ export function SiteHeader() {
             className="relative flex items-center gap-2 text-white transition-opacity hover:opacity-80"
             aria-label="Livelab — início"
           >
-            <LivelabLogo className="h-6 md:h-7" />
+            <Image
+              src="/logo-white.png"
+              alt="Livelab"
+              width={600}
+              height={250}
+              priority
+              className="h-6 w-auto md:h-7"
+            />
           </a>
 
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 md:flex">

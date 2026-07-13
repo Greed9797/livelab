@@ -23,7 +23,7 @@ export function Hero() {
       </div>
 
       <Container className="relative z-10">
-        <div className="flex flex-col items-start gap-10 md:items-center md:text-center">
+        <div className="flex max-w-2xl flex-col items-start gap-8 text-left md:max-w-3xl md:gap-10">
           <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 py-2 pl-3 pr-5 backdrop-blur rise">
             <span className="relative flex h-2.5 w-2.5">
               <span className="pulse-dot absolute inline-flex h-full w-full rounded-full" />
@@ -32,9 +32,9 @@ export function Hero() {
             <span className="eyebrow !text-white/80">AO VIVO • EM PRODUÇÃO</span>
           </div>
 
-          <h1 className="rise rise-delay-1 max-w-5xl font-display text-[clamp(3rem,8vw,7rem)] leading-[0.92] tracking-[-0.035em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
+          <h1 className="rise rise-delay-1 font-display text-[clamp(2.75rem,6.5vw,5.5rem)] leading-[0.94] tracking-[-0.035em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
             A inteligência por trás
-            <br className="hidden md:block" />
+            <br />
             <span className="italic text-white/75">
               das lives que vendem
             </span>
@@ -43,21 +43,40 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="rise rise-delay-2 max-w-2xl text-lg leading-relaxed text-white/75 md:text-xl">
+          <p className="rise rise-delay-2 max-w-xl text-lg leading-relaxed text-white/75 md:text-xl">
             Livelab é a sala de controle para live commerce. Monitore
             audiência, engajamento e vendas em tempo real — e decida o próximo
             passo enquanto a live ainda está no ar.
           </p>
 
           <div className="rise rise-delay-3 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <Button href="https://api.whatsapp.com/send/?phone=5547984676404&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" variant="primary" size="lg">
+            <Button
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              size="lg"
+            >
               Quero franquear
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Button>
-            <Button href="#produto" variant="inverse" size="lg">
+            <Button
+              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="inverse"
+              size="lg"
+            >
+              Quero vender
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Button>
+            <a
+              href="#produto"
+              className="group inline-flex items-center gap-2 px-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
+            >
               <Radio className="h-4 w-4" />
               Ver a sala de controle
-            </Button>
+            </a>
           </div>
 
           <div className="rise rise-delay-4 flex items-center gap-3 pt-2">

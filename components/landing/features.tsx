@@ -47,9 +47,9 @@ const FEATURES: Feature[] = [
 
 export function Features() {
   return (
-    <section id="recursos" className="relative py-24 md:py-36">
+    <section id="recursos" className="relative py-16 md:py-24">
       <Container>
-        <div className="mb-16 flex flex-col items-start gap-6 md:mb-24 md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col items-start gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
           <div className="flex items-center gap-3">
             <div className="hairline-brand" aria-hidden />
             <span className="eyebrow">O que a Livelab enxerga</span>
@@ -67,7 +67,7 @@ export function Features() {
           {FEATURES.map(({ icon: Icon, kicker, title, description }) => (
             <article
               key={kicker}
-              className="group relative flex flex-col gap-8 bg-[color:var(--background)] p-10 transition-colors duration-500 hover:bg-[color:var(--surface)] md:min-h-[320px] md:p-14"
+              className="group relative flex flex-col gap-6 bg-[color:var(--background)] p-8 transition-colors duration-500 hover:bg-[color:var(--surface)] md:min-h-[220px] md:p-10"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs tracking-[0.2em] text-[color:var(--muted)]">
