@@ -62,24 +62,24 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <div className="relative hidden items-center gap-3 md:flex">
+          <div className="relative hidden items-center gap-2 md:flex">
             <a
               href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-white/25 bg-white/5 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/15"
+              className="inline-flex h-10 items-center rounded-full border border-white/20 px-5 text-sm font-medium text-white/90 transition-colors hover:border-white/40 hover:bg-white/10"
             >
               Quero vender
             </a>
-            <Button
+            <a
               href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
               target="_blank"
               rel="noopener noreferrer"
-              size="md"
+              className="group inline-flex h-10 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-brand-foreground shadow-[0_8px_24px_-8px_rgba(232,103,60,0.7)] transition-colors hover:bg-brand-hover"
             >
               <MessageCircle className="h-4 w-4" />
               Quero franquear
-            </Button>
+            </a>
           </div>
 
           <button
