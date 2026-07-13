@@ -1,4 +1,3 @@
-import { SiteHeader } from "@/components/landing/site-header";
 import { Hero } from "@/components/landing/hero";
 import { LogoCloud } from "@/components/landing/logo-cloud";
 import { Features } from "@/components/landing/features";
@@ -36,7 +35,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <SiteHeader />
       <main id="top" className="flex flex-1 flex-col">
         <Hero />
         <LogoCloud />
