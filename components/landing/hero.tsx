@@ -14,8 +14,7 @@ export function Hero() {
           className="absolute left-1/2 top-1/2 h-[max(100%,56.25vw)] w-[max(100%,177.78vh)] -translate-x-1/2 -translate-y-1/2 scale-110 border-0 blur-[6px]"
         />
         {/* Legibility overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,8,6,0.72)_0%,rgba(12,8,6,0.55)_45%,rgba(12,8,6,0.78)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(232,103,60,0.14),_transparent_65%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.58)_45%,rgba(0,0,0,0.82)_100%)]" />
       </div>
 
       <Container className="relative z-10">
