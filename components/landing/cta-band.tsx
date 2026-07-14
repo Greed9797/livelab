@@ -1,6 +1,10 @@
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "./container";
 import { Button } from "./button";
+import {
+  WHATSAPP_FRANCHISE_URL,
+  WHATSAPP_SALES_URL,
+} from "@/lib/contact";
 
 export function CtaBand() {
   return (
@@ -47,7 +51,7 @@ export function CtaBand() {
 
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <Button
-              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
+              href={WHATSAPP_FRANCHISE_URL}
               target="_blank"
               rel="noopener noreferrer"
               variant="primary"
@@ -57,7 +61,7 @@ export function CtaBand() {
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Button>
             <Button
-              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
+              href={WHATSAPP_SALES_URL}
               target="_blank"
               rel="noopener noreferrer"
               variant="inverse"

@@ -1,24 +1,20 @@
 import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "./container";
-
-const WHATSAPP =
-  "https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 const COLUMNS = [
   {
-    title: "Produto",
+    title: "Explorar",
     links: [
-      { label: "Sala de controle", href: "#produto" },
       { label: "Recursos", href: "#recursos" },
-      { label: "Preços", href: "#precos" },
+      { label: "Clientes", href: "#clientes" },
     ],
   },
   {
     title: "Empresa",
     links: [
-      { label: "Clientes", href: "#clientes" },
-      { label: "Falar com vendas", href: WHATSAPP, external: true },
+      { label: "Falar com vendas", href: WHATSAPP_URL, external: true },
       { label: "Acessar a plataforma", href: "https://app.grupolivelab.com.br", external: true },
     ],
   },
@@ -49,13 +45,13 @@ export function SiteFooter() {
               decisões enquanto a live acontece.
             </p>
             <a
-              href={WHATSAPP}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--border)] px-4 py-2 text-sm font-medium text-[color:var(--muted-strong)] transition-colors hover:border-brand hover:text-brand"
             >
               <MessageCircle className="h-4 w-4" />
-              WhatsApp
+              {WHATSAPP_DISPLAY}
             </a>
           </div>
 

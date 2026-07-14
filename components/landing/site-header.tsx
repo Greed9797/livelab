@@ -6,15 +6,17 @@ import { Container } from "./container";
 import { Button } from "./button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import {
+  WHATSAPP_FRANCHISE_URL,
+  WHATSAPP_SALES_URL,
+} from "@/lib/contact";
 
 const GLASS =
   "border border-white/10 bg-[rgba(22,15,11,0.55)] backdrop-blur-xl backdrop-saturate-150 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.55)]";
 
 const NAV_LINKS = [
-  { label: "Produto", href: "#produto" },
   { label: "Recursos", href: "#recursos" },
   { label: "Clientes", href: "#clientes" },
-  { label: "Preços", href: "#precos" },
 ];
 
 export function SiteHeader() {
@@ -64,7 +66,7 @@ export function SiteHeader() {
 
           <div className="relative hidden items-center gap-2 md:flex">
             <a
-              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
+              href={WHATSAPP_SALES_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-10 items-center rounded-full border border-white/20 px-5 text-sm font-medium text-white/90 transition-colors hover:border-white/40 hover:bg-white/10"
@@ -72,7 +74,7 @@ export function SiteHeader() {
               Quero vender
             </a>
             <a
-              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
+              href={WHATSAPP_FRANCHISE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex h-10 items-center gap-2 rounded-full bg-brand px-5 text-sm font-semibold text-brand-foreground shadow-[0_8px_24px_-8px_rgba(232,103,60,0.7)] transition-colors hover:bg-brand-hover"
@@ -114,7 +116,7 @@ export function SiteHeader() {
           ))}
           <div className="mt-2 flex flex-col gap-3">
             <Button
-              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab"
+              href={WHATSAPP_FRANCHISE_URL}
               target="_blank"
               rel="noopener noreferrer"
               size="md"
@@ -123,7 +125,7 @@ export function SiteHeader() {
               Quero franquear
             </Button>
             <a
-              href="https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab"
+              href={WHATSAPP_SALES_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}

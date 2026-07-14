@@ -6,6 +6,7 @@ const BRANDS = [
   { src: "/brands/pokoloka.svg", alt: "Pokoloka" },
   { src: "/brands/bauny.svg", alt: "Bauny" },
   { src: "/brands/haag.svg", alt: "Haag" },
+  { src: "/brands/mirante.webp", alt: "Loja Mirante" },
 ];
 
 export function LogoCloud() {

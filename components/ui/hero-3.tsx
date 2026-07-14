@@ -2,7 +2,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { cn } from "@/lib/utils"; // Assuming you have a `cn` utility from shadcn
+import {
+  WHATSAPP_FRANCHISE_URL,
+  WHATSAPP_SALES_URL,
+} from "@/lib/contact";
 
 // Props interface for the component
 interface AnimatedMarqueeHeroProps {
@@ -13,11 +18,6 @@ interface AnimatedMarqueeHeroProps {
   images: string[];
   className?: string;
 }
-
-const WA_FRANQUEAR =
-  "https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20franquear%20a%20Livelab";
-const WA_VENDER =
-  "https://api.whatsapp.com/send/?phone=5547984676404&type=phone_number&app_absent=0&text=Quero%20vender%20ao%20vivo%20com%20a%20Livelab";
 
 // The main hero component
 export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
@@ -104,7 +104,7 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
           className="mt-8 flex flex-col items-center gap-3 sm:flex-row"
         >
           <motion.a
-            href={WA_FRANQUEAR}
+            href={WHATSAPP_FRANCHISE_URL}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
@@ -114,7 +114,7 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
             {ctaText}
           </motion.a>
           <motion.a
-            href={WA_VENDER}
+            href={WHATSAPP_SALES_URL}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
@@ -147,10 +147,12 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
                 rotate: `${(index % 2 === 0 ? -2 : 5)}deg`,
               }}
             >
-              <img
+              <Image
                 src={src}
                 alt={`Showcase image ${index + 1}`}
-                className="w-full h-full object-cover rounded-2xl shadow-md"
+                fill
+                sizes="(max-width: 768px) 12rem, 16rem"
+                className="rounded-2xl object-cover shadow-md"
               />
             </div>
           ))}

@@ -1,7 +1,6 @@
 import { Hero } from "@/components/landing/hero";
 import { LogoCloud } from "@/components/landing/logo-cloud";
 import { Features } from "@/components/landing/features";
-import { ProductPreview } from "@/components/landing/product-preview";
 import { MarqueeShowcase } from "@/components/landing/marquee-showcase";
 import { Stats } from "@/components/landing/stats";
 import { Testimonial } from "@/components/landing/testimonial";
@@ -39,7 +38,6 @@ export default function Home() {
         <Hero />
         <LogoCloud />
         <Features />
-        <ProductPreview />
         <MarqueeShowcase />
         <Stats />
         <Testimonial />

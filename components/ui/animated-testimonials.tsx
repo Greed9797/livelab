@@ -38,29 +38,26 @@ export const AnimatedTestimonials = ({
 
   useEffect(() => {
     if (autoplay) {
-      const interval = setInterval(handleNext, 5000);
+      const interval = setInterval(() => {
+        setActive((prev) => (prev + 1) % testimonials.length);
+      }, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, testimonials.length]);
 
   const rotations = [-8, 6, -3, 9, -6, 4];
   const rotateFor = (index: number) => rotations[index % rotations.length];
 
   return (
-    <div className={cn("mx-auto max-w-sm px-4 py-16 md:max-w-4xl md:px-8", className)}>
-      <div className="relative grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-20">
+    <div className={cn("mx-auto max-w-sm px-4 py-6 md:max-w-3xl md:px-6 md:py-6", className)}>
+      <div className="relative grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-12">
         <div>
-          <div className="relative h-80 w-full">
-            <AnimatePresence>
+          <div className="relative h-[26rem] w-full md:h-[30rem]">
+            <AnimatePresence initial={false}>
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={testimonial.src}
-                  initial={{
-                    opacity: 0,
-                    scale: 0.9,
-                    z: -100,
-                    rotate: rotateFor(index),
-                  }}
+                  initial={false}
                   animate={{
                     opacity: isActive(index) ? 1 : 0.7,
                     scale: isActive(index) ? 1 : 0.95,
@@ -99,7 +96,7 @@ export const AnimatedTestimonials = ({
         <div className="flex flex-col justify-between py-4">
           <motion.div
             key={active}
-            initial={{ y: 20, opacity: 0 }}
+            initial={false}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -114,7 +111,7 @@ export const AnimatedTestimonials = ({
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
-                  initial={{ filter: "blur(10px)", opacity: 0, y: 5 }}
+                  initial={false}
                   animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.2,
