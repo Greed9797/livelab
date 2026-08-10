@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type Testimonial = {
-  quote: string;
   name: string;
-  designation: string;
   src: string;
 };
 
@@ -93,7 +91,7 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between py-4">
+        <div className="flex flex-col justify-center py-4">
           <motion.div
             key={active}
             initial={false}
@@ -101,31 +99,11 @@ export const AnimatedTestimonials = ({
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
-            <h3 className="font-display text-4xl leading-none tracking-[-0.02em] text-foreground md:text-5xl">
+            <h3 className="font-display text-5xl leading-none tracking-[-0.02em] text-foreground md:text-7xl">
               {testimonials[active].name}
             </h3>
-            <p className="mt-2 text-sm text-[color:var(--muted)]">
-              {testimonials[active].designation}
-            </p>
-            <motion.p className="mt-8 font-display text-2xl leading-snug tracking-[-0.01em] text-[color:var(--muted-strong)] md:text-3xl">
-              {testimonials[active].quote.split(" ").map((word, index) => (
-                <motion.span
-                  key={index}
-                  initial={false}
-                  animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.2,
-                    ease: "easeInOut",
-                    delay: 0.02 * index,
-                  }}
-                  className="inline-block"
-                >
-                  {word}&nbsp;
-                </motion.span>
-              ))}
-            </motion.p>
           </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <div className="flex gap-4 pt-8 md:pt-10">
             <button
               type="button"
               aria-label="Anterior"
