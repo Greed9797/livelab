@@ -5,30 +5,30 @@ const TESTIMONIALS = [
   {
     quote:
       "A Livelab virou o único monitor que fica aceso atrás do apresentador. A gente para de adivinhar e começa a vender.",
-    name: "Equipe Posthaus",
-    designation: "Operação de live commerce",
-    src: "/showcase/post-1.jpg",
+    name: "Posthaus",
+    designation: "Moda • operação de live commerce",
+    src: "/showcase/live-posthaus.jpg",
   },
   {
     quote:
       "Dobramos o faturamento por live no primeiro mês. Ver audiência, engajamento e vendas juntos muda a decisão em tempo real.",
-    name: "Time Vernissage",
-    designation: "Operação comercial",
-    src: "/showcase/post-5.jpg",
+    name: "Rovitex",
+    designation: "Moda • operação comercial",
+    src: "/showcase/live-rovitex.jpg",
   },
   {
     quote:
       "Não precisei montar equipe nem integrar nada. Em 30 minutos estávamos operando com a sala de controle no ar.",
-    name: "Equipe Pokoloka",
-    designation: "Marketing e live commerce",
-    src: "/showcase/post-9.jpg",
+    name: "Alto Calçados",
+    designation: "Calçados • marketing e live commerce",
+    src: "/showcase/live-alto.jpg",
   },
   {
     quote:
       "O alerta de produto em alta salvou nossa última live. Repetimos a oferta antes de encerrar e o ticket médio subiu 34%.",
-    name: "Time Bauny",
-    designation: "Operação de live commerce",
-    src: "/showcase/post-3.jpg",
+    name: "Pure Up",
+    designation: "Suplementos • operação de live commerce",
+    src: "/showcase/live-pureup.jpg",
   },
 ];
 

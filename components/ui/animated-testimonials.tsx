@@ -49,10 +49,10 @@ export const AnimatedTestimonials = ({
   const rotateFor = (index: number) => rotations[index % rotations.length];
 
   return (
-    <div className={cn("mx-auto max-w-sm px-4 py-6 md:max-w-3xl md:px-6 md:py-6", className)}>
-      <div className="relative grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-12">
-        <div>
-          <div className="relative h-[26rem] w-full md:h-[30rem]">
+    <div className={cn("mx-auto max-w-md px-4 py-10 md:max-w-5xl md:px-6 md:py-12", className)}>
+      <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:gap-16">
+        <div className="flex justify-center md:justify-start">
+          <div className="relative aspect-[9/16] w-full max-w-[20rem] md:max-w-[24rem]">
             <AnimatePresence initial={false}>
               {testimonials.map((testimonial, index) => (
                 <motion.div
@@ -83,8 +83,8 @@ export const AnimatedTestimonials = ({
                   <Image
                     src={testimonial.src}
                     alt={testimonial.name}
-                    width={500}
-                    height={500}
+                    width={588}
+                    height={1280}
                     draggable={false}
                     className="h-full w-full rounded-3xl object-cover object-center shadow-[0_30px_80px_-40px_rgba(0,0,0,0.4)]"
                   />
@@ -101,10 +101,10 @@ export const AnimatedTestimonials = ({
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
-            <h3 className="text-2xl font-semibold text-foreground">
+            <h3 className="font-display text-4xl leading-none tracking-[-0.02em] text-foreground md:text-5xl">
               {testimonials[active].name}
             </h3>
-            <p className="text-sm text-[color:var(--muted)]">
+            <p className="mt-2 text-sm text-[color:var(--muted)]">
               {testimonials[active].designation}
             </p>
             <motion.p className="mt-8 font-display text-2xl leading-snug tracking-[-0.01em] text-[color:var(--muted-strong)] md:text-3xl">
