@@ -8,10 +8,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
-    {
-      url: `${siteUrlString}/calculadora`,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
   ];
 }
