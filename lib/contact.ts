@@ -18,7 +18,3 @@ export const WHATSAPP_FRANCHISE_URL = buildWhatsappUrl(
 export const WHATSAPP_SALES_URL = buildWhatsappUrl(
   "Quero vender ao vivo com a Livelab"
 );
-
-export const WHATSAPP_PRESENTER_URL = buildWhatsappUrl(
-  "Quero ser apresentadora na Livelab"
-);
