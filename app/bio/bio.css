@@ -111,43 +111,35 @@ html:has(.bio-root) body {
 }
 
 .bio-title {
-  margin: 0;
+  margin: 0 0 22px;
   color: var(--ink);
-  font-family: var(--font-instrument-serif), "Times New Roman", serif;
-  font-style: normal;
-  font-weight: 400;
-  font-feature-settings: "liga", "dlig";
   font-size: 54px;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
 }
 
-.bio-title span {
+.bio-title-sans,
+.bio-title-serif {
   display: block;
 }
 
-.bio-title-indent {
-  padding-left: 44px;
+.bio-title-sans {
+  font-family: var(--font-geist-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.bio-title-serif {
+  font-family: var(--font-instrument-serif), "Times New Roman", serif;
   font-style: italic;
-}
-
-.bio-kicker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 20px 0 22px;
-  color: var(--muted);
-  font-size: 13px;
   font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
+  font-feature-settings: "liga", "dlig";
+  letter-spacing: -0.03em;
 }
 
-.bio-kicker-rule {
-  width: 28px;
-  height: 1px;
-  flex: 0 0 auto;
-  background: var(--accent);
+.bio-title-mark {
+  color: var(--accent);
 }
 
 .bio-doors {
@@ -180,7 +172,6 @@ html:has(.bio-root) body {
 .bio-door-num {
   width: 22px;
   flex: 0 0 22px;
-  align-self: flex-start;
   color: var(--faint);
   font-size: 11px;
   font-weight: 500;
@@ -188,29 +179,15 @@ html:has(.bio-root) body {
   line-height: 1.2;
 }
 
-.bio-door-copy {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-.bio-door-label {
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
 .bio-door-offer {
+  flex: 1;
+  min-width: 0;
   color: var(--ink);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.32;
   letter-spacing: -0.005em;
+  text-transform: none;
 }
 
 .bio-door-go {
@@ -234,7 +211,6 @@ html:has(.bio-root) body {
 }
 
 .bio-door-accent .bio-door-num,
-.bio-door-accent .bio-door-label,
 .bio-door-accent .bio-door-go {
   color: var(--accent);
 }
@@ -343,22 +319,8 @@ html:has(.bio-root) body {
   }
 
   .bio-title {
+    margin-bottom: 40px;
     font-size: 80px;
-    letter-spacing: -0.022em;
-  }
-
-  .bio-title-indent {
-    padding-left: 64px;
-  }
-
-  .bio-kicker {
-    gap: 14px;
-    margin: 30px 0 40px;
-    font-size: 14px;
-  }
-
-  .bio-kicker-rule {
-    width: 36px;
   }
 
   .bio-door {
@@ -375,14 +337,6 @@ html:has(.bio-root) body {
     width: 26px;
     flex-basis: 26px;
     font-size: 12px;
-  }
-
-  .bio-door-copy {
-    gap: 8px;
-  }
-
-  .bio-door-label {
-    font-size: 10.5px;
   }
 
   .bio-door-offer {

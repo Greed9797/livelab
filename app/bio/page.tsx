@@ -11,13 +11,12 @@ export default function BioPage() {
         <Logo className="bio-logo" />
         <div className="bio-spacer" />
         <h1 className="bio-title">
-          <span>Luz, Câmera</span>
-          <span className="bio-title-indent">e Vendas!</span>
+          <span className="bio-title-sans">Luz,</span>
+          <span className="bio-title-sans">Câmera</span>
+          <span className="bio-title-serif">
+            Vendas<span className="bio-title-mark">!</span>
+          </span>
         </h1>
-        <p className="bio-kicker">
-          <span className="bio-kicker-rule" aria-hidden="true" />
-          Escolha por onde você quer começar.
-        </p>
         <nav className="bio-doors" aria-label="Escolha seu caminho">
           {links.map((link) => (
             <LinkButton key={link.id} {...link} />
