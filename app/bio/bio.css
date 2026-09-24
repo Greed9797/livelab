@@ -1,3 +1,17 @@
+html:has(.bio-root) {
+  background: #0c0a08;
+  color-scheme: dark;
+}
+
+html:has(.bio-root) body {
+  background: #0c0a08;
+}
+
+.bio-root {
+  background: #0c0a08;
+  min-height: 100%;
+}
+
 .bio-page {
   --bg: #0c0a08;
   --ink: #f3eee6;
@@ -13,7 +27,7 @@
   min-height: 100svh;
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -99,9 +113,10 @@
 .bio-title {
   margin: 0;
   color: var(--ink);
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-instrument-serif), "Times New Roman", serif;
   font-style: normal;
   font-weight: 400;
+  font-feature-settings: "liga", "dlig";
   font-size: 54px;
   line-height: 0.98;
   letter-spacing: -0.02em;
@@ -113,6 +128,7 @@
 
 .bio-title-indent {
   padding-left: 44px;
+  font-style: italic;
 }
 
 .bio-kicker {
