@@ -1,20 +1,10 @@
-import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./bio.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: "400",
-  style: "normal",
-  variable: "--font-playfair",
-  display: "swap",
-});
+export const viewport: Viewport = {
+  themeColor: "#0C0A08",
+  colorScheme: "dark",
+};
 
 export const metadata: Metadata = {
   title: "LiveLab — Luz, Câmera e Vendas!",
@@ -28,12 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function BioLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      className={`${inter.variable} ${playfair.variable} bio-root`}
-      style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-    >
-      {children}
-    </div>
-  );
+  return <div className="bio-root">{children}</div>;
 }

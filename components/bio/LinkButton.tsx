@@ -2,8 +2,11 @@ import Link from "next/link";
 import type { LinkItem } from "@/lib/bio/links";
 
 export default function LinkButton({ href, number, label, offer, accent }: LinkItem) {
-  return (
-    <Link href={href} className={accent ? "bio-door bio-door-accent" : "bio-door"}>
+  const className = accent ? "bio-door bio-door-accent" : "bio-door";
+  const external = /^https?:\/\//.test(href);
+
+  const content = (
+    <>
       <span className="bio-door-num">{number}</span>
       <span className="bio-door-copy">
         <span className="bio-door-label">{label}</span>
@@ -21,6 +24,20 @@ export default function LinkButton({ href, number, label, offer, accent }: LinkI
           />
         </svg>
       </span>
+    </>
+  );
+
+  if (external) {
+    return (
+      <a href={href} className={className} target="_blank" rel="noopener noreferrer">
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {content}
     </Link>
   );
 }
