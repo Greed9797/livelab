@@ -1,37 +1,33 @@
-export type Part = { text: string; bold?: boolean };
-
 export interface LinkItem {
   id: string;
+  number: string;
+  label: string;
+  offer: string;
   href: string;
-  parts: Part[];
+  accent?: boolean;
 }
 
 export const links: LinkItem[] = [
   {
-    id: "estrutura",
+    id: "empresa",
+    number: "01",
+    label: "Empresa",
+    offer: "Estrutura completa de lives para a sua empresa",
     href: "/bio/cliente",
-    parts: [
-      { text: "Estrutura completa", bold: true },
-      { text: " de " },
-      { text: "Lives", bold: true },
-      { text: " para sua empresa" },
-    ],
+    accent: true,
   },
   {
-    id: "franqueado",
+    id: "franquia",
+    number: "02",
+    label: "Franquia",
+    offer: "Seja franqueado LiveLab na sua cidade",
     href: "/bio/franqueado",
-    parts: [
-      { text: "Seja um " },
-      { text: "franqueado", bold: true },
-      { text: " Livelab na sua cidade" },
-    ],
   },
   {
     id: "apresentador",
+    number: "03",
+    label: "Apresentador",
+    offer: "Quero me tornar apresentador(a)",
     href: "/bio/apresentador",
-    parts: [
-      { text: "Quero me tornar " },
-      { text: "apresentador(a)!", bold: true },
-    ],
   },
 ];
