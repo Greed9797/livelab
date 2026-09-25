@@ -5,7 +5,7 @@ import { PRESS } from "@/lib/company";
 
 // Fala: matéria do Empreenda News (30 jun 2026). Nomes e funções: enviados pelo cliente.
 // Na ordem da foto, da esquerda para a direita. A copy não cita outras empresas.
-const FOUNDERS = [
+export const FOUNDERS = [
   { name: "Rui Orsini", role: "Franquia" },
   { name: "Luan Cavati", role: "CEO e expansão" },
   { name: "Leonardo Ames", role: "Performance" },

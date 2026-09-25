@@ -1,7 +1,11 @@
+import type { Metadata } from "next";
 import Logo from "@/components/bio/Logo";
 import BioVideo from "@/components/bio/BioVideo";
 import LinkButton from "@/components/bio/LinkButton";
 import { links } from "@/lib/bio/links";
+
+// Sem isso a /bio herda o canonical da home e o Google a trata como cópia.
+export const metadata: Metadata = { alternates: { canonical: "/bio" } };
 
 export default function BioPage() {
   return (

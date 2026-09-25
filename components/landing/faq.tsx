@@ -3,7 +3,7 @@ import { Container } from "./container";
 
 // Só perguntas com resposta confirmada pelo cliente. Preço, fidelidade, TikTok Shop e
 // segmentos entram quando houver resposta oficial.
-const QUESTIONS = [
+export const QUESTIONS = [
   {
     q: "Preciso ter estúdio ou equipamento?",
     a: "Não. A live acontece na cabine LiveLab, com luz, câmera e transmissão prontas.",

@@ -4,9 +4,9 @@ import { Features } from "@/components/landing/features";
 import { MarqueeShowcase } from "@/components/landing/marquee-showcase";
 import { Testimonial } from "@/components/landing/testimonial";
 import { HowItWorks } from "@/components/landing/how-it-works";
-import { Faq } from "@/components/landing/faq";
+import { Faq, QUESTIONS } from "@/components/landing/faq";
 import { WhereWeAre } from "@/components/landing/where-we-are";
-import { Founders } from "@/components/landing/founders";
+import { Founders, FOUNDERS } from "@/components/landing/founders";
 import { ProofNumbers } from "@/components/landing/proof-numbers";
 import { COMPANY, MAPS_URL, PRESS, SOCIAL } from "@/lib/company";
 import { CtaBand } from "@/components/landing/cta-band";
@@ -28,6 +28,10 @@ const structuredData = [
     image: `${siteUrlString}/opengraph-image`,
     email: COMPANY.email,
     telephone: COMPANY.phone,
+    slogan: "Luz, câmera, vendas!",
+    areaServed: { "@type": "Country", name: "Brasil" },
+    knowsAbout: ["Live commerce", "TikTok Shop", "Franquia de live commerce", "Live shopping"],
+    founder: FOUNDERS.map((f) => ({ "@type": "Person", name: f.name, jobTitle: f.role })),
     hasMap: MAPS_URL,
     sameAs: [MAPS_URL, SOCIAL.instagram],
     subjectOf: PRESS.map((p) => ({ "@type": "NewsArticle", headline: p.title, url: p.url })),
@@ -48,6 +52,15 @@ const structuredData = [
       email: COMPANY.email,
       availableLanguage: "pt-BR",
     },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: QUESTIONS.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
   },
   {
     "@context": "https://schema.org",
