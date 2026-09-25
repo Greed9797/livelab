@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "./container";
 import { OPERATION, PRESS } from "@/lib/company";
@@ -26,42 +26,68 @@ function valuesAt(ms: number) {
 const BASE = valuesAt(BASE_MS);
 
 export function ProofNumbers() {
-  // O HTML estático sai com os valores base; no navegador eles sobem até "agora" e seguem contando.
+  // O HTML estático sai com os valores base. A contagem só começa quando a faixa entra na tela,
+  // e o relógio pausa quando ela sai: nenhum trabalho fora da vista.
   const [v, setV] = useState(BASE);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const target = valuesAt(Date.now());
-    const from = {
-      lives: target.lives * COUNT_FROM,
-      hours: target.hours * COUNT_FROM,
-      gmv: target.gmv * COUNT_FROM,
-    };
-    // Sem movimento: pula direto para o valor de agora.
+    const el = ref.current;
+    if (!el) return;
     const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : COUNT_UP_MS;
-    const start = performance.now();
     let raf = 0;
+    let tick = 0;
+    let counted = false;
 
-    const countUp = (t: number) => {
-      const p = duration === 0 ? 1 : Math.min(1, (t - start) / duration);
-      const e = 1 - Math.pow(1 - p, 4);
-      setV({
-        lives: from.lives + (target.lives - from.lives) * e,
-        hours: from.hours + (target.hours - from.hours) * e,
-        gmv: from.gmv + (target.gmv - from.gmv) * e,
-      });
-      if (p < 1) raf = requestAnimationFrame(countUp);
+    const startTicking = () => {
+      window.clearInterval(tick);
+      tick = window.setInterval(() => setV(valuesAt(Date.now())), 1000);
     };
 
-    raf = requestAnimationFrame(countUp);
+    const countUp = () => {
+      const target = valuesAt(Date.now());
+      const from = {
+        lives: target.lives * COUNT_FROM,
+        hours: target.hours * COUNT_FROM,
+        gmv: target.gmv * COUNT_FROM,
+      };
+      const start = performance.now();
+      const frame = (t: number) => {
+        const p = duration === 0 ? 1 : Math.min(1, (t - start) / duration);
+        const e = 1 - Math.pow(1 - p, 4);
+        setV({
+          lives: from.lives + (target.lives - from.lives) * e,
+          hours: from.hours + (target.hours - from.hours) * e,
+          gmv: from.gmv + (target.gmv - from.gmv) * e,
+        });
+        if (p < 1) raf = requestAnimationFrame(frame);
+        else startTicking();
+      };
+      raf = requestAnimationFrame(frame);
+    };
 
-    // Depois da contagem, acompanha o relógio (o GMV muda a cada ~4 s).
-    let tick = 0;
-    const startTicking = window.setTimeout(() => {
-      tick = window.setInterval(() => setV(valuesAt(Date.now())), 1000);
-    }, duration);
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!counted) {
+            counted = true;
+            countUp();
+          } else {
+            setV(valuesAt(Date.now()));
+            startTicking();
+          }
+        } else {
+          cancelAnimationFrame(raf);
+          window.clearInterval(tick);
+        }
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+
     return () => {
+      io.disconnect();
       cancelAnimationFrame(raf);
-      window.clearTimeout(startTicking);
       window.clearInterval(tick);
     };
   }, []);
@@ -75,7 +101,7 @@ export function ProofNumbers() {
   const press = PRESS[0];
 
   return (
-    <section className="bg-preto pb-16 pt-4 md:pb-20">
+    <section ref={ref} className="bg-preto pb-16 pt-4 md:pb-20">
       <Container>
         <dl className="grid grid-cols-2 border-t border-gelo/15 md:grid-cols-[1fr_1fr_1.55fr_0.9fr]">
           {numbers.map(({ value, label, cell }, i) => (
