@@ -84,6 +84,24 @@ body {
   animation: ticker 38s linear infinite;
 }
 
+/* Feed dentro da máscara: sobe metade da trilha (a cópia) e recomeça no mesmo quadro. */
+.live-feed-screen {
+  overflow: hidden;
+}
+
+.live-feed-track {
+  animation: live-feed-up 24s linear infinite;
+}
+
+@keyframes live-feed-up {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
 @keyframes ticker {
   from {
     transform: translateX(0);
@@ -185,5 +203,24 @@ body {
   .marquee-mask {
     mask-image: none;
     -webkit-mask-image: none;
+  }
+
+  .live-feed-track {
+    animation: none;
+    transform: none;
+  }
+
+  .live-feed-screen {
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+  }
+
+  .live-feed-slide {
+    scroll-snap-align: start;
+  }
+
+  .live-feed-clone {
+    display: none;
   }
 }

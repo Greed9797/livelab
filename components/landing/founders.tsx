@@ -3,14 +3,14 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "./container";
 import { PRESS } from "@/lib/company";
 
-// Texto e fala: matéria do Empreenda News (30 jun 2026). Nomes e cargos: enviados pelo cliente.
-// Na ordem da foto, da esquerda para a direita.
+// Fala: matéria do Empreenda News (30 jun 2026). Nomes e funções: enviados pelo cliente.
+// Na ordem da foto, da esquerda para a direita. A copy não cita outras empresas.
 const FOUNDERS = [
-  { name: "Rui Orsini", role: "Responsável pela franquia" },
-  { name: "Luan Cavati", role: "CEO da LiveLab" },
-  { name: "Leonardo Ames", role: "Fundador do Grupo W3" },
-  { name: "Lucas Monteiro", role: "Fundador do Grupo W3" },
-  { name: "Gustavo Hofmann", role: "Fundador do Grupo W3" },
+  { name: "Rui Orsini", role: "Franquia" },
+  { name: "Luan Cavati", role: "CEO e expansão" },
+  { name: "Leonardo Ames", role: "Performance" },
+  { name: "Lucas Monteiro", role: "Operações" },
+  { name: "Gustavo Hofmann", role: "Aquisição" },
 ];
 
 export function Founders() {
@@ -24,11 +24,9 @@ export function Founders() {
             <span className="text-laranja">.</span>
           </h2>
           <p className="mt-6 max-w-[36rem] text-lg leading-relaxed text-gelo/70">
-            Cinco fundadores. A LiveLab nasce do Grupo W3, empresa de soluções
-            para e-commerce de Blumenau, em parceria com a Joyn RH na formação de apresentadores.
-            A proposta: tirar o live commerce de São Paulo e tornar a operação
-            profissional, escalável e replicável, para marcas e para quem quer
-            trabalhar ao vivo.
+            Cinco fundadores da LiveLab. A proposta: tirar o live commerce de
+            São Paulo e tornar a operação profissional, escalável e replicável,
+            para marcas e para quem quer trabalhar ao vivo.
           </p>
         </div>
 
@@ -41,7 +39,7 @@ export function Founders() {
           <figcaption className="mt-8 flex flex-col gap-4 text-sm text-gelo/65 sm:flex-row sm:items-center sm:justify-between">
             <span>
               <span className="font-semibold text-gelo">Lucas Monteiro</span>,
-              Diretor de Crescimento do Grupo W3
+              Diretor de Crescimento
             </span>
             <a
               href={press.url}
@@ -59,14 +57,16 @@ export function Founders() {
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-grafite sm:aspect-[16/9]">
             <Image
               src="/brand/fundadores.webp"
-              alt="Da esquerda para a direita: Rui Orsini, Luan Cavati, Leonardo Ames, Lucas Monteiro e Gustavo Hofmann, no escritório da LiveLab"
+              alt="Fundadores da LiveLab, da esquerda para a direita: Rui Orsini, Luan Cavati, Leonardo Ames, Lucas Monteiro e Gustavo Hofmann"
               fill
               sizes="(max-width: 1240px) 100vw, 1160px"
               className="object-cover"
             />
           </div>
           <figcaption>
-            <p className="mt-6 text-sm text-gelo/55">Da esquerda para a direita</p>
+            <p className="mt-6 text-sm text-gelo/55">
+              Fundadores da LiveLab, da esquerda para a direita
+            </p>
             <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
               {FOUNDERS.map((f) => (
                 <li key={f.name} className="border-t border-gelo/15 pt-4">

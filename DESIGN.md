@@ -171,7 +171,7 @@ A home é a apresentação da marca (Figma "Apresentação — Livelab", `gBhM8W
 
 O sistema recusa dois mundos, ambos confirmados: o editorial creme com serif da versão anterior e o dark-SaaS genérico com brilho neon, glow e vidro fosco. Profundidade vem de campos de cor que trocam de borda a borda e de círculos sobrepostos, não de sombra.
 
-Escopo: home (`app/page.tsx`, `components/landing/*`, `components/ui/hero-3.tsx`, `components/ui/animated-testimonials.tsx`), marca (`components/brand/*`), imagem OG (`app/opengraph-image.tsx`), tokens globais (`app/globals.css`) e a paleta do `/bio` (`app/bio/bio.css`). `/bio/cliente`, `/bio/franqueado`, `/bio/apresentador` e `/bio/admin` ficam fora: mantêm o estilo legado e não se redesenham a partir deste arquivo.
+Escopo: home (`app/page.tsx`, `components/landing/*`, `components/ui/hero-3.tsx`), marca (`components/brand/*`), imagem OG (`app/opengraph-image.tsx`), tokens globais (`app/globals.css`) e a paleta do `/bio` (`app/bio/bio.css`). `/bio/cliente`, `/bio/franqueado`, `/bio/apresentador` e `/bio/admin` ficam fora: mantêm o estilo legado e não se redesenham a partir deste arquivo.
 
 **Key Characteristics:**
 - Preto dominante; campos cheios de Laranja e Branco Gelo alternando por faixa inteira.
@@ -256,14 +256,14 @@ Plano por padrão. A profundidade vem de sobreposição de círculos (disco lara
 
 ### Shadow Vocabulary
 - **Foto elevada** (`box-shadow: 0 18px 40px -18px rgba(7,7,7,0.55)`): posts na faixa da franquia.
-- **Foto elevada grande** (`box-shadow: 0 30px 70px -35px rgba(7,7,7,0.55)`): capturas de live na pilha de clientes.
+- **Foto elevada grande** (`box-shadow: 0 30px 70px -35px rgba(7,7,7,0.55)`): máscara de iPhone das lives de clientes.
 
 ### Named Rules
 **Regra do Palco Sem Brilho.** Sem glow, sem vidro fosco, sem backdrop-blur, sem sombra colorida. Escurecimento é sempre Preto (a radial da órbita, as máscaras de borda dos marquees, os véus do /bio).
 
 ## Shapes
 
-O círculo é a forma organizadora: o círculo do REC que recorta o vídeo da cabine, o disco laranja, o símbolo com play vazado, os discos de ícone, os botões redondos, o indicador do FAQ e os pontos (10px no REC, 6px nos marcadores, 4px no /bio). Todo botão é pílula (9999px). Fotografias são as únicas superfícies com canto médio: 16px nos posts, 24px nas capturas de live, e aparecem giradas (posts alternando −2° e 4°; a pilha de clientes entre −8° e 9°). Todo o resto é reto: faixas, réguas e as portas do /bio (raio 0).
+O círculo é a forma organizadora: o círculo do REC que recorta o vídeo da cabine, o disco laranja, o símbolo com play vazado, os discos de ícone, os botões redondos, o indicador do FAQ e os pontos (10px no REC, 6px nos marcadores, 4px no /bio). Todo botão é pílula (9999px). Fotografias são as únicas superfícies com canto médio: 16px nos posts e giro alternado (−2° e 4°) na faixa da franquia. As lives de clientes ficam retas, cortadas pela tela do iPhone. Todo o resto é reto: faixas, réguas e as portas do /bio (raio 0).
 
 ### Named Rules
 **Regra do Círculo.** Canto arredondado só em círculo, pílula ou foto. Não existe card de UI com raio intermediário.
@@ -308,8 +308,8 @@ Logos reais de clientes forçados a branco (`brightness(0) invert(1)`), opacidad
 ### Faixa da franquia
 Campo Laranja cheio (`#franquia`), título Preto centralizado na voz display maior, body large em Preto a 80%, par ink + outline-ink. Posts reais do Instagram em 3:4 (192px → 256px de altura), cantos 16px, giro alternado, foto elevada, 40s linear.
 
-### Pilha de clientes
-Capturas de live em 9:16 empilhadas com cantos de 24px e giros; a ativa vem à frente com um salto; o nome do cliente em numeral; setas em botão redondo; autoplay de 5s.
+### Máscara de lives
+Na faixa Gelo de clientes, as capturas sobem de baixo para cima dentro de uma máscara de iPhone (bezel Preto, tela 9:19.5, ilha dinâmica). O movimento é linear e contínuo; a trilha é absoluta e a seção corta o eixo X (`overflow-x: clip`) para a página não rolar para o lado. Cada foto leva o nome da marca; a Mirant acrescenta "Live de roupa básica", sem número de vendas. Sob `prefers-reduced-motion` o feed para e a tela vira rolagem vertical.
 
 ### Órbita (CTA final)
 Faixa Preta (`#contato`). O key visual `orbita-discos.jpg` (200vw no mobile, até 1440px no desktop) escurecido no centro por radial Preto (82% → 55% → 0), com máscara vertical que some em 14% e 86%; o headline em Gelo mora dentro da órbita. Abaixo, body large, um primary, a nota em caption Gelo a 60% e o link terciário sublinhado para a franquia, empilhados com 16px.

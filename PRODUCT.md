@@ -56,9 +56,9 @@ Números e provas enviados pelo cliente em 2026-09-25 (no site):
 - Selo TikTok Shop Partner (declarado pelo cliente).
 - Alto Calçados e Popô Baby: dados públicos, liberados. GMV acumulado de R$ 1,23 mi é só de live.
 - Instagram: @livelab.br.
-- Fundadores: Luan Cavati (CEO), Rui Orsini (franquia), Leonardo Ames, Gustavo Hofmann e Lucas Monteiro (fundadores do Grupo W3). Foto em public/brand/fundadores.webp, enviada pelo cliente.
-- Seção "Quem está por trás" usa só o que a matéria do Empreenda News publicou (Grupo W3, Joyn RH, fala do Lucas).
-- Imprensa: Empreenda News, 30 jun 2026 (a matéria cita o Grupo W3 e a Joyn RH, não a marca LiveLab).
+- Fundadores da LiveLab, da esquerda para a direita na foto: Rui Orsini (franquia), Luan Cavati (CEO e expansão), Leonardo Ames (performance), Lucas Monteiro (operações), Gustavo Hofmann (aquisição). Foto em public/brand/fundadores.webp. Não reordenar.
+- A home não cita outras empresas na origem da operação. A fala do Lucas na seção "Quem está por trás" fica sem cargo de outra empresa.
+- Imprensa: Empreenda News, 30 jun 2026. O link da matéria permanece; o texto da home não repete os nomes de empresas da reportagem.
 - Empresa: LIVELAB FRANCHISING LTDA, CNPJ 66.390.001/0001-06, R. Buenos Aires 145, Ponta Aguda, Blumenau/SC. Google Meu Negócio CID 5579591897828166736.
 
 Números antigos sem fonte, removidos da home em 2026-09-25: R$ 2,4B de GMV, 12M de espectadores, 99,98% de uptime, "lives que faturam mais de R$ 50M/ano", "em 30 minutos", "três anos operando". Não voltar sem fonte primária. Também não usar "10x mais", "US$ 1 mi → 46 mi" nem estatísticas de mercado dos posts sem a fonte original.

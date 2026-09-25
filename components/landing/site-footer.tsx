@@ -61,7 +61,7 @@ export function SiteFooter() {
           </div>
 
           {COLUMNS.map((col) => (
-            <div key={col.title} className="flex flex-col gap-4">
+            <div key={col.title} className="flex min-w-0 flex-col gap-4">
               <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gelo/50">
                 {col.title}
               </span>
@@ -73,7 +73,7 @@ export function SiteFooter() {
                       {...("external" in link && link.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
-                      className="text-sm text-gelo/75 transition-colors hover:text-laranja"
+                      className="text-sm text-gelo/75 transition-colors [overflow-wrap:anywhere] hover:text-laranja"
                     >
                       {link.label}
                     </a>
