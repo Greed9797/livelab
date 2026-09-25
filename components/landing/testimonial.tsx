@@ -14,15 +14,19 @@ export function Testimonial() {
   return (
     <section
       id="clientes"
-      className="overflow-x-clip bg-gelo py-20 text-preto [--focus:var(--preto)] md:py-28"
+      className="overflow-x-clip bg-gelo py-16 text-preto [--focus:var(--preto)] md:py-20 lg:py-16"
     >
       <Container className="min-w-0">
         <h2 className="display text-[clamp(2.25rem,4.4vw,3.75rem)]">
           Quem já está no <span className="serif-accent">ar</span> com a
           LiveLab<span className="text-laranja">.</span>
         </h2>
-        <Cases />
-        <LivePhone lives={LIVES} />
+        {/* No PC, cards e iPhone dividem a mesma faixa e o aparelho cabe inteiro.
+            No celular a pilha continua: cards, depois a máscara com o feed subindo. */}
+        <div className="mt-8 flex flex-col gap-10 lg:mt-10 lg:grid lg:grid-cols-[minmax(0,1fr)_11.75rem] lg:items-end lg:gap-10 xl:gap-14">
+          <Cases />
+          <LivePhone lives={LIVES} />
+        </div>
       </Container>
     </section>
   );

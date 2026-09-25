@@ -29,7 +29,7 @@ const CASES = [
 
 export function Cases() {
   return (
-    <ul className="mt-10 grid gap-4 md:mt-14 md:grid-cols-3">
+    <ul className="grid min-w-0 gap-4 md:grid-cols-3">
       {CASES.map((c) => (
         <li
           key={c.brand}

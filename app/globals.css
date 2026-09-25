@@ -187,13 +187,18 @@ body {
     transition-duration: 0.01ms !important;
   }
 
-  /* Sem movimento, os logos param em grade e as cópias do loop somem. */
+  /* Sem movimento, o letreiro para. A cópia do loop some e os nomes quebram em grade. */
   .ticker-track {
-    animation: none;
+    animation: none !important;
     width: auto;
+    max-width: 100%;
     flex-wrap: wrap;
     justify-content: center;
-    row-gap: 2rem;
+    gap: 2rem 3.5rem;
+  }
+
+  .ticker-track > ul {
+    display: contents;
   }
 
   .ticker-track > [aria-hidden="true"] {

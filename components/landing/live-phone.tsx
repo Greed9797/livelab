@@ -12,7 +12,7 @@ export function LivePhone({ lives }: { lives: LiveShot[] }) {
   const loop = [...lives, ...lives];
 
   return (
-    <div className="mx-auto mt-14 w-full min-w-0 max-w-[17.5rem] md:mt-16 md:max-w-[19.5rem]">
+    <div className="mx-auto w-full min-w-0 max-w-[17.5rem] md:max-w-[19.5rem] lg:mx-0 lg:w-full lg:max-w-none">
       <div className="rounded-[2.75rem] bg-preto p-2.5 shadow-[0_30px_70px_-35px_rgba(7,7,7,0.55)]">
         <div className="live-feed-screen relative aspect-[9/19.5] rounded-[2.15rem] bg-preto [container-type:size]">
           <div className="live-feed-track absolute left-0 top-0 flex w-full flex-col">
