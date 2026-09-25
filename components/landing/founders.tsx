@@ -4,12 +4,13 @@ import { Container } from "./container";
 import { PRESS } from "@/lib/company";
 
 // Texto e fala: matéria do Empreenda News (30 jun 2026). Nomes e cargos: enviados pelo cliente.
+// Na ordem da foto, da esquerda para a direita.
 const FOUNDERS = [
-  { name: "Luan Cavati", role: "CEO da LiveLab" },
   { name: "Rui Orsini", role: "Responsável pela franquia" },
+  { name: "Luan Cavati", role: "CEO da LiveLab" },
   { name: "Leonardo Ames", role: "Fundador do Grupo W3" },
-  { name: "Gustavo Hofmann", role: "Fundador do Grupo W3" },
   { name: "Lucas Monteiro", role: "Fundador do Grupo W3" },
+  { name: "Gustavo Hofmann", role: "Fundador do Grupo W3" },
 ];
 
 export function Founders() {
@@ -58,14 +59,15 @@ export function Founders() {
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-grafite sm:aspect-[16/9]">
             <Image
               src="/brand/fundadores.webp"
-              alt="Os cinco fundadores da LiveLab no escritório, em frente ao logo"
+              alt="Da esquerda para a direita: Rui Orsini, Luan Cavati, Leonardo Ames, Lucas Monteiro e Gustavo Hofmann, no escritório da LiveLab"
               fill
               sizes="(max-width: 1240px) 100vw, 1160px"
               className="object-cover"
             />
           </div>
           <figcaption>
-            <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
+            <p className="mt-6 text-sm text-gelo/55">Da esquerda para a direita</p>
+            <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
               {FOUNDERS.map((f) => (
                 <li key={f.name} className="border-t border-gelo/15 pt-4">
                   <p className="font-semibold text-gelo">{f.name}</p>
