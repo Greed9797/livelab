@@ -1,8 +1,17 @@
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "./container";
 import { PRESS } from "@/lib/company";
 
-// Tudo aqui vem da matéria do Empreenda News (30 jun 2026). Nada além do que foi publicado.
+// Texto e fala: matéria do Empreenda News (30 jun 2026). Nomes e cargos: enviados pelo cliente.
+const FOUNDERS = [
+  { name: "Luan Cavati", role: "CEO da LiveLab" },
+  { name: "Rui Orsini", role: "Responsável pela franquia" },
+  { name: "Leonardo Ames", role: "Fundador do Grupo W3" },
+  { name: "Gustavo Hofmann", role: "Fundador do Grupo W3" },
+  { name: "Lucas Monteiro", role: "Fundador do Grupo W3" },
+];
+
 export function Founders() {
   const press = PRESS[0];
   return (
@@ -14,8 +23,8 @@ export function Founders() {
             <span className="text-laranja">.</span>
           </h2>
           <p className="mt-6 max-w-[36rem] text-lg leading-relaxed text-gelo/70">
-            A LiveLab nasce do Grupo W3, empresa de soluções para e-commerce de
-            Blumenau, em parceria com a Joyn RH na formação de apresentadores.
+            Cinco fundadores. A LiveLab nasce do Grupo W3, empresa de soluções
+            para e-commerce de Blumenau, em parceria com a Joyn RH na formação de apresentadores.
             A proposta: tirar o live commerce de São Paulo e tornar a operação
             profissional, escalável e replicável, para marcas e para quem quer
             trabalhar ao vivo.
@@ -30,8 +39,8 @@ export function Founders() {
           </blockquote>
           <figcaption className="mt-8 flex flex-col gap-4 text-sm text-gelo/65 sm:flex-row sm:items-center sm:justify-between">
             <span>
-              <span className="font-semibold text-gelo">Lucas</span>, Diretor de
-              Crescimento do Grupo W3
+              <span className="font-semibold text-gelo">Lucas Monteiro</span>,
+              Diretor de Crescimento do Grupo W3
             </span>
             <a
               href={press.url}
@@ -42,6 +51,28 @@ export function Founders() {
               Ler no {press.outlet}
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </a>
+          </figcaption>
+        </figure>
+
+        <figure className="lg:col-span-2">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-grafite sm:aspect-[16/9]">
+            <Image
+              src="/brand/fundadores.webp"
+              alt="Os cinco fundadores da LiveLab no escritório, em frente ao logo"
+              fill
+              sizes="(max-width: 1240px) 100vw, 1160px"
+              className="object-cover"
+            />
+          </div>
+          <figcaption>
+            <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
+              {FOUNDERS.map((f) => (
+                <li key={f.name} className="border-t border-gelo/15 pt-4">
+                  <p className="font-semibold text-gelo">{f.name}</p>
+                  <p className="mt-1 text-sm text-gelo/65">{f.role}</p>
+                </li>
+              ))}
+            </ul>
           </figcaption>
         </figure>
       </Container>
