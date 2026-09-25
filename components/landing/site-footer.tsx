@@ -1,6 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Container } from "./container";
 import { LivelabLogo } from "@/components/brand/livelab-logo";
+import { COMPANY, COMPANY_ADDRESS_LINE } from "@/lib/company";
 import {
   WHATSAPP_DISPLAY,
   WHATSAPP_FRANCHISE_URL,
@@ -24,6 +25,7 @@ const COLUMNS = [
       { label: "Quero vender em live", href: WHATSAPP_SALES_URL, external: true },
       { label: "Quero abrir uma LiveLab", href: WHATSAPP_FRANCHISE_URL, external: true },
       { label: "Quero apresentar produtos", href: "/bio/apresentador" },
+      { label: COMPANY.email, href: `mailto:${COMPANY.email}` },
     ],
   },
   {
@@ -81,10 +83,12 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-14 flex items-center gap-2.5 border-t border-gelo/10 pt-6">
-          <span className="h-1.5 w-1.5 rounded-full bg-laranja" aria-hidden />
-          <p className="text-xs text-gelo/55">
-            © 2026 Grupo LiveLab · AMH Soluções Digitais Ltda. · CNPJ 54.619.914/0001-64
+        <div className="mt-14 flex items-start gap-2.5 border-t border-gelo/10 pt-6">
+          <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-laranja" aria-hidden />
+          <p className="text-xs leading-relaxed text-gelo/55">
+            © 2026 {COMPANY.legalName} · CNPJ {COMPANY.cnpj}
+            <br />
+            {COMPANY_ADDRESS_LINE}
           </p>
         </div>
       </Container>
