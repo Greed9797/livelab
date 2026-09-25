@@ -35,13 +35,14 @@ export const SOCIAL = {
   instagramHandle: "@livelab.br",
 } as const;
 
-// Números da operação informados pelo cliente em 2026-09-25 (acumulado).
+// Números da operação: valor real no instante-base + ritmo médio informado pelo cliente.
+// Para recalibrar, troque baseAt e os valores base pelos números reais do dia.
 export const OPERATION = {
-  lives: "1.303",
-  hours: "3.829",
-  gmv: "R$ 1,23 mi",
+  baseAt: "2026-09-25T12:50:00-03:00",
+  lives: { base: 1303, perDay: 14 },
+  hours: { base: 3829, perDay: 2.7 * 24 },
+  gmv: { base: 1231504.78, perDay: 20000 },
   brands: "30+",
-  asOf: "set/2026",
 } as const;
 
 export const PRESS = [

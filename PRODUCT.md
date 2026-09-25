@@ -49,7 +49,7 @@ Fatos confirmados pelo cliente em 2026-09-25 (podem ir para a copy):
 - "A 1ª franquia de live commerce do Brasil" pode ser usada.
 
 Números e provas enviados pelo cliente em 2026-09-25 (no site):
-- Operação acumulada até set/2026: 1.303 lives, 3.829 horas em live, R$ 1.231.504,78 de GMV, 30+ marcas.
+- Operação: em 25/09/2026 12:50 (base) 1.303 lives, 3.829 horas em live, R$ 1.231.504,78 de GMV, 30+ marcas. O site projeta em tempo real com o ritmo médio informado pelo cliente: +14 lives/dia, +2,7 h de live por hora, +R$ 20 mil de GMV/dia (lib/company.ts → OPERATION). Recalibrar a base com os números reais periodicamente.
 - Rovitex: +485% de GMV em 15–30 jun 2026 vs. 30 mai–14 jun (Seller Center). Publicar só o crescimento, não o valor em R$.
 - Alto Calçados: R$ 126,79 mil em live na conta própria, R$ 371,37 mil de receita total da loja, 20 ago–4 set 2026 (Seller Center).
 - Popô Baby: set/2026 parcial, R$ 79,8 mil de GMV (+311,82%), lives com 58,3% (~R$ 46,5 mil); top 6 da categoria roupas de bebê no TikTok Shop (Kalodata, 4–10 set 2026).
