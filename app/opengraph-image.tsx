@@ -1,52 +1,92 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { wordmarkSvg } from "@/components/brand/livelab-logo";
+import { SYMBOL_PATH } from "@/components/brand/livelab-symbol";
 
-export const runtime = "edge";
-export const alt = "Livelab — inteligência para lives que vendem";
+export const alt = "LiveLab: sua marca vende em live sem montar estúdio";
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+const svgUri = (svg: string) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+
+const symbol = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="#FE5105" fill-rule="evenodd" d="${SYMBOL_PATH}"/></svg>`;
+
+// Mesmo par do site (OFL, arquivos em assets/fonts): Geist Bold no título, Instrument Serif itálica no destaque.
+export default async function OpenGraphImage() {
+  const [geistBold, serifItalic] = await Promise.all([
+    readFile(join(process.cwd(), "assets/fonts/Geist-Bold.ttf")),
+    readFile(join(process.cwd(), "assets/fonts/InstrumentSerif-Italic.ttf")),
+  ]);
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: "#f7f6f2",
-          color: "#0a0a0a",
+          background: "#070707",
+          color: "#EFEFEF",
           display: "flex",
-          flexDirection: "column",
+          fontFamily: "Geist",
           height: "100%",
-          justifyContent: "space-between",
-          padding: "72px",
+          position: "relative",
           width: "100%",
         }}
       >
-        <div style={{ display: "flex", fontSize: 48, fontWeight: 700 }}>
-          livelab<span style={{ color: "#e8673c" }}>.</span>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div style={{ color: "#6b6b6b", fontSize: 24, letterSpacing: 4 }}>
-            LIVE COMMERCE
-          </div>
+        <img
+          src={svgUri(symbol)}
+          width={620}
+          height={620}
+          alt=""
+          style={{ position: "absolute", right: -150, top: 5 }}
+        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "72px",
+            width: 760,
+          }}
+        >
+          <img src={svgUri(wordmarkSvg("#EFEFEF"))} width={285} height={80} alt="" />
+          {/* Satori não quebra texto corrido entre spans; as linhas vão explícitas. */}
           <div
             style={{
-              fontSize: 68,
+              display: "flex",
+              flexDirection: "column",
+              fontSize: 76,
               fontWeight: 700,
-              letterSpacing: -2,
-              lineHeight: 1.05,
-              maxWidth: 920,
+              letterSpacing: -3,
+              lineHeight: 1,
             }}
           >
-            A inteligência por trás das lives que vendem.
+            <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
+              Sua marca
+              <span style={{ fontFamily: "Instrument Serif", fontStyle: "italic", fontWeight: 400, letterSpacing: -1.5 }}>
+                vende
+              </span>
+            </div>
+            <div style={{ display: "flex" }}>em live sem</div>
+            <div style={{ display: "flex" }}>
+              montar estúdio<span style={{ color: "#FE5105" }}>.</span>
+            </div>
           </div>
-        </div>
-        <div style={{ color: "#e8673c", fontSize: 24 }}>
-          Audiência, engajamento e vendas em tempo real.
+          <div style={{ display: "flex", alignItems: "center", gap: 14, color: "rgba(239,239,239,0.6)", fontSize: 26 }}>
+            <div style={{ width: 12, height: 12, borderRadius: 12, background: "#FE5105" }} />
+            grupolivelab.com.br
+          </div>
         </div>
       </div>
     ),
-    size
+    {
+      ...size,
+      fonts: [
+        { name: "Geist", data: geistBold, weight: 700, style: "normal" },
+        { name: "Instrument Serif", data: serifItalic, weight: 400, style: "italic" },
+      ],
+    }
   );
 }

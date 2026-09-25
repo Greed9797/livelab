@@ -2,8 +2,9 @@ import { Hero } from "@/components/landing/hero";
 import { LogoCloud } from "@/components/landing/logo-cloud";
 import { Features } from "@/components/landing/features";
 import { MarqueeShowcase } from "@/components/landing/marquee-showcase";
-import { Stats } from "@/components/landing/stats";
 import { Testimonial } from "@/components/landing/testimonial";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { Faq } from "@/components/landing/faq";
 import { CtaBand } from "@/components/landing/cta-band";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { siteUrlString } from "@/lib/site-config";
@@ -12,16 +13,16 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Livelab",
+    name: "LiveLab",
     url: siteUrlString,
     logo: `${siteUrlString}/logo.png`,
     description:
-      "Sala de controle para live commerce com audiência, engajamento e vendas em tempo real.",
+      "A 1ª franquia de live commerce do Brasil. Estrutura completa de live (cabine, apresentadores e playbook de vendas) para marcas venderem ao vivo.",
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Livelab",
+    name: "LiveLab",
     url: siteUrlString,
     inLanguage: "pt-BR",
   },
@@ -38,9 +39,10 @@ export default function Home() {
         <Hero />
         <LogoCloud />
         <Features />
-        <MarqueeShowcase />
-        <Stats />
+        <HowItWorks />
         <Testimonial />
+        <Faq />
+        <MarqueeShowcase />
         <CtaBand />
       </main>
       <SiteFooter />

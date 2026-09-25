@@ -1,158 +1,99 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { cn } from "@/lib/utils"; // Assuming you have a `cn` utility from shadcn
-import {
-  WHATSAPP_FRANCHISE_URL,
-  WHATSAPP_SALES_URL,
-} from "@/lib/contact";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/landing/button";
+import { PlayGlyph } from "@/components/brand/livelab-symbol";
 
-// Props interface for the component
 interface AnimatedMarqueeHeroProps {
-  tagline: string;
+  id?: string;
   title: React.ReactNode;
   description: string;
-  ctaText: string;
+  primary: { text: string; href: string };
+  secondary: { text: string; href: string };
   images: string[];
   className?: string;
 }
 
-// The main hero component
+// Faixa laranja da marca: os posts da LiveLab passando sobre o laranja cheio.
+// Texto em preto porque o branco sobre #FE5105 não passa em contraste.
 export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
-  tagline,
+  id,
   title,
   description,
-  ctaText,
+  primary,
+  secondary,
   images,
   className,
 }) => {
-  // Animation variants for the text content
-  const FADE_IN_ANIMATION_VARIANTS = {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 100, damping: 20 } },
-  };
-
-  // Duplicate images for a seamless loop
-  const duplicatedImages = [...images, ...images];
+  const reduceMotion = useReducedMotion();
+  // Loop duplicado. Sem movimento (CSS motion-reduce), as cópias somem e a faixa vira rolagem lateral.
+  const shownImages = [...images, ...images];
 
   return (
     <section
+      id={id}
       className={cn(
-        "relative w-full overflow-hidden bg-background flex flex-col items-center text-center px-4 pt-20 pb-0 md:pt-24",
+        "relative flex w-full flex-col items-center overflow-hidden bg-laranja px-6 pt-20 text-center text-preto [--focus:var(--preto)] md:pt-28",
         className
       )}
     >
-      <div className="z-10 flex flex-col items-center">
-        {/* Tagline */}
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={FADE_IN_ANIMATION_VARIANTS}
-          className="mb-4 inline-block rounded-full border border-border bg-card/50 px-4 py-1.5 text-sm font-medium text-muted-foreground backdrop-blur-sm"
-        >
-          {tagline}
-        </motion.div>
+      <h2 className="display max-w-4xl text-[clamp(2.75rem,7vw,6rem)]">{title}</h2>
 
-        {/* Main Title */}
-        <motion.h1
-          initial="hidden"
-          animate="show"
-          variants={{
-            hidden: {},
-            show: {
-              transition: {
-                staggerChildren: 0.1,
-              },
-            },
-          }}
-          className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground"
-        >
-          {typeof title === 'string' ? (
-            title.split(" ").map((word, i) => (
-              <motion.span
-                key={i}
-                variants={FADE_IN_ANIMATION_VARIANTS}
-                className="inline-block"
-              >
-                {word}&nbsp;
-              </motion.span>
-            ))
-          ) : (
-            title
-          )}
-        </motion.h1>
+      <p className="mt-6 max-w-xl text-lg leading-relaxed text-preto/80 md:text-xl">
+        {description}
+      </p>
 
-        {/* Description */}
-        <motion.p
-          initial="hidden"
-          animate="show"
-          variants={FADE_IN_ANIMATION_VARIANTS}
-          transition={{ delay: 0.5 }}
-          className="mt-6 max-w-xl text-lg text-muted-foreground"
+      <div className="mt-9 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
+        <Button
+          href={primary.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="ink"
+          size="lg"
         >
-          {description}
-        </motion.p>
-
-        {/* Call to Action Buttons */}
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={FADE_IN_ANIMATION_VARIANTS}
-          transition={{ delay: 0.6 }}
-          className="mt-8 flex flex-col items-center gap-3 sm:flex-row"
+          {primary.text}
+          <PlayGlyph className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+        </Button>
+        <Button
+          href={secondary.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="outline-ink"
+          size="lg"
         >
-          <motion.a
-            href={WHATSAPP_FRANCHISE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full bg-brand px-8 py-3 font-semibold text-brand-foreground shadow-lg transition-colors hover:bg-brand-hover"
-          >
-            {ctaText}
-          </motion.a>
-          <motion.a
-            href={WHATSAPP_SALES_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full border border-[color:var(--border-strong)] bg-background px-8 py-3 font-semibold text-foreground shadow-sm transition-colors hover:bg-foreground hover:text-background"
-          >
-            Quero vender
-          </motion.a>
-        </motion.div>
+          {secondary.text}
+          <PlayGlyph className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+        </Button>
       </div>
 
-      {/* Animated Image Marquee */}
-      <div className="relative mt-14 h-56 w-full overflow-hidden md:mt-20 md:h-72 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]">
+      <div className="relative mt-16 h-60 w-[calc(100%+3rem)] overflow-hidden motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto motion-reduce:px-6 md:mt-20 md:h-80">
         <motion.div
-          className="flex gap-4"
-          animate={{
-            x: ["-100%", "0%"],
-            transition: {
-              ease: "linear",
-              duration: 40,
-              repeat: Infinity,
-            },
-          }}
+          className="flex w-max gap-5 pr-5 pt-4"
+          animate={
+            reduceMotion
+              ? undefined
+              : { x: ["-50%", "0%"], transition: { ease: "linear", duration: 40, repeat: Infinity } }
+          }
         >
-          {duplicatedImages.map((src, index) => (
+          {shownImages.map((src, index) => (
             <div
               key={index}
-              className="relative aspect-[3/4] h-48 md:h-64 flex-shrink-0"
-              style={{
-                rotate: `${(index % 2 === 0 ? -2 : 5)}deg`,
-              }}
+              className={cn(
+                "relative aspect-[3/4] h-48 flex-shrink-0 snap-start md:h-64",
+                index >= images.length && "motion-reduce:hidden"
+              )}
+              style={{ rotate: `${index % 2 === 0 ? -2 : 4}deg` }}
             >
               <Image
                 src={src}
-                alt={`Showcase image ${index + 1}`}
+                alt={index < images.length ? `Post ${index + 1} da LiveLab no Instagram sobre live commerce` : ""}
+                aria-hidden={index >= images.length || undefined}
                 fill
-                sizes="(max-width: 768px) 12rem, 16rem"
-                className="rounded-2xl object-cover shadow-md"
+                sizes="(max-width: 768px) 9rem, 12rem"
+                className="rounded-2xl object-cover shadow-[0_18px_40px_-18px_rgba(7,7,7,0.55)]"
               />
             </div>
           ))}

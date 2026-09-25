@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Instrument_Serif } from "next/font/google";
 import { siteUrl } from "@/lib/site-config";
 import "./globals.css";
@@ -8,17 +8,20 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+// Só o itálico: é o único papel da serif até a Behind The Nineties licenciada entrar.
+// Carregar o arquivo itálico evita o oblíquo sintético (romano tombado pelo navegador).
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   weight: "400",
+  style: "italic",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Livelab — Inteligência para lives que vendem",
+  title: "Live commerce pra sua marca vender ao vivo | LiveLab",
   description:
-    "Livelab é a sala de controle para live commerce: audiência, engajamento e vendas em tempo real, enquanto a live ainda está no ar.",
+    "Cabine equipada, apresentadores e playbook de vendas pra sua marca vender em live sem montar estúdio. A 1ª franquia de live commerce do Brasil.",
   alternates: {
     canonical: "/",
   },
@@ -27,29 +30,34 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Livelab — Inteligência para lives que vendem",
+    title: "Sua marca vende em live sem montar estúdio | LiveLab",
     description:
-      "A sala de controle para live commerce. Audiência, engajamento e vendas em tempo real.",
+      "Cabine, apresentadores e playbook pra sua marca vender em live. Fale com a LiveLab no WhatsApp.",
     locale: "pt_BR",
     type: "website",
     url: "/",
-    siteName: "Livelab",
+    siteName: "LiveLab",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Livelab — inteligência para lives que vendem",
+        alt: "LiveLab: sua marca vende em live sem montar estúdio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Livelab — Inteligência para lives que vendem",
+    title: "Sua marca vende em live sem montar estúdio | LiveLab",
     description:
-      "A sala de controle para live commerce. Audiência, engajamento e vendas em tempo real.",
+      "Cabine, apresentadores e playbook pra sua marca vender em live. Fale com a LiveLab no WhatsApp.",
     images: ["/opengraph-image"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#070707",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

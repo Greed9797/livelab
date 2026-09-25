@@ -1,26 +1,26 @@
 html:has(.bio-root) {
-  background: #0c0a08;
+  background: #070707;
   color-scheme: dark;
 }
 
 html:has(.bio-root) body {
-  background: #0c0a08;
+  background: #070707;
 }
 
 .bio-root {
-  background: #0c0a08;
+  background: #070707;
   min-height: 100%;
 }
 
 .bio-page {
-  --bg: #0c0a08;
-  --ink: #f3eee6;
-  --muted: #a89f94;
-  --faint: #8a8277;
-  --arrow: #d9d2c8;
-  --rule: rgba(243, 238, 230, 0.14);
-  --ring: rgba(243, 238, 230, 0.22);
-  --accent: #fe5206;
+  --bg: #070707;
+  --ink: #efefef;
+  --muted: #a3a3a3;
+  --faint: #8c8c8c;
+  --arrow: #d6d6d6;
+  --rule: rgba(239, 239, 239, 0.14);
+  --ring: rgba(239, 239, 239, 0.22);
+  --accent: #fe5105;
 
   position: relative;
   isolation: isolate;
@@ -63,8 +63,8 @@ html:has(.bio-root) body {
   inset: 0;
   background: radial-gradient(
     120% 90% at 55% 35%,
-    rgba(12, 10, 8, 0) 45%,
-    rgba(12, 10, 8, 0.55) 100%
+    rgba(7, 7, 7, 0) 45%,
+    rgba(7, 7, 7, 0.55) 100%
   );
 }
 
@@ -73,7 +73,7 @@ html:has(.bio-root) body {
   left: 0;
   right: 0;
   height: 25.641026%;
-  background: linear-gradient(180deg, rgba(12, 10, 8, 0.6), rgba(12, 10, 8, 0));
+  background: linear-gradient(180deg, rgba(7, 7, 7, 0.6), rgba(7, 7, 7, 0));
 }
 
 .bio-veil-base {
@@ -81,7 +81,7 @@ html:has(.bio-root) body {
   right: 0;
   top: 57.264957%;
   bottom: -1px;
-  background: linear-gradient(180deg, rgba(12, 10, 8, 0) 0%, rgba(12, 10, 8, 0.78) 55%, #0c0a08 100%);
+  background: linear-gradient(180deg, rgba(7, 7, 7, 0) 0%, rgba(7, 7, 7, 0.78) 55%, #070707 100%);
 }
 
 .bio-veil-side {
@@ -221,7 +221,7 @@ html:has(.bio-root) body {
 
 .bio-door:hover .bio-door-go {
   transform: translateX(3px);
-  border-color: rgba(243, 238, 230, 0.5);
+  border-color: rgba(239, 239, 239, 0.5);
 }
 
 .bio-door:focus-visible {
@@ -287,8 +287,8 @@ html:has(.bio-root) body {
   .bio-vignette {
     background: radial-gradient(
       110% 80% at 45% 45%,
-      rgba(12, 10, 8, 0) 50%,
-      rgba(12, 10, 8, 0.5) 100%
+      rgba(7, 7, 7, 0) 50%,
+      rgba(7, 7, 7, 0.5) 100%
     );
   }
 
@@ -303,7 +303,7 @@ html:has(.bio-root) body {
     bottom: 0;
     left: 67.5%;
     width: 32.75%;
-    background: linear-gradient(90deg, rgba(12, 10, 8, 0) 0%, rgba(12, 10, 8, 0.75) 55%, #0c0a08 100%);
+    background: linear-gradient(90deg, rgba(7, 7, 7, 0) 0%, rgba(7, 7, 7, 0.75) 55%, #070707 100%);
   }
 
   .bio-col {

@@ -1,86 +1,74 @@
-import { ArrowUpRight, Radio } from "lucide-react";
 import { Container } from "./container";
 import { Button } from "./button";
 import { HeroVideo } from "./hero-video";
-import {
-  WHATSAPP_FRANCHISE_URL,
-  WHATSAPP_SALES_URL,
-} from "@/lib/contact";
+import { LivelabLogo } from "@/components/brand/livelab-logo";
+import { LivelabSymbol, PlayGlyph } from "@/components/brand/livelab-symbol";
+import { WHATSAPP_SALES_URL } from "@/lib/contact";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-20 md:py-28">
-      {/* Video background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <HeroVideo />
-        {/* Legibility overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.58)_45%,rgba(0,0,0,0.82)_100%)]" />
-      </div>
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-preto">
+      <Container className="relative z-20 flex items-center justify-between pt-6 md:pt-9">
+        <a href="#top" aria-label="Livelab — início" className="text-gelo">
+          <LivelabLogo className="h-7 w-auto md:h-9" />
+        </a>
+        <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-gelo/70">
+          <span className="rec-dot" aria-hidden />
+          Luz, câmera, vendas!
+        </p>
+      </Container>
 
-      <Container className="relative z-10">
-        <div className="flex max-w-2xl flex-col items-start gap-8 text-left md:max-w-3xl md:gap-10">
-          <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 py-2 pl-3 pr-5 backdrop-blur rise">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="pulse-dot absolute inline-flex h-full w-full rounded-full" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand" />
-            </span>
-            <span className="eyebrow !text-white/80">AO VIVO • EM PRODUÇÃO</span>
-          </div>
-
-          <h1 className="rise rise-delay-1 font-display text-[clamp(2.75rem,6.5vw,5.5rem)] leading-[0.94] tracking-[-0.035em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
-            A inteligência por trás
-            <br />
-            <span className="italic text-white/75">
-              das lives que vendem
-            </span>
-            <span className="ml-2 inline-block translate-y-[0.08em] text-brand">
-              .
-            </span>
+      <Container className="relative z-10 grid flex-1 items-center gap-12 pb-16 pt-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10 lg:py-16">
+        <div className="flex flex-col items-start gap-8 md:gap-10">
+          <h1 className="display text-[clamp(2.75rem,5.4vw,5rem)] text-gelo">
+            Sua marca <span className="serif-accent">vende</span> em live sem
+            montar estúdio<span className="text-laranja">.</span>
           </h1>
 
-          <p className="rise rise-delay-2 max-w-xl text-lg leading-relaxed text-white/75 md:text-xl">
-            Livelab é a sala de controle para live commerce. Monitore
-            audiência, engajamento e vendas em tempo real — e decida o próximo
-            passo enquanto a live ainda está no ar.
+          <p className="max-w-[34rem] text-lg leading-relaxed text-gelo/70 md:text-xl">
+            Você traz o produto. A LiveLab entra com a cabine equipada,
+            apresentador(a) profissional e playbook de vendas. Sem contratar
+            equipe, sem improviso.
           </p>
 
-          <div className="rise rise-delay-3 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <Button
-              href={WHATSAPP_FRANCHISE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="primary"
-              size="lg"
-            >
-              Quero franquear
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Button>
+          <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
             <Button
               href={WHATSAPP_SALES_URL}
               target="_blank"
               rel="noopener noreferrer"
-              variant="inverse"
               size="lg"
             >
-              Quero vender
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              Quero vender em live
+              <PlayGlyph className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Button>
+            <Button href="#como-funciona" variant="outline" size="lg">
+              Ver como funciona
+              <PlayGlyph className="h-3 w-3 rotate-90 transition-transform duration-300 group-hover:translate-y-0.5" />
             </Button>
             <a
-              href="#recursos"
-              className="group inline-flex items-center gap-2 px-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
+              href="#franquia"
+              className="px-2 py-3 text-sm font-medium text-gelo/70 underline-offset-4 transition-colors hover:text-gelo hover:underline"
             >
-              <Radio className="h-4 w-4" />
-              Conhecer os recursos
+              Quer abrir uma LiveLab? Conheça a franquia
             </a>
           </div>
 
-          <div className="rise rise-delay-4 flex items-center gap-3 pt-2">
-            <div className="hairline-brand" aria-hidden />
-            <p className="eyebrow !text-white/60">
-              Operando lives que faturam mais de R$&nbsp;50M/ano em
-              live&nbsp;commerce
-            </p>
+          <p className="flex items-center gap-3 text-sm text-gelo/60">
+            <span className="h-1.5 w-1.5 flex-none rounded-full bg-laranja" aria-hidden />
+            Diagnóstico gratuito da sua operação, com retorno em até&nbsp;24h
+          </p>
+        </div>
+
+        {/* O círculo do REC, com a cabine gravando dentro. */}
+        <div
+          aria-hidden
+          className="relative order-first mx-auto mb-[calc(min(80vw,24rem)*0.13)] aspect-square w-[min(80vw,24rem)] md:mb-[calc(min(60vw,28rem)*0.13)] md:w-[min(60vw,28rem)] lg:order-none lg:mb-0 lg:w-full lg:max-w-[34rem] lg:justify-self-end"
+        >
+          <div className="disc-slide absolute inset-0 rounded-full bg-laranja [--disc-x:-15%] [--disc-y:13%] lg:max-xl:[--disc-x:0%]" />
+          <div className="rec-open absolute inset-0 overflow-hidden rounded-full bg-grafite">
+            <HeroVideo />
           </div>
+          <LivelabSymbol className="absolute -right-[3%] top-[6%] w-[24%] text-laranja" />
         </div>
       </Container>
     </section>

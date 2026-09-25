@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,7 @@ export const AnimatedTestimonials = ({
   className?: string;
 }) => {
   const [active, setActive] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
@@ -35,18 +36,20 @@ export const AnimatedTestimonials = ({
   };
 
   useEffect(() => {
-    if (autoplay) {
+    if (autoplay && !reduceMotion) {
       const interval = setInterval(() => {
         setActive((prev) => (prev + 1) % testimonials.length);
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay, testimonials.length]);
+  }, [autoplay, reduceMotion, testimonials.length]);
 
   const rotations = [-8, 6, -3, 9, -6, 4];
   const rotateFor = (index: number) => rotations[index % rotations.length];
 
   return (
+    // reducedMotion="user" zera os saltos e giros dos cards para quem pediu menos movimento.
+    <MotionConfig reducedMotion="user">
     <div className={cn("mx-auto max-w-md px-4 py-10 md:max-w-5xl md:px-6 md:py-12", className)}>
       <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:gap-16">
         <div className="flex justify-center md:justify-start">
@@ -80,11 +83,11 @@ export const AnimatedTestimonials = ({
                 >
                   <Image
                     src={testimonial.src}
-                    alt={testimonial.name}
+                    alt={`Live da ${testimonial.name} com a LiveLab`}
                     width={588}
                     height={1280}
                     draggable={false}
-                    className="h-full w-full rounded-3xl object-cover object-center shadow-[0_30px_80px_-40px_rgba(0,0,0,0.4)]"
+                    className="h-full w-full rounded-3xl object-cover object-center shadow-[0_30px_70px_-35px_rgba(7,7,7,0.55)]"
                   />
                 </motion.div>
               ))}
@@ -99,7 +102,7 @@ export const AnimatedTestimonials = ({
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
-            <h3 className="font-display text-5xl leading-none tracking-[-0.02em] text-foreground md:text-7xl">
+            <h3 className="display text-5xl leading-none md:text-7xl">
               {testimonials[active].name}
             </h3>
           </motion.div>
@@ -108,21 +111,22 @@ export const AnimatedTestimonials = ({
               type="button"
               aria-label="Anterior"
               onClick={handlePrev}
-              className="group/button flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface-alt)] transition-colors hover:border-brand"
+              className="group/button flex h-12 w-12 items-center justify-center rounded-full border border-preto/25 transition-colors hover:border-preto hover:bg-preto hover:text-gelo"
             >
-              <ArrowLeft className="h-5 w-5 text-foreground transition-transform duration-300 group-hover/button:-translate-x-0.5" />
+              <ArrowLeft className="h-5 w-5 transition-transform duration-300 group-hover/button:-translate-x-0.5" />
             </button>
             <button
               type="button"
               aria-label="Próximo"
               onClick={handleNext}
-              className="group/button flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface-alt)] transition-colors hover:border-brand"
+              className="group/button flex h-12 w-12 items-center justify-center rounded-full border border-preto/25 transition-colors hover:border-preto hover:bg-preto hover:text-gelo"
             >
-              <ArrowRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover/button:translate-x-0.5" />
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/button:translate-x-0.5" />
             </button>
           </div>
         </div>
       </div>
     </div>
+    </MotionConfig>
   );
 };

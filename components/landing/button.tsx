@@ -1,11 +1,13 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "ghost" | "inverse";
+// primary: laranja com texto preto (6,1:1). Branco sobre o laranja fica em 2,9:1 e não passa.
+// outline: para fundo preto. ink / outline-ink: para fundo laranja ou gelo.
+type Variant = "primary" | "outline" | "ink" | "outline-ink";
 type Size = "md" | "lg";
 
 const base =
-  "group inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[color:var(--ring)] rounded-full";
+  "group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-semibold tracking-[-0.01em] transition-[background-color,color,border-color] duration-300 ease-out";
 
 const sizes: Record<Size, string> = {
   md: "h-11 px-5 text-sm",
@@ -13,14 +15,10 @@ const sizes: Record<Size, string> = {
 };
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-brand text-brand-foreground hover:bg-brand-hover shadow-[0_12px_32px_-12px_rgba(232,103,60,0.6)] hover:shadow-[0_18px_40px_-12px_rgba(232,103,60,0.7)]",
-  secondary:
-    "bg-surface text-foreground border border-[color:var(--border-strong)] hover:bg-foreground hover:text-background",
-  ghost:
-    "text-foreground hover:text-brand underline-offset-4 hover:underline",
-  inverse:
-    "bg-background text-foreground hover:bg-brand hover:text-brand-foreground",
+  primary: "bg-laranja text-preto hover:bg-gelo",
+  outline: "border border-gelo/30 text-gelo hover:border-gelo hover:bg-gelo hover:text-preto",
+  ink: "bg-preto text-gelo hover:bg-gelo hover:text-preto",
+  "outline-ink": "border border-preto/35 text-preto hover:border-preto hover:bg-preto hover:text-gelo",
 };
 
 type ButtonProps = {

@@ -1,93 +1,76 @@
 import {
-  Activity,
-  MessageCircle,
-  TrendingUp,
-  Zap,
+  BookOpen,
+  Megaphone,
+  Mic,
+  Video,
   type LucideIcon,
 } from "lucide-react";
 import { Container } from "./container";
 
 type Feature = {
   icon: LucideIcon;
-  kicker: string;
   title: string;
   description: string;
 };
 
+// Entregas publicadas pela própria marca (posts 9 a 13 do Instagram).
 const FEATURES: Feature[] = [
   {
-    icon: Activity,
-    kicker: "01",
-    title: "Audiência viva",
+    icon: Video,
+    title: "Cabine pronta pra vender",
     description:
-      "Quantos espectadores estão com você neste segundo. De onde vieram, quando saíram, e o pico exato da live.",
+      "Luz, câmera, cenário e transmissão já montados. Sua marca não compra equipamento nem monta estúdio.",
   },
   {
-    icon: MessageCircle,
-    kicker: "02",
-    title: "Engajamento por minuto",
+    icon: Mic,
+    title: "Apresentador(a) que vende",
     description:
-      "Comentários, reações e cliques desenhando uma curva sincronizada com o momento do produto apresentado.",
+      "Apresentadores profissionais conduzem a live e puxam a venda. Você não precisa ir pra frente da câmera nem contratar ninguém.",
   },
   {
-    icon: TrendingUp,
-    kicker: "03",
-    title: "Vendas em tempo real",
+    icon: BookOpen,
+    title: "Playbook, não improviso",
     description:
-      "Pedidos, ticket médio e conversão acompanhando a fala do apresentador — não o relatório do dia seguinte.",
+      "Estratégias de venda validadas nos maiores mercados do mundo, como China e EUA. Você não começa do zero.",
   },
   {
-    icon: Zap,
-    kicker: "04",
-    title: "Alertas inteligentes",
+    icon: Megaphone,
+    title: "Marketing validado",
     description:
-      "Um produto estourou acima do esperado? A Livelab te avisa antes do fim da live — dá pra repetir.",
+      "Estratégias de marketing validadas com grandes marcas, aplicadas à sua live. Não é só ligar a câmera.",
   },
 ];
 
 export function Features() {
   return (
-    <section id="recursos" className="relative py-16 md:py-24">
-      <Container>
-        <div className="mb-10 flex flex-col items-start gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
-          <div className="flex items-center gap-3">
-            <div className="hairline-brand" aria-hidden />
-            <span className="eyebrow">O que a Livelab enxerga</span>
-          </div>
-          <h2 className="max-w-2xl font-display text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] tracking-[-0.025em] text-foreground">
-            Tudo que você precisa saber
-            <br />
-            <span className="italic text-[color:var(--muted-strong)]">
-              enquanto a live ainda acontece.
-            </span>
-          </h2>
-        </div>
+    <section id="recursos" className="bg-gelo py-20 text-preto [--focus:var(--preto)] md:py-32">
+      <Container className="grid gap-12 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-20">
+        <h2 className="display text-[clamp(2.25rem,4.4vw,3.75rem)] md:sticky md:top-20 md:self-start">
+          Tudo que falta pra sua marca{" "}
+          <span className="serif-accent">vender</span> ao vivo
+          <span className="text-laranja">.</span>
+        </h2>
 
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--border)] bg-[color:var(--border)] md:grid-cols-2">
-          {FEATURES.map(({ icon: Icon, kicker, title, description }) => (
-            <article
-              key={kicker}
-              className="group relative flex flex-col gap-6 bg-[color:var(--background)] p-8 transition-colors duration-500 hover:bg-[color:var(--surface)] md:min-h-[220px] md:p-10"
+        <ul className="border-t border-preto/15">
+          {FEATURES.map(({ icon: Icon, title, description }) => (
+            <li
+              key={title}
+              className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-5 border-b border-preto/15 py-8 md:gap-x-8 md:py-10"
             >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs tracking-[0.2em] text-[color:var(--muted)]">
-                  / {kicker}
-                </span>
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-brand transition-all duration-500 group-hover:scale-105 group-hover:border-brand group-hover:bg-[color:var(--brand-soft)]">
-                  <Icon className="h-5 w-5" strokeWidth={1.75} />
-                </div>
-              </div>
-              <div className="mt-auto flex flex-col gap-4">
-                <h3 className="font-display text-[clamp(1.75rem,2.5vw,2.5rem)] leading-[1.05] tracking-[-0.015em] text-foreground">
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-laranja text-preto">
+                <Icon className="h-5 w-5" strokeWidth={2} aria-hidden />
+              </span>
+              <div>
+                <h3 className="text-2xl font-bold tracking-[-0.03em] md:text-[2rem] md:leading-tight">
                   {title}
                 </h3>
-                <p className="max-w-md text-base leading-relaxed text-[color:var(--muted-strong)]">
+                <p className="mt-3 max-w-[36rem] text-base leading-relaxed text-preto/70 md:text-lg">
                   {description}
                 </p>
               </div>
-            </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     </section>
   );

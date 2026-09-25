@@ -10,12 +10,12 @@ const TESTIMONIALS = [
 
 export function Testimonial() {
   return (
-    <section id="clientes" className="py-12 md:py-16">
+    <section id="clientes" className="bg-gelo py-20 text-preto [--focus:var(--preto)] md:py-28">
       <Container>
-        <div className="mb-4 flex items-center gap-3">
-          <div className="hairline-brand" aria-hidden />
-          <span className="eyebrow">Quem já opera com a Livelab</span>
-        </div>
+        <h2 className="display text-[clamp(2.25rem,4.4vw,3.75rem)]">
+          Quem já está no <span className="serif-accent">ar</span> com a
+          LiveLab<span className="text-laranja">.</span>
+        </h2>
         <AnimatedTestimonials testimonials={TESTIMONIALS} autoplay />
       </Container>
     </section>

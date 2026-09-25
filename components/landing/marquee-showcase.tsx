@@ -1,23 +1,29 @@
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
+import {
+  WHATSAPP_FRANCHISE_INVEST_URL,
+  WHATSAPP_FRANCHISE_URL,
+} from "@/lib/contact";
 
 const SHOWCASE_IMAGES = Array.from(
   { length: 13 },
   (_, i) => `/showcase/post-${i + 1}.jpg`
 );
 
+// Porta da franquia: o modelo é o do slide "Conceito da marca" do Figma.
 export function MarqueeShowcase() {
   return (
     <AnimatedMarqueeHero
-      tagline="Marcas que já vendem ao vivo com a Livelab"
+      id="franquia"
       title={
         <>
-          Sua próxima live
+          Abra uma LiveLab
           <br />
-          começa aqui.
+          na sua <span className="serif-accent">cidade</span>.
         </>
       }
-      description="Da cabine à sala de controle: montamos, operamos e otimizamos a sua transmissão enquanto você foca em vender."
-      ctaText="Quero franquear"
+      description="A 1ª franquia de live commerce do Brasil. Você opera cabines equipadas, atende marcas locais e fatura receita fixa + comissão."
+      primary={{ text: "Quero abrir uma LiveLab", href: WHATSAPP_FRANCHISE_URL }}
+      secondary={{ text: "Quero entender o investimento", href: WHATSAPP_FRANCHISE_INVEST_URL }}
       images={SHOWCASE_IMAGES}
     />
   );

@@ -1,21 +1,29 @@
-import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { Container } from "./container";
-import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
+import { LivelabLogo } from "@/components/brand/livelab-logo";
+import {
+  WHATSAPP_DISPLAY,
+  WHATSAPP_FRANCHISE_URL,
+  WHATSAPP_SALES_URL,
+  WHATSAPP_URL,
+} from "@/lib/contact";
 
 const COLUMNS = [
   {
     title: "Explorar",
     links: [
-      { label: "Recursos", href: "#recursos" },
+      { label: "Como funciona", href: "#como-funciona" },
       { label: "Clientes", href: "#clientes" },
+      { label: "Franquia", href: "#franquia" },
+      { label: "Acessar a plataforma", href: "https://app.grupolivelab.com.br", external: true },
     ],
   },
   {
-    title: "Empresa",
+    title: "Fale com a gente",
     links: [
-      { label: "Falar com vendas", href: WHATSAPP_URL, external: true },
-      { label: "Acessar a plataforma", href: "https://app.grupolivelab.com.br", external: true },
+      { label: "Quero vender em live", href: WHATSAPP_SALES_URL, external: true },
+      { label: "Quero abrir uma LiveLab", href: WHATSAPP_FRANCHISE_URL, external: true },
+      { label: "Quero apresentar produtos", href: "/bio/apresentador" },
     ],
   },
   {
@@ -29,26 +37,20 @@ const COLUMNS = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[color:var(--border)] bg-[color:var(--surface)] pt-16 pb-8">
+    <footer className="border-t border-gelo/10 bg-preto pb-8 pt-16 md:pt-20">
       <Container>
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2 flex flex-col gap-5">
-            <Image
-              src="/logo.png"
-              alt="Livelab"
-              width={600}
-              height={250}
-              className="h-7 w-auto"
-            />
-            <p className="max-w-xs text-sm leading-relaxed text-[color:var(--muted-strong)]">
-              A sala de controle para live commerce. Dados em tempo real,
-              decisões enquanto a live acontece.
+            <LivelabLogo className="h-auto w-32 text-gelo" />
+            <p className="max-w-xs text-sm leading-relaxed text-gelo/65">
+              Estrutura completa de live pra sua marca vender. A 1ª franquia
+              de live commerce do Brasil.
             </p>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--border)] px-4 py-2 text-sm font-medium text-[color:var(--muted-strong)] transition-colors hover:border-brand hover:text-brand"
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-gelo/20 px-4 py-2.5 text-sm font-medium text-gelo/80 transition-colors hover:border-laranja hover:text-laranja"
             >
               <MessageCircle className="h-4 w-4" />
               {WHATSAPP_DISPLAY}
@@ -57,7 +59,9 @@ export function SiteFooter() {
 
           {COLUMNS.map((col) => (
             <div key={col.title} className="flex flex-col gap-4">
-              <span className="eyebrow">{col.title}</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gelo/50">
+                {col.title}
+              </span>
               <ul className="flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
@@ -66,7 +70,7 @@ export function SiteFooter() {
                       {...("external" in link && link.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
-                      className="text-sm text-[color:var(--muted-strong)] transition-colors hover:text-foreground"
+                      className="text-sm text-gelo/75 transition-colors hover:text-laranja"
                     >
                       {link.label}
                     </a>
@@ -77,9 +81,10 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 border-t border-[color:var(--border)] pt-6">
-          <p className="font-mono text-xs text-[color:var(--muted)]">
-            © 2026 Grupo Livelab · Brasil
+        <div className="mt-14 flex items-center gap-2.5 border-t border-gelo/10 pt-6">
+          <span className="h-1.5 w-1.5 rounded-full bg-laranja" aria-hidden />
+          <p className="text-xs text-gelo/55">
+            © 2026 Grupo LiveLab · AMH Soluções Digitais Ltda. · CNPJ 54.619.914/0001-64
           </p>
         </div>
       </Container>
