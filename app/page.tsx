@@ -6,13 +6,14 @@ import { Testimonial } from "@/components/landing/testimonial";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { Faq } from "@/components/landing/faq";
 import { WhereWeAre } from "@/components/landing/where-we-are";
+import { Founders } from "@/components/landing/founders";
 import { ProofNumbers } from "@/components/landing/proof-numbers";
-import { COMPANY, MAPS_URL, PRESS } from "@/lib/company";
+import { COMPANY, MAPS_URL, PRESS, SOCIAL } from "@/lib/company";
 import { CtaBand } from "@/components/landing/cta-band";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { siteUrlString } from "@/lib/site-config";
 
-// ponytail: Instagram e TikTok entram em sameAs quando o cliente mandar os @.
+// ponytail: TikTok entra em sameAs quando o cliente mandar o @.
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -28,7 +29,7 @@ const structuredData = [
     email: COMPANY.email,
     telephone: COMPANY.phone,
     hasMap: MAPS_URL,
-    sameAs: [MAPS_URL],
+    sameAs: [MAPS_URL, SOCIAL.instagram],
     subjectOf: PRESS.map((p) => ({ "@type": "NewsArticle", headline: p.title, url: p.url })),
     description:
       "A 1ª franquia de live commerce do Brasil. Estrutura completa de live (cabine, apresentadores e playbook de vendas) para marcas venderem ao vivo.",
@@ -72,6 +73,7 @@ export default function Home() {
         <Features />
         <HowItWorks />
         <Testimonial />
+        <Founders />
         <Faq />
         <MarqueeShowcase />
         <CtaBand />

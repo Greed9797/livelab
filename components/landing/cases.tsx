@@ -3,9 +3,9 @@
 const CASES = [
   {
     brand: "Rovitex",
-    value: "R$ 73,3 mil",
-    detail: "em vendas no TikTok Shop em 15 dias",
-    growth: "+485%",
+    value: "+485%",
+    detail: "de crescimento em vendas no TikTok Shop em 15 dias de operação com a LiveLab",
+    growth: "15 dias",
     growthLabel: "vs. os 15 dias anteriores",
     period: "15 a 30 jun 2026",
   },

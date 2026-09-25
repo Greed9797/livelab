@@ -31,6 +31,8 @@ export const MAPS_EMBED_URL = `https://www.google.com/maps?q=${embedQuery}&outpu
 
 export const SOCIAL = {
   googleBusiness: MAPS_URL,
+  instagram: "https://www.instagram.com/livelab.br/",
+  instagramHandle: "@livelab.br",
 } as const;
 
 // Números da operação informados pelo cliente em 2026-09-25 (acumulado).

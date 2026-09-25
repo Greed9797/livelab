@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Container } from "./container";
 import { LivelabLogo } from "@/components/brand/livelab-logo";
-import { COMPANY, COMPANY_ADDRESS_LINE } from "@/lib/company";
+import { COMPANY, COMPANY_ADDRESS_LINE, SOCIAL } from "@/lib/company";
 import {
   WHATSAPP_DISPLAY,
   WHATSAPP_FRANCHISE_URL,
@@ -26,6 +26,7 @@ const COLUMNS = [
       { label: "Quero abrir uma LiveLab", href: WHATSAPP_FRANCHISE_URL, external: true },
       { label: "Quero apresentar produtos", href: "/bio/apresentador" },
       { label: COMPANY.email, href: `mailto:${COMPANY.email}` },
+      { label: `Instagram ${SOCIAL.instagramHandle}`, href: SOCIAL.instagram, external: true },
     ],
   },
   {

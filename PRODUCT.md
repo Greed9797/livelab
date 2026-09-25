@@ -50,10 +50,13 @@ Fatos confirmados pelo cliente em 2026-09-25 (podem ir para a copy):
 
 Números e provas enviados pelo cliente em 2026-09-25 (no site):
 - Operação acumulada até set/2026: 1.303 lives, 3.829 horas em live, R$ 1.231.504,78 de GMV, 30+ marcas.
-- Rovitex: R$ 73,3 mil de GMV em 15–30 jun 2026, +485% vs. 30 mai–14 jun (Seller Center).
+- Rovitex: +485% de GMV em 15–30 jun 2026 vs. 30 mai–14 jun (Seller Center). Publicar só o crescimento, não o valor em R$.
 - Alto Calçados: R$ 126,79 mil em live na conta própria, R$ 371,37 mil de receita total da loja, 20 ago–4 set 2026 (Seller Center).
 - Popô Baby: set/2026 parcial, R$ 79,8 mil de GMV (+311,82%), lives com 58,3% (~R$ 46,5 mil); top 6 da categoria roupas de bebê no TikTok Shop (Kalodata, 4–10 set 2026).
 - Selo TikTok Shop Partner (declarado pelo cliente).
+- Alto Calçados e Popô Baby: dados públicos, liberados. GMV acumulado de R$ 1,23 mi é só de live.
+- Instagram: @livelab.br.
+- Seção "Quem está por trás" usa só o que a matéria do Empreenda News publicou (Grupo W3, Joyn RH, fala do Lucas).
 - Imprensa: Empreenda News, 30 jun 2026 (a matéria cita o Grupo W3 e a Joyn RH, não a marca LiveLab).
 - Empresa: LIVELAB FRANCHISING LTDA, CNPJ 66.390.001/0001-06, R. Buenos Aires 145, Ponta Aguda, Blumenau/SC. Google Meu Negócio CID 5579591897828166736.
 
