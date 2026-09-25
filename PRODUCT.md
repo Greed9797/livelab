@@ -48,7 +48,16 @@ Fatos confirmados pelo cliente em 2026-09-25 (podem ir para a copy):
 - Quem chama direto no WhatsApp também recebe diagnóstico gratuito com retorno em até 24h.
 - "A 1ª franquia de live commerce do Brasil" pode ser usada.
 
-Números sem fonte, removidos da home em 2026-09-25: R$ 2,4B de GMV, 12M de espectadores, 99,98% de uptime, "lives que faturam mais de R$ 50M/ano", "em 30 minutos", "três anos operando". Não voltar sem fonte primária. Também não usar "10x mais", "US$ 1 mi → 46 mi" nem estatísticas de mercado dos posts sem a fonte original.
+Números e provas enviados pelo cliente em 2026-09-25 (no site):
+- Operação acumulada até set/2026: 1.303 lives, 3.829 horas em live, R$ 1.231.504,78 de GMV, 30+ marcas.
+- Rovitex: R$ 73,3 mil de GMV em 15–30 jun 2026, +485% vs. 30 mai–14 jun (Seller Center).
+- Alto Calçados: R$ 126,79 mil em live na conta própria, R$ 371,37 mil de receita total da loja, 20 ago–4 set 2026 (Seller Center).
+- Popô Baby: set/2026 parcial, R$ 79,8 mil de GMV (+311,82%), lives com 58,3% (~R$ 46,5 mil); top 6 da categoria roupas de bebê no TikTok Shop (Kalodata, 4–10 set 2026).
+- Selo TikTok Shop Partner (declarado pelo cliente).
+- Imprensa: Empreenda News, 30 jun 2026 (a matéria cita o Grupo W3 e a Joyn RH, não a marca LiveLab).
+- Empresa: LIVELAB FRANCHISING LTDA, CNPJ 66.390.001/0001-06, R. Buenos Aires 145, Ponta Aguda, Blumenau/SC. Google Meu Negócio CID 5579591897828166736.
+
+Números antigos sem fonte, removidos da home em 2026-09-25: R$ 2,4B de GMV, 12M de espectadores, 99,98% de uptime, "lives que faturam mais de R$ 50M/ano", "em 30 minutos", "três anos operando". Não voltar sem fonte primária. Também não usar "10x mais", "US$ 1 mi → 46 mi" nem estatísticas de mercado dos posts sem a fonte original.
 
 Ainda sem resposta (não publicar até confirmar): preço ou modelo de cobrança, fidelidade, se precisa de TikTok Shop, segmentos atendidos, prazo até a primeira live, cidade de origem e sede (Blumenau × Erechim/RS, no CNPJ), investimento, território e suporte da franquia (Lei 13.966/2019: número publicado tem que bater com a COF).
 

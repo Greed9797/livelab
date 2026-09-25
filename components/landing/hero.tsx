@@ -1,3 +1,4 @@
+import { BadgeCheck } from "lucide-react";
 import { Container } from "./container";
 import { Button } from "./button";
 import { HeroVideo } from "./hero-video";
@@ -53,10 +54,16 @@ export function Hero() {
             </a>
           </div>
 
-          <p className="flex items-center gap-3 text-sm text-gelo/60">
-            <span className="h-1.5 w-1.5 flex-none rounded-full bg-laranja" aria-hidden />
-            Diagnóstico gratuito da sua operação, com retorno em até&nbsp;24h
-          </p>
+          <div className="flex flex-col gap-3 text-sm text-gelo/60 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
+            <p className="inline-flex items-center gap-2 font-semibold text-gelo">
+              <BadgeCheck className="h-4 w-4 text-laranja" aria-hidden />
+              TikTok Shop Partner
+            </p>
+            <p className="flex items-center gap-3">
+              <span className="h-1.5 w-1.5 flex-none rounded-full bg-laranja" aria-hidden />
+              Diagnóstico gratuito, retorno em até&nbsp;24h
+            </p>
+          </div>
         </div>
 
         {/* O círculo do REC, com a cabine gravando dentro. */}

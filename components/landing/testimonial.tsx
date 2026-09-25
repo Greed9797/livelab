@@ -1,5 +1,6 @@
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { Container } from "./container";
+import { Cases } from "./cases";
 
 const TESTIMONIALS = [
   { name: "Posthaus", src: "/showcase/live-posthaus.jpg" },
@@ -16,6 +17,7 @@ export function Testimonial() {
           Quem já está no <span className="serif-accent">ar</span> com a
           LiveLab<span className="text-laranja">.</span>
         </h2>
+        <Cases />
         <AnimatedTestimonials testimonials={TESTIMONIALS} autoplay />
       </Container>
     </section>
