@@ -10,12 +10,12 @@ const BRANDS: Brand[] = [
   { name: "Posthaus", src: "/brands/posthaus.png" },
   { name: "Haag", src: "/brands/haag.svg" },
   { name: "Loja Mirante", src: "/brands/mirante.webp" },
-  { name: "Popô Baby" },
-  { name: "Fakini" },
-  { name: "Upkids" },
-  { name: "Grupo Cristina" },
-  { name: "Alto Calçados" },
-  { name: "Cofari" },
+  { name: "Popô Baby", src: "/brands/popo-baby.png" },
+  { name: "Fakini", src: "/brands/fakini.png" },
+  { name: "Upkids", src: "/brands/upkids.png" },
+  { name: "Grupo Cristina", src: "/brands/grupo-cristina.png" },
+  { name: "Alto Calçados", src: "/brands/alto.png" },
+  { name: "Cofari", src: "/brands/cofari.svg" },
   { name: "Ame Kids" },
 ];
 
@@ -27,7 +27,7 @@ function BrandMark({ brand, decorative }: { brand: Brand; decorative: boolean })
         src={brand.src}
         alt={decorative ? "" : brand.name}
         loading="lazy"
-        className="h-6 w-auto max-w-[150px] shrink-0 object-contain opacity-60 [filter:brightness(0)_invert(1)] transition-opacity duration-300 hover:opacity-100 sm:h-7 md:h-8"
+        className="h-6 w-auto max-w-[300px] shrink-0 object-contain opacity-60 [filter:brightness(0)_invert(1)] transition-opacity duration-300 hover:opacity-100 sm:h-7 md:h-8"
       />
     );
   }
