@@ -67,6 +67,7 @@ Ainda sem resposta (não publicar até confirmar): preço ou modelo de cobrança
 
 ## Capabilities and Constraints
 
+- Blog: 10 artigos publicados em 2026-09-26 (taxas, vale a pena, ou Shopee, como fazer live, conta suspensa, como funciona, streamer, franquia de live commerce, quanto custa uma franquia, mercado). Cada um passou por pesquisa em fonte oficial + checagem adversarial; só fatos com URL. Sem sigilo operacional nem número de franquia. Contador do site é citado como "mais de 1.300 lives / 3.800 horas" para não datar.
 - Blog (2026-09-26): posts em `content/blog/<slug>.md` com front matter (title, description, date, author). Publicar = commitar o arquivo. Conversor de markdown próprio em `lib/blog.ts` (títulos, parágrafos, listas, citação, negrito, itálico, link); trocar por remark se precisar de tabela ou código.
 - Página `/franquia` (2026-09-26): copy para futuros franqueados, WhatsApp como destino, sem número de investimento, payback ou faturamento (Lei 13.966/2019: só o que bate com a COF). Pendentes: depoimento de franqueado e fotos da cabine, que o cliente vai enviar. O formulário `/bio/franqueado` ainda publica projeções (R$ 48k/mês, payback 6 meses) sem confirmação na COF: revisar.
 
