@@ -29,6 +29,8 @@ A gestão acontece no **Gerenciador de LIVE**, em Central do Vendedor > LIVE & V
 
 Tudo isso está na [página do Gerenciador de LIVE](https://seller-br.tiktok.com/university/essay?knowledge_id=6821109446412048&lang=pt-BR).
 
+![Cabine equipada com ring light, iluminação de contorno e rig para smartphone pronta para entrar ao vivo](/blog/setup-cabine-live-commerce.webp)
+
 ## Como colocar produtos na sacolinha e criar ofertas?
 
 O Gerenciador permite criar **Conjuntos de Produtos LIVE** reutilizáveis, com até 100 produtos cada e até 50 conjuntos por conta. Um Evento de LIVE agendado dura de 30 minutos a 13 horas e respeita o limite de 100 produtos por evento.
@@ -77,6 +79,8 @@ A live de vendedor sai da conta oficial da loja, com os produtos da própria loj
 Os números do TikTok dizem que sim, para quem faz com frequência: no primeiro ano no Brasil, o número médio diário de lives cresceu 20x e o GMV médio diário gerado por lives cresceu 161x ([balanço do primeiro ano](https://newsroom.tiktok.com/tiktok-shop-cresce-102-vezes-em-seu-primeiro-ano-no-brasil?lang=pt-BR)).
 
 Na LiveLab já passamos de 1.300 lives e 3.800 horas de transmissão, com mais de R$ 1,23 milhão vendidos em live para mais de 30 marcas. A Rovitex cresceu 485% em 15 dias e a Alto Calçados fez R$ 126,8 mil em live em 16 dias. Veja [como funciona](/#como-funciona).
+
+![Painel de métricas e volume de vendas em tempo real de live commerce](/blog/metricas-vendas-live-tiktok-shop.webp)
 
 ## Perguntas frequentes
 
