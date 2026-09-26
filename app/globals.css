@@ -230,11 +230,11 @@ body {
   }
 }
 
-/* Corpo dos posts do blog: gerado de markdown, então os elementos não levam classes. */
+/* Corpo dos posts do blog: fundo gelo, texto preto (leitura longa pede fundo claro). */
 .prose-post {
-  color: rgb(239 239 239 / 0.85);
+  color: rgb(7 7 7 / 0.82);
   font-size: 1.125rem;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 .prose-post > * + * {
   margin-top: 1.25em;
@@ -245,22 +245,29 @@ body {
   font-size: clamp(1.625rem, 2.6vw, 2.125rem);
   line-height: 1.15;
   letter-spacing: -0.03em;
-  color: var(--gelo);
+  color: var(--preto);
 }
 .prose-post h3 {
   margin-top: 1.8em;
   font-weight: 700;
   font-size: 1.375rem;
   letter-spacing: -0.02em;
-  color: var(--gelo);
+  color: var(--preto);
 }
 .prose-post strong {
-  color: var(--gelo);
+  color: var(--preto);
 }
+/* Laranja sobre gelo não passa em contraste para texto; o link fica preto com sublinhado laranja. */
 .prose-post a {
-  color: var(--laranja);
+  color: var(--preto);
+  font-weight: 600;
   text-decoration: underline;
+  text-decoration-color: var(--laranja);
+  text-decoration-thickness: 2px;
   text-underline-offset: 4px;
+}
+.prose-post a:hover {
+  color: var(--laranja);
 }
 .prose-post ul,
 .prose-post ol {
@@ -279,11 +286,11 @@ body {
   color: var(--laranja);
 }
 .prose-post blockquote {
-  border-left: 2px solid var(--laranja);
+  border-left: 3px solid var(--laranja);
   padding-left: 1.25rem;
   font-family: var(--font-serif), "Times New Roman", serif;
   font-style: italic;
   font-size: 1.375rem;
   line-height: 1.4;
-  color: var(--gelo);
+  color: var(--preto);
 }
