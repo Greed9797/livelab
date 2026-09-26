@@ -67,6 +67,7 @@ Ainda sem resposta (não publicar até confirmar): preço ou modelo de cobrança
 
 ## Capabilities and Constraints
 
+- Blog (2026-09-26): posts em `content/blog/<slug>.md` com front matter (title, description, date, author). Publicar = commitar o arquivo. Conversor de markdown próprio em `lib/blog.ts` (títulos, parágrafos, listas, citação, negrito, itálico, link); trocar por remark se precisar de tabela ou código.
 - Página `/franquia` (2026-09-26): copy para futuros franqueados, WhatsApp como destino, sem número de investimento, payback ou faturamento (Lei 13.966/2019: só o que bate com a COF). Pendentes: depoimento de franqueado e fotos da cabine, que o cliente vai enviar. O formulário `/bio/franqueado` ainda publica projeções (R$ 48k/mês, payback 6 meses) sem confirmação na COF: revisar.
 
 - Contato pelo WhatsApp: número único em `WHATSAPP_PHONE` (`lib/contact.ts`). Todos os botões, da home e da bio, vão para esse número (decisão de 2026-09-25: não separar por público). As mensagens da home começam com "Oi! Vi o site…" para separar a origem. As mensagens da bio e o número não mudam sem pedido.

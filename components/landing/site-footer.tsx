@@ -16,6 +16,7 @@ const COLUMNS = [
       { label: "Como funciona", href: "#como-funciona" },
       { label: "Clientes", href: "#clientes" },
       { label: "Franquia", href: "/franquia" },
+      { label: "Blog", href: "/blog" },
       { label: "Acessar a plataforma", href: "https://app.grupolivelab.com.br", external: true },
     ],
   },

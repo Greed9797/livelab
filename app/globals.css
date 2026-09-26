@@ -229,3 +229,61 @@ body {
     display: none;
   }
 }
+
+/* Corpo dos posts do blog: gerado de markdown, então os elementos não levam classes. */
+.prose-post {
+  color: rgb(239 239 239 / 0.85);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+.prose-post > * + * {
+  margin-top: 1.25em;
+}
+.prose-post h2 {
+  margin-top: 2.2em;
+  font-weight: 700;
+  font-size: clamp(1.625rem, 2.6vw, 2.125rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--gelo);
+}
+.prose-post h3 {
+  margin-top: 1.8em;
+  font-weight: 700;
+  font-size: 1.375rem;
+  letter-spacing: -0.02em;
+  color: var(--gelo);
+}
+.prose-post strong {
+  color: var(--gelo);
+}
+.prose-post a {
+  color: var(--laranja);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.prose-post ul,
+.prose-post ol {
+  padding-left: 1.5rem;
+}
+.prose-post ul {
+  list-style: disc;
+}
+.prose-post ol {
+  list-style: decimal;
+}
+.prose-post li + li {
+  margin-top: 0.5em;
+}
+.prose-post li::marker {
+  color: var(--laranja);
+}
+.prose-post blockquote {
+  border-left: 2px solid var(--laranja);
+  padding-left: 1.25rem;
+  font-family: var(--font-serif), "Times New Roman", serif;
+  font-style: italic;
+  font-size: 1.375rem;
+  line-height: 1.4;
+  color: var(--gelo);
+}

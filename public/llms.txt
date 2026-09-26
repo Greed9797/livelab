@@ -25,5 +25,7 @@
 - [Home](https://www.grupolivelab.com.br/): o que é a LiveLab, como funciona, resultados, fundadores e perguntas frequentes.
 - [Quero ser cliente](https://www.grupolivelab.com.br/bio/cliente): formulário de diagnóstico para marcas.
 - [Quero ser franqueado](https://www.grupolivelab.com.br/bio/franqueado): perfil de investidor.
+- [Franquia](https://www.grupolivelab.com.br/franquia): modelo, perfil do franqueado, etapas e perguntas frequentes.
+- [Blog](https://www.grupolivelab.com.br/blog): live commerce, TikTok Shop e o que faz uma live vender.
 - [Candidatura apresentador(a)](https://www.grupolivelab.com.br/bio/apresentador)
 - [Na imprensa: Empreenda News](https://empreendanews.com.br/noticia/blumenau-tem-a-primeira-estrutura-de-live-commerce-no-sul)
