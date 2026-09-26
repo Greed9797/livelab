@@ -2,10 +2,7 @@ import Image from "next/image";
 import { Container } from "./container";
 import { Button } from "./button";
 import { PlayGlyph } from "@/components/brand/livelab-symbol";
-import {
-  WHATSAPP_FRANCHISE_URL,
-  WHATSAPP_SALES_URL,
-} from "@/lib/contact";
+import { WHATSAPP_SALES_URL } from "@/lib/contact";
 
 // Capa da apresentação da marca (slide 1): o título mora dentro da órbita de discos.
 export function CtaBand() {
@@ -52,12 +49,10 @@ export function CtaBand() {
           </Button>
           <p className="text-sm text-gelo/60">Diagnóstico gratuito, retorno em até 24h.</p>
           <a
-            href={WHATSAPP_FRANCHISE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/franquia"
             className="mt-2 text-sm font-medium text-gelo/70 underline underline-offset-4 transition-colors hover:text-laranja"
           >
-            Quer abrir uma LiveLab? Fale sobre a franquia
+            Quer abrir uma LiveLab? Conheça a franquia
           </a>
         </div>
       </Container>

@@ -1,6 +1,6 @@
 // Resultados enviados pelo cliente (prints do TikTok Shop Seller Center, Kalodata e
 // relatório de operação). Cada número leva o período para não virar promessa genérica.
-const CASES = [
+export const CASES = [
   {
     brand: "Rovitex",
     value: "+485%",

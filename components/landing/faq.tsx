@@ -30,17 +30,27 @@ export const QUESTIONS = [
   },
 ];
 
-export function Faq() {
+type FaqProps = {
+  id?: string;
+  title?: React.ReactNode;
+  questions?: { q: string; a: string }[];
+};
+
+export function Faq({ id = "perguntas", title, questions = QUESTIONS }: FaqProps) {
   return (
-    <section id="perguntas" className="bg-gelo py-20 text-preto [--focus:var(--preto)] md:py-28">
+    <section id={id} className="bg-gelo py-20 text-preto [--focus:var(--preto)] md:py-28">
       <Container className="grid gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-20">
         <h2 className="display text-[clamp(2.25rem,4.4vw,3.75rem)] md:sticky md:top-20 md:self-start">
-          O que as marcas perguntam <span className="serif-accent">antes</span>
-          <span className="text-laranja">.</span>
+          {title ?? (
+            <>
+              O que as marcas perguntam <span className="serif-accent">antes</span>
+              <span className="text-laranja">.</span>
+            </>
+          )}
         </h2>
 
         <div className="border-t border-preto/15">
-          {QUESTIONS.map(({ q, a }) => (
+          {questions.map(({ q, a }) => (
             <details key={q} className="group border-b border-preto/15">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold tracking-[-0.02em] md:text-xl [&::-webkit-details-marker]:hidden">
                 {q}

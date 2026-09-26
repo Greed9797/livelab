@@ -21,17 +21,33 @@ const STEPS = [
   },
 ];
 
-export function HowItWorks() {
+type HowItWorksProps = {
+  id?: string;
+  title?: React.ReactNode;
+  steps?: { title: string; description: string }[];
+  cta?: { text: string; href: string };
+};
+
+export function HowItWorks({
+  id = "como-funciona",
+  title,
+  steps = STEPS,
+  cta = { text: "Quero vender em live", href: WHATSAPP_SALES_URL },
+}: HowItWorksProps) {
   return (
-    <section id="como-funciona" className="bg-preto py-20 md:py-28">
+    <section id={id} className="bg-preto py-20 md:py-28">
       <Container>
         <h2 className="display max-w-[16ch] text-[clamp(2.25rem,4.4vw,3.75rem)] text-gelo">
-          Três passos até a sua <span className="serif-accent">live</span>
-          <span className="text-laranja">.</span>
+          {title ?? (
+            <>
+              Três passos até a sua <span className="serif-accent">live</span>
+              <span className="text-laranja">.</span>
+            </>
+          )}
         </h2>
 
-        <ol className="mt-12 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-8">
-          {STEPS.map((step, i) => (
+        <ol className="mt-12 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-8 lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]">
+          {steps.map((step, i) => (
             <li key={step.title} className="flex flex-col gap-4 border-t border-gelo/15 pt-6">
               <span className="display text-5xl leading-none tabular-nums text-laranja">
                 {String(i + 1).padStart(2, "0")}
@@ -46,13 +62,13 @@ export function HowItWorks() {
 
         <div className="mt-12 flex md:mt-16">
           <Button
-            href={WHATSAPP_SALES_URL}
+            href={cta.href}
             target="_blank"
             rel="noopener noreferrer"
             size="lg"
             className="w-full sm:w-auto"
           >
-            Quero vender em live
+            {cta.text}
             <PlayGlyph className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
           </Button>
         </div>

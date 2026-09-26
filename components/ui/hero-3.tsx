@@ -59,8 +59,7 @@ export const AnimatedMarqueeHero: React.FC<AnimatedMarqueeHeroProps> = ({
         </Button>
         <Button
           href={secondary.href}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...(secondary.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           variant="outline-ink"
           size="lg"
         >

@@ -47,7 +47,7 @@ export function Hero() {
               <PlayGlyph className="h-3 w-3 rotate-90 transition-transform duration-300 group-hover:translate-y-0.5" />
             </Button>
             <a
-              href="#franquia"
+              href="/franquia"
               className="px-2 py-3 text-sm font-medium text-gelo/70 underline-offset-4 transition-colors hover:text-gelo hover:underline"
             >
               Quer abrir uma LiveLab? Conheça a franquia

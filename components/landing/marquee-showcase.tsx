@@ -1,8 +1,5 @@
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
-import {
-  WHATSAPP_FRANCHISE_INVEST_URL,
-  WHATSAPP_FRANCHISE_URL,
-} from "@/lib/contact";
+import { WHATSAPP_FRANCHISE_URL } from "@/lib/contact";
 
 const SHOWCASE_IMAGES = Array.from(
   { length: 13 },
@@ -23,7 +20,7 @@ export function MarqueeShowcase() {
       }
       description="A 1ª franquia de live commerce do Brasil. Você opera cabines equipadas, atende marcas locais e fatura receita fixa + comissão."
       primary={{ text: "Quero abrir uma LiveLab", href: WHATSAPP_FRANCHISE_URL }}
-      secondary={{ text: "Quero entender o investimento", href: WHATSAPP_FRANCHISE_INVEST_URL }}
+      secondary={{ text: "Conhecer a franquia", href: "/franquia" }}
       images={SHOWCASE_IMAGES}
     />
   );
