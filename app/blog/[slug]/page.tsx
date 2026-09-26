@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -33,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `/blog/${post.slug}`,
       siteName: "LiveLab",
       locale: "pt_BR",
+      images: post.image ? [{ url: post.image, alt: post.title }] : undefined,
     },
   };
 }
@@ -51,6 +53,7 @@ export default async function PostPage({ params }: Props) {
     author: { "@type": "Organization", name: post.author, "@id": `${siteUrlString}/#empresa` },
     publisher: { "@type": "Organization", name: COMPANY.brand, "@id": `${siteUrlString}/#empresa` },
     mainEntityOfPage: `${siteUrlString}/blog/${post.slug}`,
+    ...(post.image ? { image: `${siteUrlString}${post.image}` } : {}),
   };
 
   return (
@@ -80,6 +83,19 @@ export default async function PostPage({ params }: Props) {
             </p>
             <h1 className="display mt-5 text-[clamp(2.25rem,4.8vw,4rem)] text-preto">{post.title}</h1>
             <p className="mt-6 text-lg leading-relaxed text-preto/70 md:text-xl">{post.description}</p>
+
+            {post.image && (
+              <div className="mt-8 overflow-hidden rounded-2xl border border-preto/10 bg-preto shadow-sm">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={1376}
+                  height={768}
+                  className="aspect-[16/9] w-full object-cover"
+                  priority
+                />
+              </div>
+            )}
 
             <div
               className="prose-post mt-12 border-t border-preto/15 pt-10"

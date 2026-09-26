@@ -3,6 +3,7 @@ title: "Live TikTok Shop: como fazer, requisitos e roteiro"
 description: "Live TikTok Shop como fazer: requisitos oficiais de conta e CNPJ, como fixar produtos na sacola, duração, roteiro em ciclos e o que a política proíbe."
 date: 2026-09-26
 author: LiveLab
+image: "/blog/como-fazer-live-no-tiktok-shop.webp"
 ---
 
 Para fazer live no TikTok Shop com carrinho, uma marca precisa de três coisas: loja aprovada no Seller Center (só com CNPJ), uma conta TikTok vinculada como conta oficial da loja e produtos ativos para fixar na sacola durante a transmissão. Com isso pronto, a live sai do celular ou do computador, e o espectador compra com um toque, sem sair do app, como o TikTok descreveu no [lançamento no Brasil](https://newsroom.tiktok.com/pt-br/tiktok-shop-chega-ao-brasil).

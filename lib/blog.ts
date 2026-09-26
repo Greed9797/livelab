@@ -12,6 +12,7 @@ export type Post = {
   description: string;
   date: string; // ISO (YYYY-MM-DD)
   author: string;
+  image?: string;
   html: string;
   readingMinutes: number;
 };
@@ -73,8 +74,18 @@ export function markdownToHtml(md: string) {
       out.push(`<blockquote><p>${inline(q.join(" "))}</p></blockquote>`);
       continue;
     }
+    const img = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (img) {
+      const alt = esc(img[1]);
+      const src = img[2];
+      out.push(
+        `<figure class="my-8 overflow-hidden rounded-xl border border-preto/10 bg-preto/5"><img src="${src}" alt="${alt}" class="w-full h-auto object-cover aspect-[16/9]" loading="lazy" />${alt ? `<figcaption class="px-4 py-2.5 text-xs text-preto/60 text-center border-t border-preto/10">${alt}</figcaption>` : ""}</figure>`
+      );
+      i++;
+      continue;
+    }
     const p: string[] = [];
-    while (i < lines.length && lines[i].trim() && !/^(#{2,3}\s|[-*]\s|\d+\.\s|> )/.test(lines[i])) { p.push(lines[i]); i++; }
+    while (i < lines.length && lines[i].trim() && !/^(#{2,3}\s|[-*]\s|\d+\.\s|> |!\[)/.test(lines[i])) { p.push(lines[i]); i++; }
     out.push(`<p>${inline(p.join(" "))}</p>`);
   }
   return out.join("\n");
@@ -96,6 +107,7 @@ export async function getPost(slug: string): Promise<Post | null> {
     description: meta.description ?? "",
     date: meta.date ?? "",
     author: meta.author ?? "LiveLab",
+    image: meta.image || undefined,
     html: markdownToHtml(body),
     readingMinutes: Math.max(1, Math.round(words / 200)),
   };
